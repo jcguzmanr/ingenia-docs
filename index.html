@@ -55,10 +55,16 @@ header::after {
 
 .header-logo {
   font-family: var(--fh); font-weight: 700; font-size: 14px;
-  color: rgba(255,255,255,0.8); letter-spacing: 0.5px;
+  color: var(--text);
+  letter-spacing: 0.5px;
   margin-bottom: clamp(20px, 4vh, 36px);
-  display: flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--white);
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
+.header-logo img { height: 20px; width: auto; vertical-align: middle; display: inline-block; }
 
 .header-title {
   font-family: var(--fh);
@@ -132,6 +138,30 @@ main {
   box-shadow: 0 12px 40px rgba(0,0,0,0.14);
 }
 .doc-card:active { transform: translateY(-1px); }
+
+/* Tarjetas bloqueadas (no clicables) */
+.doc-card--locked {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.92;
+}
+.doc-card--locked:hover {
+  transform: none;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+.doc-card--locked .card-cta {
+  color: var(--muted);
+}
+.doc-card--locked .card-cta::after { content: '🔒'; }
+.card-badge-lock {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; color: var(--muted);
+  background: var(--light);
+  padding: 4px 10px;
+  border-radius: 16px;
+  margin-left: auto;
+}
+.card-badge-lock::before { content: '🔒'; }
 
 .card-top {
   height: 6px;
@@ -263,13 +293,14 @@ footer {
 <body>
 
 <header>
-  <div class="header-logo">🟠 Ingenia Latam</div>
+  <div class="header-logo">
+    <img src="logo.png" alt="Ingenia Latam">
+  </div>
   <h1 class="header-title">Hub de Documentos<br>Estratégicos</h1>
   <p class="header-sub">Recursos clave para la reunión del 18 de marzo y el proceso de implantación de ClickUp.</p>
   <div class="header-meta">
     <span class="header-meta-chip">📅 Marzo 2026</span>
     <span class="header-meta-chip">3 documentos</span>
-    <span class="header-meta-chip">JC Guzmán</span>
   </div>
 </header>
 
@@ -278,8 +309,8 @@ footer {
 
   <div class="cards">
 
-    <!-- CARD 1: ClickUp -->
-    <a class="doc-card card--primary" href="presentacion-clickup-ingenia.html">
+    <!-- CARD 1: ClickUp (bloqueada) -->
+    <div class="doc-card doc-card--locked card--primary">
       <div class="card-top card-top--primary"></div>
       <div class="card-body">
         <div class="card-icon">🟠</div>
@@ -301,12 +332,12 @@ footer {
       </div>
       <div class="card-footer">
         <span class="card-date">17 Mar 2026</span>
-        <span class="card-cta">Abrir presentación</span>
+        <span class="card-badge-lock">No disponible</span>
       </div>
-    </a>
+    </div>
 
-    <!-- CARD 2: Manual -->
-    <a class="doc-card card--warm" href="manual-organizacional.html">
+    <!-- CARD 2: Manual (bloqueada) -->
+    <div class="doc-card doc-card--locked card--warm">
       <div class="card-top card-top--warm"></div>
       <div class="card-body">
         <div class="card-icon">📋</div>
@@ -329,9 +360,9 @@ footer {
       </div>
       <div class="card-footer">
         <span class="card-date">Marzo 2026</span>
-        <span class="card-cta">Abrir manual</span>
+        <span class="card-badge-lock">No disponible</span>
       </div>
-    </a>
+    </div>
 
     <!-- CARD 3: Pre-reunión -->
     <a class="doc-card card--accent-c" href="prereunion-18marzo.html">
