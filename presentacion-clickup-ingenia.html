@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Operativo Consultivo — ClickUp Ingenia Latam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ============ INGENIA BRAND VARS ============ */
+:root {
+  --color-primary:   #ff110a;
+  --color-secondary: #ff5800;
+  --color-accent:    #ff9400;
+  --color-white:     #ffffff;
+  --color-light:     #eeeeee;
+  --color-text:      #1a1a1a;
+  --color-muted:     #666666;
+  --color-dim:       rgba(255,17,10,0.08);
+  --color-dim2:      rgba(255,88,0,0.08);
+  --grad-primary:    linear-gradient(135deg, #ff110a, #ff5800);
+  --grad-warm:       linear-gradient(135deg, #ff5800, #ff9400);
+  --grad-full:       linear-gradient(135deg, #ff110a 0%, #ff5800 50%, #ff9400 100%);
+  --font-heading:    'Space Grotesk', 'Trebuchet MS', sans-serif;
+  --font-body:       'DM Sans', 'Segoe UI', Arial, sans-serif;
+  --font-mono:       'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  --radius:          10px;
+  --shadow:          0 2px 16px rgba(0,0,0,0.09);
+  --shadow-lg:       0 8px 40px rgba(0,0,0,0.14);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-white);
+  color: var(--color-text);
+  overflow: hidden;
+}
+
+/* ============ DECK ENGINE ============ */
+.deck {
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slide {
+  height: 100dvh;
+  scroll-snap-align: start;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(36px, 5vh, 72px) clamp(40px, 7vw, 110px);
+  isolation: isolate;
+  opacity: 0;
+  transform: translateY(36px) scale(0.985);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide.visible .reveal { opacity: 1; transform: none; }
+.slide.visible .reveal:nth-child(1) { transition-delay: 0.08s; }
+.slide.visible .reveal:nth-child(2) { transition-delay: 0.16s; }
+.slide.visible .reveal:nth-child(3) { transition-delay: 0.24s; }
+.slide.visible .reveal:nth-child(4) { transition-delay: 0.32s; }
+.slide.visible .reveal:nth-child(5) { transition-delay: 0.40s; }
+.slide.visible .reveal:nth-child(6) { transition-delay: 0.48s; }
+.slide.visible .reveal:nth-child(7) { transition-delay: 0.56s; }
+.slide.visible .reveal:nth-child(8) { transition-delay: 0.64s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slide, .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* ============ NAV CHROME ============ */
+.deck-progress {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--grad-primary); z-index: 200;
+  transition: width 0.35s ease; pointer-events: none;
+}
+
+.deck-nav {
+  position: fixed; top: 0; left: 0; right: 0; height: 52px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex; align-items: center;
+  padding: 0 clamp(20px, 4vw, 60px);
+  z-index: 150;
+  gap: 16px;
+}
+
+.deck-nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-primary);
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+
+.deck-nav-title {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-muted);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deck-nav-counter {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-nav-arrows {
+  display: flex; gap: 4px;
+}
+.deck-arrow {
+  width: 28px; height: 28px; border: 1px solid var(--color-light);
+  border-radius: 6px; background: transparent;
+  color: var(--color-muted); font-size: 14px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.deck-arrow:hover { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+
+.deck-dots {
+  position: fixed; right: clamp(10px, 1.5vw, 20px); top: 50%;
+  transform: translateY(-50%); display: flex; flex-direction: column;
+  gap: 7px; z-index: 150; padding: 8px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.deck-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--color-light); border: none; padding: 0;
+  cursor: pointer; transition: transform 0.2s ease, background 0.2s ease;
+}
+.deck-dot:hover { background: var(--color-accent); }
+.deck-dot.active { transform: scale(1.6); background: var(--color-primary); }
+
+.deck-hints {
+  position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-mono); font-size: 11px; color: var(--color-muted);
+  opacity: 0.55; z-index: 150; transition: opacity 0.5s ease;
+  white-space: nowrap; pointer-events: none;
+}
+.deck-hints.faded { opacity: 0; }
+
+/* ============ SHARED ELEMENTS ============ */
+.slide__label {
+  font-family: var(--font-heading);
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+.slide__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 4vw, 46px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.12;
+  text-wrap: balance;
+  color: var(--color-text);
+}
+
+.slide__subheading {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: var(--color-muted);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.slide__kpi-num {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 5.5vw, 64px);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--font-body); font-size: 11px; font-weight: 500;
+  padding: 3px 10px; border-radius: 20px;
+  background: var(--color-light); color: var(--color-muted);
+}
+.pill--red { background: rgba(255,17,10,0.1); color: var(--color-primary); }
+.pill--orange { background: rgba(255,148,0,0.12); color: #b36600; }
+.pill--green { background: rgba(22,163,74,0.1); color: #166534; }
+.pill--gray { background: var(--color-light); color: var(--color-muted); }
+
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: clamp(16px, 2.5vh, 28px) clamp(16px, 2vw, 24px);
+}
+.card--left-border { border-left: 4px solid var(--color-primary); }
+.card--top-gradient {
+  border-top: 3px solid transparent;
+  background-image: linear-gradient(var(--color-white), var(--color-white)),
+                    var(--grad-primary);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.divider {
+  width: 48px; height: 3px;
+  background: var(--grad-primary);
+  border-radius: 2px; margin: 12px 0;
+}
+
+/* ============ SLIDE 1: PORTADA ============ */
+.slide-1 {
+  background: var(--grad-primary);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 52px;
+}
+
+.slide-1__emoji {
+  font-size: clamp(48px, 8vw, 88px);
+  line-height: 1;
+  margin-bottom: clamp(16px, 2.5vh, 32px);
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.25));
+}
+
+.slide-1__title {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 6vw, 72px);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.slide-1__sub {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 2vw, 22px);
+  color: rgba(255,255,255,0.82);
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+.slide-1__tag {
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 1.2vw, 13px);
+  color: rgba(255,255,255,0.65);
+  margin-top: 20px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.slide-1__authors {
+  display: flex; flex-direction: column; gap: 4px;
+  margin-top: clamp(20px, 3vh, 36px);
+}
+.slide-1__author {
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1.4vw, 15px);
+  color: rgba(255,255,255,0.75);
+}
+.slide-1__author strong {
+  color: #fff; font-weight: 600;
+}
+
+.slide-1__badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 18px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-family: var(--font-body); font-size: 12px;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Corner accents */
+.corner-tl, .corner-br {
+  position: absolute; pointer-events: none; opacity: 0.2;
+}
+
+/* ============ SLIDE 2: CONTEXTO ============ */
+.slide-2 {
+  background: var(--color-white);
+  background-image: radial-gradient(ellipse at 100% 0%, rgba(255,88,0,0.06) 0%, transparent 50%);
+  padding-top: calc(52px + clamp(24px, 4vh, 48px));
+}
+
+.slide-2__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 2vw, 24px);
+  margin-top: clamp(16px, 2.5vh, 28px);
+}
+
+.slide-2__col {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: clamp(18px, 2.5vh, 28px) clamp(16px, 2vw, 22px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.slide-2__col:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+.slide-2__col-icon {
+  font-size: clamp(24px, 3vw, 32px);
+  margin-bottom: 10px;
+}
+
+.slide-2__col-title {
+  font-family: var(--font-heading);
+  font-size: clamp(14px, 1.6vw, 18px);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.slide-2__col-body {
+  font-size: clamp(12px, 1.3vw, 14px);
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.slide-2__col-items {
+  list-style: none;
+  margin-top: 8px;
+  display: flex; flex-direction: column; gap: 5px;
+}
+
+.slide-2__col-items li {
+  font-size: clamp(11px, 1.2vw, 13px);
+  color: var(--color-muted);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.4;
+}
+.slide-2__col-items li::before {
+  content: '→';
+  position: absolute; left: 0;
+  color: var(--color-secondary);
+  font-size: 10px;
+}
+
+.slide-2__arrow-flow {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  margin-top: 8px;
+}
+.slide-2__step {
+  background: rgba(255,148,0,0.1);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 600;
+  color: #b36600;
+  white-space: nowrap;
+}
+.slide-2__arrow-sym {
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.slide-2__quote {
+  margin-top: clamp(14px, 2vh, 22px);
+  border-left: 4px solid var(--color-secondary);
+  padding: clamp(12px, 1.8vh, 18px) clamp(16px, 2vw, 22px);
+  background: rgba(255,88,0,0.04);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.slide-2__quote p {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1.5vw, 16px);
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+.slide-2__quote cite {
+  font-size: clamp(11px, 1.2vw, 13px);
+  color: var(--color-secondary);
+  font-style: normal;
+  font-weight: 600;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ============ SLIDE 3: CONVERGENCIA ============ */
+.slide-3 {
+  background: var(--color-light);
+  background-image: radial-gradient(ellipse at 50% 100%, rgba(255,17,10,0.05) 0%, transparent 60%);
+  padding-top: calc(52px + clamp(20px, 3vh, 40px));
+}
+
+.slide-3__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(14px, 2vw, 22px);
+  margin-top: clamp(14px, 2vh, 22px);
+}
+
+.slide-3__panel {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(18px, 2.5vh, 28px) clamp(18px, 2vw, 24px);
+}
+
+.slide-3__panel-head {
+  font-family: var(--font-heading);
+  font-size: clamp(14px, 1.6vw, 18px);
+  font-weight: 700;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-light);
+  display: flex; align-items: center; gap: 8px;
+}
+
+.slide-3__panel--jc .slide-3__panel-head { color: var(--color-primary); }
+.slide-3__panel--luis .slide-3__panel-head { color: var(--color-secondary); }
+
+.slide-3__row {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--color-light);
+  font-size: clamp(11px, 1.2vw, 13px);
+  line-height: 1.4;
+}
+.slide-3__row:last-child { border-bottom: none; }
+
+.slide-3__row-icon {
+  color: var(--color-accent);
+  font-size: 13px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.slide-3__conclusion {
+  margin-top: clamp(12px, 1.8vh, 18px);
+  background: var(--color-white);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: clamp(14px, 2vh, 20px) clamp(16px, 2vw, 22px);
+  box-shadow: var(--shadow);
+  display: flex; align-items: center; gap: 14px;
+}
+
+.slide-3__conclusion-icon {
+  font-size: 28px; flex-shrink: 0;
+}
+
+.slide-3__conclusion p {
+  font-size: clamp(12px, 1.4vw, 15px);
+  line-height: 1.55;
+  color: var(--color-text);
+}
+
+.slide-3__result {
+  display: inline-block;
+  background: rgba(255,17,10,0.1);
+  color: var(--color-primary);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* ============ SLIDE 4: 5 SPACES ============ */
+.slide-4 {
+  background: var(--color-white);
+  background-image: radial-gradient(ellipse at 10% 50%, rgba(255,17,10,0.04) 0%, transparent 50%);
+  padding-top: calc(52px + clamp(16px, 2.5vh, 32px));
+  overflow: hidden;
+}
+
+.slide-4__flow {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 8px; flex-wrap: wrap;
+}
+.slide-4__flow-step {
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 600;
+  color: var(--color-secondary);
+  white-space: nowrap;
+}
+.slide-4__flow-arrow {
+  color: var(--color-accent);
+  font-size: 11px;
+}
+
+.slide-4__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(10px, 1.4vw, 16px);
+  margin-top: clamp(12px, 2vh, 20px);
+  flex: 1;
+}
+
+.space-card {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: clamp(14px, 2vh, 22px) clamp(12px, 1.5vw, 18px);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.space-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--card-color, var(--grad-primary));
+}
+.space-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.space-card__emoji {
+  font-size: clamp(20px, 2.5vw, 28px);
+}
+
+.space-card__name {
+  font-family: var(--font-heading);
+  font-size: clamp(12px, 1.3vw, 15px);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.space-card__tag {
+  font-size: clamp(9px, 1vw, 11px);
+  color: var(--color-muted);
+  font-style: italic;
+  line-height: 1.3;
+}
+
+.space-card__items {
+  list-style: none;
+  margin-top: 4px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.space-card__items li {
+  font-size: clamp(10px, 1.05vw, 12px);
+  color: var(--color-muted);
+  padding-left: 10px;
+  position: relative;
+  line-height: 1.3;
+}
+.space-card__items li::before {
+  content: '·';
+  position: absolute; left: 2px;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.space-card__click-hint {
+  font-size: 9px;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: auto;
+  padding-top: 6px;
+  opacity: 0.7;
+}
+
+/* ============ SLIDE 5: 7 PROCESOS ============ */
+.slide-5 {
+  background: var(--color-light);
+  background-image: radial-gradient(ellipse at 90% 20%, rgba(255,88,0,0.07) 0%, transparent 50%);
+  padding-top: calc(52px + clamp(16px, 2.5vh, 32px));
+}
+
+.slide-5__body {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(18px, 2.5vw, 32px);
+  margin-top: clamp(14px, 2vh, 22px);
+  align-items: start;
+}
+
+.process-list {
+  display: flex; flex-direction: column; gap: 6px;
+}
+
+.process-item {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  padding: clamp(9px, 1.5vh, 14px) clamp(12px, 1.5vw, 18px);
+  display: flex; align-items: center; gap: 12px;
+  transition: transform 0.15s ease;
+}
+.process-item:hover { transform: translateX(3px); }
+
+.process-num {
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 2.2vw, 24px);
+  font-weight: 700;
+  color: var(--color-primary);
+  min-width: 28px;
+  line-height: 1;
+}
+
+.process-info { flex: 1; min-width: 0; }
+
+.process-name {
+  font-family: var(--font-heading);
+  font-size: clamp(12px, 1.3vw, 14px);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.process-meta {
+  display: flex; align-items: center; gap: 6px; margin-top: 3px; flex-wrap: wrap;
+}
+
+.process-space {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  background: rgba(255,88,0,0.1);
+  border-radius: 3px;
+  padding: 1px 5px;
+  white-space: nowrap;
+}
+
+.process-owner {
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+.slide-5__right {
+  display: flex; flex-direction: column; gap: 14px;
+}
+
+.pipeline-flow {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(14px, 2vh, 22px) clamp(14px, 2vw, 20px);
+}
+
+.pipeline-flow__title {
+  font-family: var(--font-heading);
+  font-size: clamp(11px, 1.2vw, 13px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+}
+
+.pipeline-stages {
+  display: flex; flex-direction: column; gap: 6px;
+}
+
+.stage-group { }
+.stage-group__label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-muted);
+  margin-bottom: 4px;
+  padding-left: 2px;
+}
+
+.stage-row {
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+
+.stage-pill {
+  font-size: clamp(9px, 1vw, 11px);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.stage-pill--pre  { background: rgba(100,100,100,0.1); color: #555; }
+.stage-pill--act  { background: rgba(255,88,0,0.12); color: var(--color-secondary); }
+.stage-pill--neg  { background: rgba(255,148,0,0.12); color: #b36600; }
+.stage-pill--done { background: rgba(22,163,74,0.1); color: #166534; }
+.stage-pill--lost { background: rgba(255,17,10,0.1); color: var(--color-primary); }
+.stage-pill--paused { background: rgba(100,100,100,0.08); color: #888; }
+
+.slide-5__note {
+  background: rgba(255,148,0,0.08);
+  border: 1px solid rgba(255,148,0,0.2);
+  border-radius: var(--radius);
+  padding: clamp(10px, 1.5vh, 14px) clamp(12px, 1.5vw, 16px);
+  font-size: clamp(11px, 1.2vw, 13px);
+  color: #7a5000;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ============ SLIDE 6: PLAN ============ */
+.slide-6 {
+  background: var(--color-white);
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(255,17,10,0.04) 0%, transparent 50%);
+  padding-top: calc(52px + clamp(16px, 2.5vh, 28px));
+}
+
+.phases-track {
+  margin-top: clamp(14px, 2vh, 22px);
+  display: flex; flex-direction: column; gap: clamp(8px, 1.2vh, 14px);
+}
+
+.phase-card {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.06);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.phase-header {
+  display: flex; align-items: center; gap: clamp(10px, 1.5vw, 16px);
+  padding: clamp(12px, 1.8vh, 18px) clamp(16px, 2vw, 22px);
+  transition: background 0.15s;
+}
+.phase-header:hover { background: var(--color-light); }
+
+.phase-icon {
+  font-size: clamp(18px, 2.2vw, 26px);
+  flex-shrink: 0;
+}
+
+.phase-meta { flex: 1; min-width: 0; }
+.phase-name {
+  font-family: var(--font-heading);
+  font-size: clamp(13px, 1.5vw, 17px);
+  font-weight: 700;
+  color: var(--color-text);
+}
+.phase-period {
+  font-size: clamp(10px, 1.1vw, 12px);
+  color: var(--color-muted);
+  margin-top: 2px;
+}
+
+.phase-goal {
+  font-size: clamp(10px, 1.1vw, 12px);
+  color: var(--color-secondary);
+  font-weight: 600;
+  background: rgba(255,88,0,0.1);
+  border-radius: 4px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.phase-toggle {
+  color: var(--color-muted);
+  font-size: 16px;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.phase-card.open .phase-toggle { transform: rotate(90deg); }
+
+.phase-body {
+  display: none;
+  padding: 0 clamp(16px, 2vw, 22px) clamp(12px, 1.8vh, 16px) clamp(54px, 6vw, 72px);
+  border-top: 1px solid var(--color-light);
+  background: rgba(0,0,0,0.01);
+}
+.phase-card.open .phase-body { display: block; }
+
+.phase-tasks {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 5px;
+  padding-top: 10px;
+}
+.phase-tasks li {
+  font-size: clamp(11px, 1.2vw, 13px);
+  color: var(--color-muted);
+  display: flex; align-items: flex-start; gap: 8px;
+  line-height: 1.4;
+}
+.phase-tasks .done { color: #16a34a; }
+.phase-tasks .done .task-bullet { color: #16a34a; }
+.task-bullet { flex-shrink: 0; font-size: 13px; }
+
+.timeline-bar {
+  margin-top: clamp(12px, 1.8vh, 18px);
+  background: var(--color-light);
+  border-radius: 6px;
+  height: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.timeline-fill {
+  height: 100%;
+  background: var(--grad-primary);
+  border-radius: 6px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 0;
+}
+.slide-6.visible .timeline-fill { width: 18%; }
+
+.timeline-labels {
+  display: flex; justify-content: space-between;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+/* ============ SLIDE 7: PRÓXIMOS PASOS ============ */
+.slide-7 {
+  background: var(--color-light);
+  background-image: radial-gradient(ellipse at 0% 50%, rgba(255,17,10,0.06) 0%, transparent 50%);
+  padding-top: calc(52px + clamp(16px, 2.5vh, 28px));
+}
+
+.slide-7__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(14px, 2vw, 22px);
+  margin-top: clamp(14px, 2vh, 22px);
+}
+
+.action-panel {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(16px, 2.5vh, 24px) clamp(16px, 2vw, 22px);
+}
+
+.action-panel__head {
+  font-family: var(--font-heading);
+  font-size: clamp(13px, 1.5vw, 16px);
+  font-weight: 700;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-light);
+  display: flex; align-items: center; gap: 8px;
+}
+.action-panel--luis .action-panel__head { color: var(--color-secondary); }
+.action-panel--jc .action-panel__head { color: var(--color-primary); }
+
+.action-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-light);
+  font-size: clamp(11px, 1.2vw, 13px);
+  line-height: 1.45;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.1s;
+  border-radius: 4px;
+  padding-left: 4px;
+}
+.action-item:last-child { border-bottom: none; }
+.action-item:hover { background: rgba(0,0,0,0.02); }
+
+.action-check {
+  width: 16px; height: 16px;
+  border: 2px solid var(--color-light);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.action-item.checked .action-check {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+.action-item.checked .action-check::after {
+  content: '✓';
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+}
+.action-item.checked > span {
+  text-decoration: line-through;
+  color: var(--color-muted);
+}
+
+.decisions-table {
+  margin-top: clamp(12px, 1.8vh, 18px);
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.decisions-table table {
+  width: 100%; border-collapse: collapse;
+}
+.decisions-table thead tr {
+  background: var(--color-primary);
+}
+.decisions-table thead th {
+  font-family: var(--font-heading);
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  text-align: left;
+  padding: 10px 14px;
+  white-space: nowrap;
+}
+.decisions-table tbody td {
+  font-size: clamp(11px, 1.2vw, 13px);
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--color-light);
+  color: var(--color-text);
+  vertical-align: top;
+  line-height: 1.4;
+}
+.decisions-table tbody tr:last-child td { border-bottom: none; }
+.decisions-table tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+.decisions-table .owner {
+  font-weight: 600;
+  color: var(--color-secondary);
+  white-space: nowrap;
+}
+
+/* ============ SLIDE 8: PRINCIPIOS ============ */
+.slide-8 {
+  background: var(--color-white);
+  background-image: radial-gradient(ellipse at 100% 100%, rgba(255,17,10,0.05) 0%, transparent 50%);
+  padding-top: calc(52px + clamp(16px, 2.5vh, 28px));
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(10px, 1.4vw, 16px);
+  margin-top: clamp(14px, 2vh, 22px);
+}
+
+.principle-card {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: clamp(16px, 2.2vh, 24px) clamp(14px, 1.8vw, 20px);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.principle-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.principle-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--grad-primary);
+}
+
+.principle-num {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255,17,10,0.08);
+  position: absolute;
+  top: 8px; right: 12px;
+}
+
+.principle-title {
+  font-family: var(--font-heading);
+  font-size: clamp(12px, 1.3vw, 15px);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.principle-body {
+  font-size: clamp(11px, 1.15vw, 13px);
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.principle-tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: rgba(255,17,10,0.08);
+  border-radius: 3px;
+  padding: 2px 6px;
+  letter-spacing: 0.5px;
+}
+
+/* ============ MODAL ============ */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 500;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--color-white);
+  border-radius: 14px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-overlay.open .modal { transform: none; }
+
+.modal__header {
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid var(--color-light);
+  position: sticky; top: 0;
+  background: var(--color-white);
+  z-index: 1;
+}
+
+.modal__close {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  border: 1px solid var(--color-light); border-radius: 6px;
+  background: transparent; cursor: pointer;
+  font-size: 16px; color: var(--color-muted);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.modal__close:hover { background: var(--color-primary); color: white; }
+
+.modal__emoji { font-size: 28px; margin-bottom: 8px; }
+
+.modal__name {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.modal__tag {
+  font-size: 13px;
+  color: var(--color-muted);
+  margin-top: 3px;
+}
+
+.modal__body { padding: 20px 24px 24px; }
+
+.modal-folder {
+  margin-bottom: 18px;
+}
+
+.modal-folder__name {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.modal-folder__name::before {
+  content: '📁';
+  font-size: 13px;
+}
+
+.modal-fields {
+  display: flex; flex-direction: column; gap: 5px;
+}
+
+.modal-field {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.modal-field__key {
+  font-weight: 600;
+  color: var(--color-text);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.modal-field__val {
+  color: var(--color-muted);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .slide-4__grid { grid-template-columns: repeat(3, 1fr); }
+  .slide-3__grid { grid-template-columns: 1fr; }
+  .slide-5__body { grid-template-columns: 1fr; }
+  .slide-7__body { grid-template-columns: 1fr; }
+  .principles-grid { grid-template-columns: repeat(2, 1fr); }
+  .slide-2__cols { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .slide-4__grid { grid-template-columns: repeat(2, 1fr); }
+  .principles-grid { grid-template-columns: 1fr; }
+  .deck-dots { display: none; }
+}
+
+@media (max-height: 700px) {
+  .slide { padding-top: calc(52px + 12px); padding-bottom: 12px; }
+}
+
+@media (max-height: 600px) {
+  .deck-dots { display: none; }
+  .slide-1__emoji { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ MODAL OVERLAY ============ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <div class="modal__header">
+      <button class="modal__close" onclick="closeModal()">✕</button>
+      <div class="modal__emoji" id="modalEmoji"></div>
+      <div class="modal__name" id="modalName"></div>
+      <div class="modal__tag" id="modalTag"></div>
+    </div>
+    <div class="modal__body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ============ NAV CHROME ============ -->
+<div class="deck-progress" id="deckProgress"></div>
+
+<nav class="deck-nav">
+  <span class="deck-nav-logo">🟠 Ingenia</span>
+  <span class="deck-nav-title" id="navTitle">Sistema Operativo Consultivo</span>
+  <div class="deck-nav-arrows">
+    <button class="deck-arrow" onclick="engine && engine.prev()" title="Anterior">‹</button>
+    <button class="deck-arrow" onclick="engine && engine.next()" title="Siguiente">›</button>
+  </div>
+  <span class="deck-nav-counter" id="navCounter">1 / 8</span>
+</nav>
+
+<div class="deck-dots" id="deckDots"></div>
+<div class="deck-hints" id="deckHints">← → para navegar · click en tarjetas para detalles</div>
+
+<!-- ============ DECK ============ -->
+<div class="deck" id="deck">
+
+  <!-- ====== SLIDE 1: PORTADA ====== -->
+  <section class="slide slide-1">
+    <!-- Corner SVG accents -->
+    <svg class="corner-tl" style="top:52px;left:0;" width="80" height="80" viewBox="0 0 80 80">
+      <line x1="0" y1="0" x2="0" y2="50" stroke="white" stroke-width="2"/>
+      <line x1="0" y1="0" x2="50" y2="0" stroke="white" stroke-width="2"/>
+    </svg>
+    <svg class="corner-br" style="bottom:0;right:0;" width="80" height="80" viewBox="0 0 80 80">
+      <line x1="80" y1="30" x2="80" y2="80" stroke="white" stroke-width="2"/>
+      <line x1="30" y1="80" x2="80" y2="80" stroke="white" stroke-width="2"/>
+    </svg>
+    <!-- Large decorative circle -->
+    <svg style="position:absolute;top:-20%;right:-10%;opacity:0.08;pointer-events:none;" width="500" height="500" viewBox="0 0 500 500">
+      <circle cx="250" cy="250" r="200" fill="none" stroke="white" stroke-width="60"/>
+    </svg>
+
+    <div class="slide-1__emoji reveal">🟠</div>
+    <h1 class="slide-1__title reveal">Sistema Operativo<br>Consultivo</h1>
+    <p class="slide-1__sub reveal">ClickUp Ingenia Latam — Arquitectura Unificada</p>
+    <p class="slide-1__tag reveal">DRAFT v1 &nbsp;·&nbsp; 17 de marzo de 2026</p>
+    <div class="slide-1__authors reveal">
+      <span class="slide-1__author"><strong>JC Guzmán</strong> · Director de Operaciones Consultivas</span>
+      <span class="slide-1__author"><strong>Luis Holder</strong> · CEO</span>
+    </div>
+    <div class="reveal">
+      <span class="slide-1__badge">⏳ Pendiente validación de Luis</span>
+    </div>
+  </section>
+
+  <!-- ====== SLIDE 2: CONTEXTO ====== -->
+  <section class="slide slide-2" data-title="¿Por qué ClickUp ahora?">
+    <div class="slide__label reveal">El Contexto</div>
+    <h2 class="slide__heading reveal">¿Por qué ClickUp ahora?</h2>
+
+    <div class="slide-2__cols">
+      <div class="slide-2__col reveal">
+        <div class="slide-2__col-icon">🔴</div>
+        <div class="slide-2__col-title">El problema</div>
+        <ul class="slide-2__col-items">
+          <li>Carpetas dispersas sin jerarquía</li>
+          <li>Pipeline de 46 empresas en Excel</li>
+          <li>Comités gestionados por WhatsApp</li>
+          <li>Sin visibilidad ejecutiva del estado</li>
+          <li>IP acumulada que se pierde</li>
+        </ul>
+      </div>
+      <div class="slide-2__col reveal">
+        <div class="slide-2__col-icon">🧭</div>
+        <div class="slide-2__col-title">El método (el eje)</div>
+        <div class="slide-2__col-body">Secuencia <strong>no negociable</strong>. ClickUp debe reflejar el pensamiento consultivo, no la producción de piezas.</div>
+        <div class="slide-2__arrow-flow" style="margin-top:10px;">
+          <span class="slide-2__step">1 Negocio</span>
+          <span class="slide-2__arrow-sym">→</span>
+          <span class="slide-2__step">2 Marca</span>
+          <span class="slide-2__arrow-sym">→</span>
+          <span class="slide-2__step">3 Comunicación</span>
+          <span class="slide-2__arrow-sym">→</span>
+          <span class="slide-2__step">4 Creatividad</span>
+        </div>
+      </div>
+      <div class="slide-2__col reveal">
+        <div class="slide-2__col-icon">🧠</div>
+        <div class="slide-2__col-title">El objetivo</div>
+        <div class="slide-2__col-body">ClickUp como <strong>cerebro estratégico</strong> del OS consultivo:</div>
+        <div class="slide-2__arrow-flow" style="margin-top:10px; flex-direction:column; align-items:flex-start;">
+          <span class="slide-2__step">Pensar</span>
+          <span class="slide-2__arrow-sym" style="transform:rotate(90deg);display:block;">→</span>
+          <span class="slide-2__step">Decidir</span>
+          <span class="slide-2__arrow-sym" style="transform:rotate(90deg);display:block;">→</span>
+          <span class="slide-2__step">Ejecutar</span>
+          <span class="slide-2__arrow-sym" style="transform:rotate(90deg);display:block;">→</span>
+          <span class="slide-2__step">Aprender</span>
+          <span class="slide-2__arrow-sym" style="transform:rotate(90deg);display:block;">→</span>
+          <span class="slide-2__step">Mejorar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-2__quote reveal">
+      <p>"ClickUp debe reflejar el pensamiento consultivo, no la producción de piezas"</p>
+      <cite>— Luis Holder, CEO</cite>
+    </div>
+  </section>
+
+  <!-- ====== SLIDE 3: CONVERGENCIA ====== -->
+  <section class="slide slide-3" data-title="Convergencia JC + Luis">
+    <div class="slide__label reveal">Diagnóstico</div>
+    <h2 class="slide__heading reveal">Convergencia JC + Luis</h2>
+    <p class="slide__subheading reveal">Visiones complementarias, no competitivas</p>
+
+    <div class="slide-3__grid">
+      <div class="slide-3__panel slide-3__panel--jc reveal">
+        <div class="slide-3__panel-head">🟠 JC — Ingenia OS</div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Eje:</strong> Método 1→4 como columna vertebral de todo</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Capas:</strong> 3 capas — Archivos + Drive + ClickUp</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Pipeline:</strong> 46 empresas · 94 contactos · 10 etapas · AI Fields</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Clientes:</strong> Estructura de fases (1→4) por cliente</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Comités:</strong> Metodología CLAUDE + preparación estructurada</span>
+        </div>
+      </div>
+
+      <div class="slide-3__panel slide-3__panel--luis reveal">
+        <div class="slide-3__panel-head">🎯 Luis — OS Consultivo</div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Eje:</strong> Modelo consultivo + 7 procesos del sistema operativo</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Capas:</strong> 4 niveles ClickUp — WS → Space → Folder → List</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Pipeline:</strong> Flujo de valor + licitaciones formales</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Clientes:</strong> Gobierno de cuentas con métricas</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Comités:</strong> Disciplina semanal formal · 7 dashboards estratégicos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-3__conclusion reveal">
+      <div class="slide-3__conclusion-icon">🤝</div>
+      <p>
+        <strong>JC construye la estructura y la operación diaria</strong> — archivos, pipeline, AI Fields, comités.<br>
+        <strong>Luis define la gobernanza y la estrategia</strong> — 7 procesos, KPIs, dashboards, disciplina.<br>
+        <strong>ClickUp orquesta los 7 procesos</strong> reflejando el pensamiento consultivo en cada nivel.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== SLIDE 4: 5 SPACES ====== -->
+  <section class="slide slide-4" data-title="5 Spaces — Workspace Ingenia">
+    <div class="slide__label reveal">Arquitectura</div>
+    <h2 class="slide__heading reveal">Workspace Ingenia Latam — 5 Spaces</h2>
+    <div class="slide-4__flow reveal">
+      <span class="slide-4__flow-step">Pensar</span>
+      <span class="slide-4__flow-arrow">→</span>
+      <span class="slide-4__flow-step">Decidir</span>
+      <span class="slide-4__flow-arrow">→</span>
+      <span class="slide-4__flow-step">Ejecutar</span>
+      <span class="slide-4__flow-arrow">→</span>
+      <span class="slide-4__flow-step">Aprender</span>
+      <span class="slide-4__flow-arrow">→</span>
+      <span class="slide-4__flow-step">Mejorar</span>
+      <span style="margin-left:8px; font-size:11px; color:var(--color-muted);">— haz clic en cada Space para ver detalles</span>
+    </div>
+
+    <div class="slide-4__grid">
+
+      <div class="space-card reveal" style="--card-color: linear-gradient(90deg, #ff110a, #ff5800);"
+           onclick="openModal('estrategia')">
+        <div class="space-card__emoji">🧠</div>
+        <div class="space-card__name">ESTRATEGIA</div>
+        <div class="space-card__tag">Pensar → Decidir</div>
+        <ul class="space-card__items">
+          <li>Comités Estratégicos</li>
+          <li>Diagnosis &amp; Research</li>
+          <li>Consulting Brain</li>
+        </ul>
+        <div class="space-card__click-hint">↗ Ver detalles</div>
+      </div>
+
+      <div class="space-card reveal" style="--card-color: linear-gradient(90deg, #ff5800, #ff9400);"
+           onclick="openModal('pipeline')">
+        <div class="space-card__emoji">🎯</div>
+        <div class="space-card__name">PIPELINE</div>
+        <div class="space-card__tag">Flujo de Valor</div>
+        <ul class="space-card__items">
+          <li>46+ empresas · 10 etapas</li>
+          <li>94+ contactos</li>
+          <li>Licitaciones</li>
+          <li>SOWs &amp; Propuestas</li>
+        </ul>
+        <div class="space-card__click-hint">↗ Ver detalles</div>
+      </div>
+
+      <div class="space-card reveal" style="--card-color: linear-gradient(90deg, #ff110a, #ff9400);"
+           onclick="openModal('clientes')">
+        <div class="space-card__emoji">⚡</div>
+        <div class="space-card__name">CLIENTES</div>
+        <div class="space-card__tag">Operación &amp; Delivery</div>
+        <ul class="space-card__items">
+          <li>Fase 1 — Negocio</li>
+          <li>Fase 2 — Marca</li>
+          <li>Fase 3 — Comunicación</li>
+          <li>Fase 4 — Creatividad</li>
+        </ul>
+        <div class="space-card__click-hint">↗ Ver detalles</div>
+      </div>
+
+      <div class="space-card reveal" style="--card-color: linear-gradient(90deg, #ff9400, #ffb800);"
+           onclick="openModal('operacion')">
+        <div class="space-card__emoji">⚙️</div>
+        <div class="space-card__name">OPERACIÓN</div>
+        <div class="space-card__tag">Ejecutar → Aprender</div>
+        <ul class="space-card__items">
+          <li>Tareas operacionales</li>
+          <li>Reuniones &amp; Rituales</li>
+          <li>KPIs &amp; Reportería</li>
+        </ul>
+        <div class="space-card__click-hint">↗ Ver detalles</div>
+      </div>
+
+      <div class="space-card reveal" style="--card-color: linear-gradient(90deg, #ff5800, #ff110a);"
+           onclick="openModal('conocimiento')">
+        <div class="space-card__emoji">📚</div>
+        <div class="space-card__name">CONOCIMIENTO</div>
+        <div class="space-card__tag">Aprender → Mejorar</div>
+        <ul class="space-card__items">
+          <li>Research acumulado</li>
+          <li>Casos y referencias</li>
+          <li>Plantillas &amp; Procesos</li>
+        </ul>
+        <div class="space-card__click-hint">↗ Ver detalles</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== SLIDE 5: 7 PROCESOS ====== -->
+  <section class="slide slide-5" data-title="Los 7 Procesos del OS">
+    <div class="slide__label reveal">El esqueleto</div>
+    <h2 class="slide__heading reveal">Los 7 Procesos del Sistema Operativo</h2>
+    <p class="slide__subheading reveal">Cada proceso tiene su Space, responsable y ritmo de gobernanza</p>
+
+    <div class="slide-5__body">
+      <div class="process-list">
+        <div class="process-item reveal">
+          <div class="process-num">1</div>
+          <div class="process-info">
+            <div class="process-name">Pensamiento Estratégico</div>
+            <div class="process-meta">
+              <span class="process-space">ESTRATEGIA</span>
+              <span class="process-owner">→ Rodrigo</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num">2</div>
+          <div class="process-info">
+            <div class="process-name">Prospección Consultiva</div>
+            <div class="process-meta">
+              <span class="process-space">PIPELINE (etapas 0–5)</span>
+              <span class="process-owner">→ Luis + JC</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num">3</div>
+          <div class="process-info">
+            <div class="process-name">Propuesta Consultiva</div>
+            <div class="process-meta">
+              <span class="process-space">PIPELINE (SOWs + Lic.)</span>
+              <span class="process-owner">→ Rodrigo</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num">4</div>
+          <div class="process-info">
+            <div class="process-name">Gobierno de Clientes</div>
+            <div class="process-meta">
+              <span class="process-space">CLIENTES (Fases 1–4)</span>
+              <span class="process-owner">→ JC</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num">5</div>
+          <div class="process-info">
+            <div class="process-name">Ejecución Operativa</div>
+            <div class="process-meta">
+              <span class="process-space">OPERACIÓN</span>
+              <span class="process-owner">→ Todos</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num">6</div>
+          <div class="process-info">
+            <div class="process-name">Gobernanza &amp; Decisiones</div>
+            <div class="process-meta">
+              <span class="process-space">ESTRATEGIA (Comités)</span>
+              <span class="process-owner">→ Luis</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-item reveal">
+          <div class="process-num">7</div>
+          <div class="process-info">
+            <div class="process-name">Aprendizaje &amp; Mejora</div>
+            <div class="process-meta">
+              <span class="process-space">CONOCIMIENTO + EST.</span>
+              <span class="process-owner">→ JC (curador)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-5__right">
+        <div class="pipeline-flow reveal">
+          <div class="pipeline-flow__title">Pipeline — 10 etapas + 3 cierres</div>
+          <div class="pipeline-stages">
+            <div class="stage-group">
+              <div class="stage-group__label">Pre-pipeline</div>
+              <div class="stage-row">
+                <span class="stage-pill stage-pill--pre">Sin contactar</span>
+              </div>
+            </div>
+            <div class="stage-group" style="margin-top:6px;">
+              <div class="stage-group__label">Activo (6 etapas)</div>
+              <div class="stage-row">
+                <span class="stage-pill stage-pill--act">1. Selección estratégica</span>
+                <span class="stage-pill stage-pill--act">2. Registrado</span>
+                <span class="stage-pill stage-pill--act">3. Primera reunión</span>
+              </div>
+              <div class="stage-row" style="margin-top:4px;">
+                <span class="stage-pill stage-pill--act">4. Hipótesis de valor</span>
+                <span class="stage-pill stage-pill--act">5. Alcance</span>
+                <span class="stage-pill stage-pill--act">6. Gobernanza interna</span>
+              </div>
+            </div>
+            <div class="stage-group" style="margin-top:6px;">
+              <div class="stage-group__label">Negociación (3 etapas)</div>
+              <div class="stage-row">
+                <span class="stage-pill stage-pill--neg">7. Propuesta enviada</span>
+                <span class="stage-pill stage-pill--neg">8. En negociación</span>
+                <span class="stage-pill stage-pill--neg">9. Cierre</span>
+              </div>
+            </div>
+            <div class="stage-group" style="margin-top:6px;">
+              <div class="stage-group__label">Cerrado</div>
+              <div class="stage-row">
+                <span class="stage-pill stage-pill--done">✓ Ganado</span>
+                <span class="stage-pill stage-pill--lost">✗ Perdido</span>
+                <span class="stage-pill stage-pill--paused">⏸ Inactivo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-5__note reveal">
+          <span>⚠️</span>
+          <span><strong>Nota:</strong> Inferencia de los 7 procesos pendiente de validación por Luis — se recomienda sesión de 2h para recorrer los 12 links y confirmar estructura.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SLIDE 6: PLAN ====== -->
+  <section class="slide slide-6" data-title="Plan de Implantación — 4 Fases">
+    <div class="slide__label reveal">Roadmap</div>
+    <h2 class="slide__heading reveal">4 Fases · ~10 semanas</h2>
+    <p class="slide__subheading reveal">Progresivo, no big bang — cada fase validada antes de escalar</p>
+
+    <div class="phases-track">
+
+      <div class="phase-card reveal" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-icon">✅</div>
+          <div class="phase-meta">
+            <div class="phase-name">Fase 0 — Foundation</div>
+            <div class="phase-period">Completada · Hoy, 17 mar 2026</div>
+          </div>
+          <div class="phase-goal">Pipeline listo para migrar</div>
+          <div class="phase-toggle">›</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li class="done"><span class="task-bullet">✓</span> Estructura Ingenia OS local completa</li>
+            <li class="done"><span class="task-bullet">✓</span> Rules AI operativas (.claude/rules/)</li>
+            <li class="done"><span class="task-bullet">✓</span> Pipeline rediseño (columnas + etapas)</li>
+            <li class="done"><span class="task-bullet">✓</span> 46 empresas analizadas y mapeadas</li>
+            <li class="done"><span class="task-bullet">✓</span> AI Fields + prompts configurados</li>
+            <li class="done"><span class="task-bullet">✓</span> Metodología de comité estratégico (CLAUDE.md)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-card reveal" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-icon">🔄</div>
+          <div class="phase-meta">
+            <div class="phase-name">Fase 1 — Core Structures</div>
+            <div class="phase-period">En curso · Semanas 1–2 (17–28 mar)</div>
+          </div>
+          <div class="phase-goal">Pipeline operando en ClickUp</div>
+          <div class="phase-toggle">›</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li><span class="task-bullet">○</span> Workspace + 5 Spaces en ClickUp (2h)</li>
+            <li><span class="task-bullet">○</span> Folders + Lists base + Custom Fields (4h)</li>
+            <li><span class="task-bullet">○</span> Migración 46 empresas + 94 contactos (3h)</li>
+            <li><span class="task-bullet">○</span> AI Fields configurados + validación piloto (3h)</li>
+            <li><span class="task-bullet">○</span> Vista Kanban del pipeline (1h)</li>
+            <li><span class="task-bullet">○</span> Checkpoint con Luis (24–25 mar)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-card reveal" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-icon">📋</div>
+          <div class="phase-meta">
+            <div class="phase-name">Fase 2 — Clientes &amp; Gobernanza</div>
+            <div class="phase-period">Pendiente · Semanas 3–5 (31 mar – 11 abr)</div>
+          </div>
+          <div class="phase-goal">Clientes + gobernanza</div>
+          <div class="phase-toggle">›</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li><span class="task-bullet">○</span> Nicovita en ClickUp como piloto de cliente (4h)</li>
+            <li><span class="task-bullet">○</span> Automatizaciones pipeline (semáforos, alertas) (2h)</li>
+            <li><span class="task-bullet">○</span> Comités recurrentes establecidos (cadencia semanal/quincenal) (2h)</li>
+            <li><span class="task-bullet">○</span> Dashboards 1–3: Pipeline health, Clientes, Rituales (6h)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-card reveal" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-icon">🔮</div>
+          <div class="phase-meta">
+            <div class="phase-name">Fase 3 — AI + Consulting Brain</div>
+            <div class="phase-period">Futuro · Semanas 5–8 (14–25 abr)</div>
+          </div>
+          <div class="phase-goal">Sistema estratégico completo</div>
+          <div class="phase-toggle">›</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li><span class="task-bullet">○</span> AI Fields segunda capa de inteligencia (4h)</li>
+            <li><span class="task-bullet">○</span> Consulting Brain: hipótesis, frameworks, decisiones, learnings (5h)</li>
+            <li><span class="task-bullet">○</span> Dashboards 4–7: KPIs, Revenue, Brain, Ritual (8h)</li>
+            <li><span class="task-bullet">○</span> Evaluación equipo + feedback loop (3h)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase-card reveal" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-icon">♾️</div>
+          <div class="phase-meta">
+            <div class="phase-name">Fase 4 — Scale &amp; Operationalize</div>
+            <div class="phase-period">Ongoing · Semana 8+</div>
+          </div>
+          <div class="phase-goal">ClickUp = OS Oficial</div>
+          <div class="phase-toggle">›</div>
+        </div>
+        <div class="phase-body">
+          <ul class="phase-tasks">
+            <li><span class="task-bullet">○</span> Migración de todos los clientes activos</li>
+            <li><span class="task-bullet">○</span> Adopción del equipo (hands-on, no manual)</li>
+            <li><span class="task-bullet">○</span> Sync con Google Drive (carpetas espejo)</li>
+            <li><span class="task-bullet">○</span> Retrospectiva mensual + mejora continua de prompts</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reveal" style="margin-top: clamp(10px,1.5vh,16px);">
+      <div class="timeline-bar">
+        <div class="timeline-fill"></div>
+      </div>
+      <div class="timeline-labels">
+        <span>Sem 1</span><span>Sem 2</span><span>Sem 3</span><span>Sem 4</span>
+        <span>Sem 5</span><span>Sem 6</span><span>Sem 7</span><span>Sem 8+</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SLIDE 7: PRÓXIMOS PASOS ====== -->
+  <section class="slide slide-7" data-title="Próximos Pasos — Semana 17 mar">
+    <div class="slide__label reveal">Acción inmediata</div>
+    <h2 class="slide__heading reveal">Semana del 17 de marzo — ¿Qué sigue?</h2>
+
+    <div class="slide-7__body">
+      <div class="action-panel action-panel--luis reveal">
+        <div class="action-panel__head">🎯 Por Luis (esta semana)</div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Validar inferencia de los 7 procesos del OS</span>
+        </div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Compartir destilación de 12 links: Spaces exactos, workflows, 7 dashboards</span>
+        </div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Compartir sistema de KPIs completo y 10 Reglas de Oro</span>
+        </div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Compartir Plan de 7 días (para ajuste vs. plan real de ~10 semanas)</span>
+        </div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Reservar sesión 2h con JC (lunes o martes)</span>
+        </div>
+      </div>
+
+      <div class="action-panel action-panel--jc reveal">
+        <div class="action-panel__head">🟠 Por JC (esta semana)</div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Agendar sesión 2h con Luis (lunes/martes)</span>
+        </div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Preparar acceso ClickUp con permisos admin</span>
+        </div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Coordinar con Mercedes si usa/usará ClickUp</span>
+        </div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Miércoles: Crear Workspace + 5 Spaces en ClickUp</span>
+        </div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Jueves: Crear Folders + Lists base + Custom Fields</span>
+        </div>
+        <div class="action-item" onclick="this.classList.toggle('checked')">
+          <div class="action-check"></div>
+          <span>Viernes: Iniciar migración 46 empresas + 94 contactos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="decisions-table reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Decisión pendiente</th>
+            <th>Opciones</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>¿Admin de ClickUp?</td>
+            <td>JC / Mercedes / Otro</td>
+            <td class="owner">Luis</td>
+          </tr>
+          <tr>
+            <td>¿Replicar estructura en Drive?</td>
+            <td>Sync automático / Solo ClickUp</td>
+            <td class="owner">JC + DevOps</td>
+          </tr>
+          <tr>
+            <td>¿Acceso clientes (guests)?</td>
+            <td>Solo visibilidad / Colaborativo</td>
+            <td class="owner">Luis</td>
+          </tr>
+          <tr>
+            <td>¿Cuándo full operación?</td>
+            <td>Semana 2 (rápido) / Semana 4 (conservador)</td>
+            <td class="owner">Luis + JC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ====== SLIDE 8: PRINCIPIOS ====== -->
+  <section class="slide slide-8" data-title="6 Principios del Blend">
+    <div class="slide__label reveal">Compromisos</div>
+    <h2 class="slide__heading reveal">6 Principios que Guían el Blend</h2>
+    <p class="slide__subheading reveal">No son reglas técnicas — son compromisos de operación</p>
+
+    <div class="principles-grid">
+
+      <div class="principle-card reveal">
+        <div class="principle-num">1</div>
+        <div class="principle-title">El Método es el Eje</div>
+        <div class="principle-body">La secuencia 1→4 se refleja en todo: carpetas, pipeline, propuestas y estrategia. No se salta fases, no se empieza por creatividad.</div>
+        <div class="principle-tag">NO NEGOCIABLE</div>
+      </div>
+
+      <div class="principle-card reveal">
+        <div class="principle-num">2</div>
+        <div class="principle-title">ClickUp Orquesta, No Almacena</div>
+        <div class="principle-body">ClickUp = quién hace qué, cuándo, en qué estado. Archivos = qué se produjo y el conocimiento. Sin duplicación de contenido.</div>
+        <div class="principle-tag">ARQUITECTURA</div>
+      </div>
+
+      <div class="principle-card reveal">
+        <div class="principle-num">3</div>
+        <div class="principle-title">Los 7 Procesos son el Esqueleto</div>
+        <div class="principle-body">Si algo no encaja en los 7 procesos del OS, probablemente es trabajo operativo menor o no pertenece a ClickUp.</div>
+        <div class="principle-tag">GOBERNANZA</div>
+      </div>
+
+      <div class="principle-card reveal">
+        <div class="principle-num">4</div>
+        <div class="principle-title">Disciplina Semanal &gt; Automatización</div>
+        <div class="principle-body">ClickUp es un espejo de la disciplina. Si no hay disciplina, ClickUp expone el caos. Las herramientas nunca salvan la desorganización.</div>
+        <div class="principle-tag">CULTURA</div>
+      </div>
+
+      <div class="principle-card reveal">
+        <div class="principle-num">5</div>
+        <div class="principle-title">AI como Segunda Capa, No Reemplazo</div>
+        <div class="principle-body">AI Fields sugieren, evalúan y resumen. Las decisiones reales las toma el equipo en comité. Los prompts son análisis, no oráculos.</div>
+        <div class="principle-tag">ESTRATEGIA AI</div>
+      </div>
+
+      <div class="principle-card reveal">
+        <div class="principle-num">6</div>
+        <div class="principle-title">Progresivo, No Big Bang</div>
+        <div class="principle-body">60% funcional operando es mejor que 100% planeado sin usar. Cada fase validada antes de escalar. Plan de 10 semanas vs. 7 días aspiracionales.</div>
+        <div class="principle-tag">IMPLEMENTACIÓN</div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /deck -->
+
+<!-- ============ MODAL DATA ============ -->
+<script>
+const MODAL_DATA = {
+  estrategia: {
+    emoji: '🧠', name: 'ESTRATEGIA', tag: 'Space 1 — Pensar → Decidir',
+    folders: [
+      { name: 'Comités Estratégicos', fields: [
+        ['Task Name', '[Fecha] — [Tipo]: Pipeline / Clientes / Estratégico'],
+        ['Tipo de Comité', 'Pipeline · Clientes · Licitaciones · General · Estratégico'],
+        ['Estado', 'Preparación · En curso · Completado · Pendiente acuerdos'],
+        ['Responsable', 'Luis o director que lidera la sesión'],
+        ['Acuerdos', 'Decisiones formales tomadas en la sesión'],
+        ['Attachments', 'Link a registro, audio, acta'],
+      ]},
+      { name: 'Diagnosis & Research', fields: [
+        ['Task Name', 'Nombre del proyecto de investigación estratégica'],
+        ['Tipo', 'Industria · Vertical · Competencia · Mercado · Interno'],
+        ['Estado', 'Iniciado · En desarrollo · Completado · Archivado'],
+        ['Responsable', 'Quien lidera (Rodrigo por defecto)'],
+        ['Insights clave', 'Hallazgos principales del research'],
+        ['Aplicación', 'A qué decisión o prospecto aplica'],
+      ]},
+      { name: 'Consulting Brain', fields: [
+        ['Task Name', 'Título del insight, hipótesis, framework o decisión'],
+        ['Tipo', 'Hipótesis · Framework · Decisión · Aprendizaje · Patrón'],
+        ['Contenido', 'La hipótesis o framework en sí mismo'],
+        ['Relevancia', 'Alta · Media · Baja'],
+        ['Vinculado a', 'Prospectos o clientes donde aplica (Relationship)'],
+        ['Curador', 'JC (responsable de la memoria estratégica)'],
+      ]},
+    ]
+  },
+  pipeline: {
+    emoji: '🎯', name: 'PIPELINE', tag: 'Space 2 — Flujo de Valor Consultivo',
+    folders: [
+      { name: 'Pipeline de Empresas (46+ empresas)', fields: [
+        ['Base', 'Empresa, Sector, Tipo de Prospecto, Canal entrada'],
+        ['Inteligencia', 'Tensión Detectada, Hipótesis Estratégica, [AI] Calidad tensión'],
+        ['Pipeline', 'Etapa (Status), Días en etapa (Fórmula), Valor fee (Currency)'],
+        ['Operativo', 'Última interacción, [AI] Resumen, Próximo paso, [AI] Urgencia'],
+        ['Gobernanza', 'Decisión comité, [AI] Recomendación, Semáforo, [AI] Narrative brief'],
+      ]},
+      { name: 'Directorio de Contactos (94+ contactos)', fields: [
+        ['Empresa', 'Relación bidireccional con Pipeline de Empresas'],
+        ['Cargo / Rol', 'CMO, CIO, Gerente de Marketing, etc.'],
+        ['Nivel de Poder', 'Alto · Medio · Bajo'],
+        ['Tipo', 'Decisor · Influenciador · Operativo · Gatekeeper'],
+        ['Canal preferido', 'Email · WhatsApp · LinkedIn · Llamada'],
+        ['Estado', 'Activo · Sin respuesta · Convertido a cliente'],
+      ]},
+      { name: 'Licitaciones', fields: [
+        ['Task Name', '[Empresa] — Licitación [Código/Fecha]'],
+        ['Fechas', 'Publicación y cierre (deadline de propuesta)'],
+        ['Estado', 'Abierta → En desarrollo → Enviada → Resultado → Ganada/Perdida'],
+        ['[AI] Análisis de encaje', '¿Esta licitación encaja con el modelo consultivo?'],
+      ]},
+      { name: 'SOWs & Propuestas', fields: [
+        ['Tipo', 'SOW · Pitch · Brief · Propuesta comercial'],
+        ['Estado', 'Borrador → En revisión → Lista → Enviada → Aceptada/Rechazada'],
+        ['Fee propuesto', 'Valor del proyecto (Currency)'],
+        ['Versiones', 'Archivos: v1, v2, final, PDF'],
+      ]},
+    ]
+  },
+  clientes: {
+    emoji: '⚡', name: 'CLIENTES', tag: 'Space 3 — Operación & Delivery (Método 1→4)',
+    folders: [
+      { name: 'Estructura por cliente (ej: Nicovita — piloto)', fields: [
+        ['Folder', 'Un Folder por cliente activo'],
+        ['Fase 1 — Negocio', 'List: Diagnóstico, investigación, tensiones de negocio'],
+        ['Fase 2 — Marca', 'List: Estrategia de marca, posicionamiento, identidad'],
+        ['Fase 3 — Comunicación', 'List: Mensajes clave, tono, canales, contenido'],
+        ['Fase 4 — Creatividad', 'List: Producción, piezas, materiales creativos'],
+      ]},
+      { name: 'Campos en cada List (Fase)', fields: [
+        ['Task Name', 'Nombre del entregable o workstream'],
+        ['Tipo de entregable', 'Análisis · Documento · Presentación · Recomendación'],
+        ['Estado', 'Backlog · En desarrollo · En revisión · Completado · Entregado'],
+        ['Responsable + Revisor', 'Quién ejecuta y quién valida antes del cliente'],
+        ['Horas estimadas/reales', 'Para control de rentabilidad del proyecto'],
+      ]},
+    ]
+  },
+  operacion: {
+    emoji: '⚙️', name: 'OPERACIÓN INTERNA', tag: 'Space 4 — Ejecutar → Aprender',
+    folders: [
+      { name: 'Tareas Operacionales', fields: [
+        ['Tipo', 'Admin · Proceso · Mejora · Investigación'],
+        ['Prioridad', 'Crítica · Alta · Normal · Baja'],
+        ['Estado', 'Backlog · En desarrollo · En revisión · Completado'],
+        ['Asignado a', 'Responsable del equipo'],
+      ]},
+      { name: 'Reuniones & Rituales', fields: [
+        ['Tipo de reunión', 'Status diario · Status semanal · Comité · Retrospectiva'],
+        ['Orden del día', 'Temas a tratar (pre-sesión)'],
+        ['Notas + Decisiones', 'Lo discutido y los acuerdos formales tomados'],
+        ['Attachment', 'Recording, acta, materiales'],
+      ]},
+      { name: 'KPIs & Reportería', fields: [
+        ['KPI', 'A definir con Luis según sistema de KPIs del OS'],
+        ['Período', 'Semanal · Mensual · Trimestral'],
+        ['Valor meta vs. real', 'Para medir si operamos como consultora'],
+        ['Análisis', 'Interpretación del número + acción correctiva'],
+      ]},
+    ]
+  },
+  conocimiento: {
+    emoji: '📚', name: 'CONOCIMIENTO', tag: 'Space 5 — Aprender → Mejorar (IP Acumulada)',
+    folders: [
+      { name: 'Research Acumulado', fields: [
+        ['Tipo', 'Industria · Vertical · Tendencia · Mercado · Benchmark'],
+        ['Resumen', 'Hallazgos principales del estudio'],
+        ['Aplicación', 'A qué prospectos o clientes aplica este research'],
+        ['Fecha', 'Cuándo se realizó — para saber qué está vigente'],
+      ]},
+      { name: 'Casos y Referencias', fields: [
+        ['Tipo', 'Caso ganado · Caso perdido · Learning interno · Best practice'],
+        ['Descripción', 'Qué pasó y qué aprendimos como consultora'],
+        ['Aplicable a', 'Qué verticales o tipo de prospectos se benefician'],
+      ]},
+      { name: 'Plantillas & Procesos', fields: [
+        ['Tipo', 'Propuesta · Brief · Contrato · Proceso · Presentación'],
+        ['Descripción', 'Para qué se usa y cuándo aplicarla'],
+        ['Responsable', 'Quién mantiene actualizada esta plantilla'],
+        ['Última actualización', 'Para saber si está vigente'],
+      ]},
+    ]
+  }
+};
+
+function openModal(key) {
+  const d = MODAL_DATA[key];
+  if (!d) return;
+  document.getElementById('modalEmoji').textContent = d.emoji;
+  document.getElementById('modalName').textContent = d.name;
+  document.getElementById('modalTag').textContent = d.tag;
+  const body = document.getElementById('modalBody');
+  body.innerHTML = d.folders.map(f => `
+    <div class="modal-folder">
+      <div class="modal-folder__name">${f.name}</div>
+      <div class="modal-fields">
+        ${f.fields.map(([k,v]) => `
+          <div class="modal-field">
+            <span class="modal-field__key">${k}:</span>
+            <span class="modal-field__val">${v}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('modalOverlay').classList.add('open');
+  // Prevent slide navigation when modal is open
+  document.querySelector('.deck').style.overflowY = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalOverlay')) return;
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.querySelector('.deck').style.overflowY = 'auto';
+}
+
+document.getElementById('modalContent').addEventListener('click', e => e.stopPropagation());
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.querySelector('.deck').style.overflowY = 'auto';
+  }
+});
+
+function togglePhase(card) {
+  card.classList.toggle('open');
+}
+
+// ============ SLIDE ENGINE ============
+var engine;
+
+function SlideEngine() {
+  this.deck = document.getElementById('deck');
+  this.slides = Array.from(document.querySelectorAll('.slide'));
+  this.current = 0;
+  this.total = this.slides.length;
+  this.buildDots();
+  this.bindEvents();
+  this.observe();
+  this.update();
+}
+
+SlideEngine.prototype.buildDots = function() {
+  var container = document.getElementById('deckDots');
+  var self = this;
+  this.slides.forEach(function(_, i) {
+    var d = document.createElement('button');
+    d.className = 'deck-dot';
+    d.title = 'Slide ' + (i + 1);
+    d.onclick = function() { self.goTo(i); };
+    container.appendChild(d);
+  });
+  this.dots = Array.from(container.children);
+};
+
+SlideEngine.prototype.bindEvents = function() {
+  var self = this;
+  document.addEventListener('keydown', function(e) {
+    // Don't handle if modal is open
+    if (document.getElementById('modalOverlay').classList.contains('open')) return;
+    if (['ArrowDown', 'ArrowRight', ' ', 'PageDown'].indexOf(e.key) > -1) {
+      e.preventDefault(); self.next();
+    } else if (['ArrowUp', 'ArrowLeft', 'PageUp'].indexOf(e.key) > -1) {
+      e.preventDefault(); self.prev();
+    } else if (e.key === 'Home') { e.preventDefault(); self.goTo(0); }
+    else if (e.key === 'End') { e.preventDefault(); self.goTo(self.total - 1); }
+    clearTimeout(self.hintTimer);
+    document.getElementById('deckHints').classList.add('faded');
+  });
+  // Touch
+  var tY;
+  this.deck.addEventListener('touchstart', function(e) { tY = e.touches[0].clientY; }, { passive: true });
+  this.deck.addEventListener('touchend', function(e) {
+    if (document.getElementById('modalOverlay').classList.contains('open')) return;
+    var dy = tY - e.changedTouches[0].clientY;
+    if (Math.abs(dy) > 50) { dy > 0 ? self.next() : self.prev(); }
+  });
+  // Auto-hide hints
+  this.hintTimer = setTimeout(function() {
+    document.getElementById('deckHints').classList.add('faded');
+  }, 5000);
+};
+
+SlideEngine.prototype.observe = function() {
+  var self = this;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        self.current = self.slides.indexOf(entry.target);
+        self.update();
+      }
+    });
+  }, { threshold: 0.5 });
+  this.slides.forEach(function(s) { obs.observe(s); });
+};
+
+SlideEngine.prototype.goTo = function(i) {
+  var idx = Math.max(0, Math.min(i, this.total - 1));
+  this.slides[idx].scrollIntoView({ behavior: 'smooth' });
+};
+SlideEngine.prototype.next = function() { if (this.current < this.total - 1) this.goTo(this.current + 1); };
+SlideEngine.prototype.prev = function() { if (this.current > 0) this.goTo(this.current - 1); };
+
+SlideEngine.prototype.update = function() {
+  var pct = ((this.current + 1) / this.total * 100) + '%';
+  document.getElementById('deckProgress').style.width = pct;
+  var c = this.current;
+  this.dots.forEach(function(d, i) { d.classList.toggle('active', i === c); });
+  document.getElementById('navCounter').textContent = (this.current + 1) + ' / ' + this.total;
+  // Update nav title
+  var slide = this.slides[this.current];
+  var title = slide.getAttribute('data-title') || 'Sistema Operativo Consultivo';
+  document.getElementById('navTitle').textContent = title;
+};
+
+engine = new SlideEngine();
+</script>
+
+</body>
+</html>

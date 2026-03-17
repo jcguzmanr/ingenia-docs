@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antes de que nos veamos mañana — Ingenia 18 Marzo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:    #ff110a;
+  --orange: #ff5800;
+  --accent: #ff9400;
+  --white:  #ffffff;
+  --light:  #eeeeee;
+  --bg:     #f4f4f4;
+  --text:   #1a1a1a;
+  --muted:  #666666;
+  --green:  #16a34a;
+  --grad:   linear-gradient(135deg, #ff110a, #ff5800);
+  --fh:     'Space Grotesk', sans-serif;
+  --fb:     'DM Sans', sans-serif;
+  --r:      10px;
+  --sh:     0 2px 16px rgba(0,0,0,0.08);
+  --max:    720px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--fb); background: var(--bg); color: var(--text); }
+
+/* ── TOP NAV ── */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; height: 52px;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  display: flex; align-items: center; padding: 0 clamp(16px, 4vw, 40px); gap: 12px;
+  z-index: 100;
+}
+.topnav-logo { display: flex; align-items: center; text-decoration: none; }
+.topnav-logo img { height: 28px; width: auto; object-fit: contain; display: block; }
+.topnav-title { font-size: 13px; color: var(--muted); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topnav-back { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s; white-space: nowrap; }
+.topnav-back:hover { color: var(--red); }
+
+/* ── SCROLL PROGRESS ── */
+.progress-bar {
+  position: fixed; top: 52px; left: 0; right: 0; height: 3px;
+  background: var(--light); z-index: 99;
+}
+.progress-fill {
+  height: 100%; width: 0%;
+  background: var(--grad);
+  transition: width 0.1s linear;
+}
+
+/* ── CONTAINER ── */
+.wrap {
+  max-width: calc(var(--max) + 80px);
+  margin: 0 auto;
+  padding: calc(52px + 48px) clamp(20px, 5vw, 40px) 80px;
+}
+
+/* ── REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── HEADER / HERO ── */
+.memo-header { margin-bottom: 48px; }
+.read-time {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.read-time::before { content: ''; display: inline-block; width: 14px; height: 14px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>') no-repeat center; background-size: contain; opacity: 0.7; }
+.memo-meta {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+  font-size: 13px; color: var(--muted);
+  margin-bottom: 24px;
+  background: var(--white);
+  border-radius: var(--r);
+  box-shadow: var(--sh);
+  padding: 18px 22px;
+  border-left: 4px solid var(--red);
+}
+.meta-key { font-weight: 700; color: var(--text); white-space: nowrap; }
+.meta-val { color: var(--muted); }
+.memo-title {
+  font-family: var(--fh);
+  font-size: clamp(30px, 6vw, 52px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.08;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.memo-title span { color: var(--red); }
+.memo-intro {
+  font-size: clamp(14px, 2vw, 17px);
+  color: var(--muted);
+  line-height: 1.65;
+  border-left: 3px solid var(--light);
+  padding-left: 16px;
+  font-style: italic;
+  margin-top: 16px;
+}
+
+/* ── SECTION ── */
+.ms { margin-bottom: 48px; max-width: var(--max); }
+.ms h2 {
+  font-family: var(--fh);
+  font-size: clamp(18px, 2.8vw, 24px);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+.ms-divider {
+  width: 40px; height: 3px;
+  background: var(--grad);
+  border-radius: 2px; margin-bottom: 16px;
+}
+.ms p { font-size: 15px; line-height: 1.7; color: var(--muted); margin-bottom: 12px; }
+.ms p strong { color: var(--text); }
+.ms h3 { font-family: var(--fh); font-size: 17px; font-weight: 700; color: var(--text); margin: 24px 0 10px; }
+
+/* ── AGENDA ── */
+.agenda { display: flex; flex-direction: column; gap: 12px; }
+.agenda-item {
+  background: var(--white); border-radius: var(--r);
+  box-shadow: var(--sh); padding: 16px 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.agenda-num {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--grad); color: white;
+  font-family: var(--fh); font-weight: 700; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.agenda-info { flex: 1; }
+.agenda-title { font-family: var(--fh); font-size: 14px; font-weight: 700; color: var(--text); }
+.agenda-desc { font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+
+/* ── MODEL FLOW ── */
+.model-flow { display: flex; flex-direction: column; gap: 3px; margin: 20px 0; }
+.model-step { display: flex; align-items: stretch; gap: 0; border-radius: 8px; overflow: hidden; }
+.model-step-num {
+  width: 40px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fh); font-weight: 700; font-size: 18px; color: white;
+}
+.model-step-body { flex: 1; padding: 14px 18px; }
+.model-step-name { font-family: var(--fh); font-size: 15px; font-weight: 700; line-height: 1; }
+.model-step-desc { font-size: 12px; margin-top: 3px; opacity: 0.75; }
+.ms1 { background: rgba(255,17,10,0.08); }
+.ms1 .model-step-num { background: var(--red); }
+.ms1 .model-step-name { color: var(--red); }
+.ms2 { background: rgba(255,88,0,0.08); }
+.ms2 .model-step-num { background: var(--orange); }
+.ms2 .model-step-name { color: var(--orange); }
+.ms3 { background: rgba(255,148,0,0.08); }
+.ms3 .model-step-num { background: var(--accent); }
+.ms3 .model-step-name { color: #b36600; }
+.ms4 { background: rgba(100,100,100,0.07); }
+.ms4 .model-step-num { background: #555; }
+.ms4 .model-step-name { color: #333; }
+
+/* ── CONSEQUENCE TABLE ── */
+.conseq {
+  background: var(--white); border-radius: var(--r); box-shadow: var(--sh);
+  overflow: hidden; margin: 16px 0;
+}
+.conseq table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.conseq thead tr { background: var(--red); }
+.conseq thead th { color: white; font-family: var(--fh); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 10px 16px; text-align: left; }
+.conseq tbody td { padding: 10px 16px; border-bottom: 1px solid var(--light); color: var(--muted); line-height: 1.4; }
+.conseq tbody tr:last-child td { border-bottom: none; }
+.conseq tbody td strong { color: var(--red); }
+
+/* ── HIGHLIGHT BOX ── */
+.highlight {
+  background: rgba(255,17,10,0.05); border: 1px solid rgba(255,17,10,0.12);
+  border-radius: var(--r); padding: 16px 20px; margin: 16px 0;
+  font-size: 14px; line-height: 1.6; color: var(--text);
+}
+.highlight strong { color: var(--red); }
+
+/* ── 4-LAYER DIAGRAM ── */
+.layers { display: flex; flex-direction: column; gap: 3px; margin: 20px 0; }
+.layer {
+  border-radius: 8px; padding: 16px 22px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.layer-1 { background: linear-gradient(90deg, rgba(255,17,10,0.12), rgba(255,17,10,0.04)); border-left: 4px solid var(--red); }
+.layer-2 { background: linear-gradient(90deg, rgba(255,88,0,0.12), rgba(255,88,0,0.04)); border-left: 4px solid var(--orange); }
+.layer-3 { background: linear-gradient(90deg, rgba(255,148,0,0.12), rgba(255,148,0,0.04)); border-left: 4px solid var(--accent); }
+.layer-4 { background: rgba(100,100,100,0.07); border-left: 4px solid #bbb; }
+.layer-5 { background: rgba(22,163,74,0.06); border-left: 4px solid var(--green); }
+.layer-label { font-family: var(--fh); font-size: 13px; font-weight: 700; min-width: 180px; }
+.layer-1 .layer-label { color: var(--red); }
+.layer-2 .layer-label { color: var(--orange); }
+.layer-3 .layer-label { color: #b36600; }
+.layer-4 .layer-label { color: #555; }
+.layer-5 .layer-label { color: var(--green); }
+.layer-who { font-size: 12px; color: var(--muted); }
+.layer-mandate { font-size: 12px; font-style: italic; color: var(--muted); flex: 1; min-width: 160px; }
+.layer-new { font-size: 10px; font-weight: 700; background: var(--red); color: white; border-radius: 4px; padding: 2px 6px; white-space: nowrap; }
+
+/* ── NEW PROFILES (accordion) ── */
+.new-profiles { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+.profile-card {
+  background: var(--white); border-radius: var(--r); box-shadow: var(--sh);
+  position: relative; overflow: hidden;
+}
+.profile-card--new  { border-left: 4px solid var(--red); }
+.profile-card--internal { border-left: 4px solid var(--orange); }
+
+.profile-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 22px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.profile-card-head:hover { background: rgba(0,0,0,0.02); }
+.profile-card-head-inner { flex: 1; min-width: 0; }
+.profile-badge {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  border-radius: 4px; padding: 2px 8px; margin-bottom: 10px;
+}
+.profile-badge--new      { background: rgba(255,17,10,0.1); color: var(--red); }
+.profile-badge--internal { background: rgba(255,88,0,0.1); color: var(--orange); }
+.profile-icon { font-size: 22px; margin-bottom: 6px; }
+.profile-name { font-family: var(--fh); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.profile-who { font-size: 12px; font-weight: 600; color: var(--red); margin-bottom: 0; }
+
+.profile-toggle {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border: none;
+  background: rgba(0,0,0,0.05);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.15s ease;
+}
+.profile-toggle:hover { background: rgba(0,0,0,0.08); color: var(--text); }
+.profile-toggle-icon { display: inline-block; transition: transform 0.25s ease; }
+.profile-card.is-open .profile-toggle-icon { transform: rotate(-180deg); }
+
+.profile-card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.profile-card.is-open .profile-card-body { max-height: 420px; }
+.profile-card-body .profile-desc {
+  padding: 0 22px 12px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 0;
+  border-top: 1px solid var(--light);
+  padding-top: 14px;
+  margin-top: 0;
+}
+.profile-card-body .profile-what {
+  margin: 0 22px 18px;
+  font-size: 11px;
+  color: var(--muted);
+  background: rgba(0,0,0,0.03);
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-style: italic;
+}
+
+/* ── CHANGES TABLE ── */
+.changes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+.changes-card { background: var(--white); border-radius: var(--r); box-shadow: var(--sh); padding: 20px; }
+.changes-card h4 { font-family: var(--fh); font-size: 13px; font-weight: 700; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--light); }
+.changes-card--yes h4 { color: var(--red); }
+.changes-card--no h4 { color: var(--muted); }
+.changes-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.changes-list li { font-size: 13px; color: var(--muted); padding-left: 16px; position: relative; line-height: 1.4; }
+.changes-list li::before { position: absolute; left: 0; }
+.changes-card--yes .changes-list li::before { content: '✓'; color: var(--red); font-weight: 700; font-size: 11px; }
+.changes-card--no .changes-list li::before { content: '='; color: #aaa; font-weight: 700; }
+
+/* ── PATHS ── */
+.paths { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+.path-card { border-radius: var(--r); padding: 20px; }
+.path-a { background: rgba(255,17,10,0.06); border: 1px solid rgba(255,17,10,0.12); }
+.path-b { background: rgba(22,163,74,0.06); border: 1px solid rgba(22,163,74,0.15); }
+.path-label { font-family: var(--fh); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.path-a .path-label { color: var(--red); }
+.path-b .path-label { color: #16a34a; }
+.path-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+.path-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.path-items li { font-size: 12px; color: var(--muted); padding-left: 12px; position: relative; }
+.path-items li::before { content: '→'; position: absolute; left: 0; font-size: 10px; }
+.path-a .path-items li::before { color: var(--red); }
+.path-b .path-items li::before { color: #16a34a; }
+
+/* ── PREVIEW LIST ── */
+.preview-list { display: flex; flex-direction: column; gap: 8px; }
+.preview-item {
+  background: var(--white); border-radius: var(--r); box-shadow: var(--sh);
+  padding: 14px 18px; display: flex; align-items: center; gap: 12px;
+}
+.preview-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); flex-shrink: 0; }
+.preview-text { font-size: 14px; color: var(--text); }
+
+/* ── REFLECTION CTA ── */
+.reflection-cta {
+  margin-top: 20px;
+  padding: 20px 24px;
+  background: rgba(255,17,10,0.06);
+  border-left: 4px solid var(--red);
+  border-radius: var(--r);
+}
+.reflection-cta-text {
+  font-family: var(--fh);
+  font-size: clamp(16px, 2.2vw, 19px);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── SIGN-OFF ── */
+.signoff { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--light); max-width: var(--max); }
+.signoff-msg { font-size: 16px; line-height: 1.65; color: var(--muted); margin-bottom: 20px; }
+.signoff-msg strong { color: var(--text); }
+.signoff-sig { font-family: var(--fh); font-size: 20px; font-weight: 700; color: var(--red); }
+.signoff-name { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.signoff-footer { margin-top: 32px; font-size: 11px; color: var(--muted); text-align: center; padding-top: 16px; border-top: 1px solid var(--light); }
+
+/* ── RESPONSIVE BASE ── */
+@media (max-width: 620px) {
+  .changes-grid { grid-template-columns: 1fr; }
+  .paths { grid-template-columns: 1fr; }
+}
+
+
+/* ═══════════════════════════════════════════════
+   ANALOGÍA INTERACTIVA
+═══════════════════════════════════════════════ */
+
+.analogy-section {
+  margin: 28px 0;
+  background: linear-gradient(135deg, rgba(22,163,74,0.04) 0%, rgba(255,255,255,0) 60%);
+  border: 1px solid rgba(22,163,74,0.14);
+  border-radius: 14px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.analogy-section::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 140px; height: 140px;
+  border: 24px solid rgba(22,163,74,0.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.analogy-section-title {
+  font-family: var(--fh);
+  font-size: clamp(15px, 2.2vw, 18px);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.analogy-section-title .atitle-icon {
+  font-size: 22px;
+}
+
+.analogy-section-intro {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 580px;
+}
+
+/* ── MOBILE TABS ── */
+.analogy-tabs {
+  display: none;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 660px) {
+  .analogy-tabs { display: flex; }
+}
+
+.atab {
+  flex: 1;
+  padding: 11px 8px;
+  border: 2px solid var(--light);
+  border-radius: 9px;
+  background: var(--white);
+  font-family: var(--fh);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--muted);
+  transition: all 0.2s ease;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.atab[data-for="agency"].is-active {
+  border-color: #888;
+  color: #444;
+  background: #f0f0f0;
+}
+
+.atab[data-for="consultivo"].is-active {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(22,163,74,0.06);
+}
+
+/* ── COMPARISON GRID ── */
+.analogy-grid {
+  display: grid;
+  grid-template-columns: 1fr 36px 1fr;
+  gap: 0;
+  align-items: start;
+}
+
+@media (max-width: 660px) {
+  .analogy-grid { grid-template-columns: 1fr; }
+  .analogy-vs   { display: none; }
+  .acard        { display: none; }
+  .acard.mobile-show { display: flex; }
+}
+
+.analogy-vs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+.analogy-vs-inner {
+  font-family: var(--fh);
+  font-size: 11px;
+  font-weight: 700;
+  color: #bbb;
+  writing-mode: vertical-rl;
+  letter-spacing: 2px;
+}
+
+/* ── CARDS ── */
+.acard {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.acard:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.11); }
+
+.acard-agency   { border-top: 4px solid #aaa; }
+.acard-consultivo { border-top: 4px solid var(--green); }
+
+/* Card header */
+.acard-head {
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--light);
+}
+
+.acard-name {
+  font-family: var(--fh);
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  line-height: 1.2;
+}
+
+.acard-agency .acard-name     { color: #555; }
+.acard-consultivo .acard-name { color: var(--green); }
+
+.acard-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── PITCH AREA ── */
+.apitch {
+  flex: 1;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.apitch-agency     { background: #f6f6f6; }
+.apitch-consultivo { background: linear-gradient(180deg, #f0faf4 0%, #f8fef9 100%); }
+
+.azone {
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: center;
+  position: relative;
+}
+
+.azone-agency     { background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.06); }
+.azone-consultivo { background: rgba(22,163,74,0.07); border: 1px solid rgba(22,163,74,0.15); }
+
+.az-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  display: block;
+  margin-bottom: 7px;
+}
+.az-badge-gray  { color: #888; }
+.az-badge-green { color: #15803d; }
+
+.az-players {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  font-size: 26px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.az-label {
+  font-size: 11px;
+  color: #999;
+  font-style: italic;
+  line-height: 1.3;
+}
+.az-label-green { color: #15803d; font-style: normal; font-weight: 600; }
+
+/* Ball zone */
+.azone-ball {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 14px;
+  min-height: 44px;
+  flex-wrap: wrap;
+}
+.ball-hint {
+  font-size: 10px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2px;
+}
+.ball-hint--green { color: #15803d; }
+.azone-ball--col { flex-direction: column; gap: 4px; }
+
+/* Duplas */
+.duplas-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  padding: 8px 14px;
+}
+.dupla-chip {
+  font-size: 10px;
+  background: rgba(22,163,74,0.09);
+  color: #15803d;
+  border: 1px solid rgba(22,163,74,0.2);
+  border-radius: 12px;
+  padding: 3px 9px;
+  font-weight: 600;
+}
+
+/* ── CARD DESCRIPTION ── */
+.acard-desc {
+  padding: 12px 18px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+  border-top: 1px solid var(--light);
+}
+
+/* ── CANCHA LABEL (lado de cada card) ── */
+.acard-cancha {
+  padding: 10px 18px 14px;
+  border-top: 1px dashed rgba(0,0,0,0.08);
+  text-align: center;
+}
+.cancha-label {
+  font-family: var(--fh);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  display: block;
+  margin-bottom: 4px;
+}
+.acard-cancha--agency .cancha-label { color: #888; }
+.acard-cancha--consultivo .cancha-label { color: #15803d; }
+.cancha-meta {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+.acard-cancha--consultivo .cancha-meta { color: #15803d; font-style: normal; font-weight: 600; }
+
+/* ── CLOSING QUOTE ── */
+.analogy-close-quote {
+  margin-top: 18px;
+  background: var(--text);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 16px 22px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.analogy-close-quote strong { color: var(--accent); }
+
+.analogy-cta-note {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 10px;
+}
+
+
+/* ═══════════════════════════════════════════════
+   KEYFRAME ANIMATIONS
+═══════════════════════════════════════════════ */
+
+/* Agency: players waiting idly — slow bob */
+@keyframes pWait {
+  0%,100% { transform: translateY(0) scale(1);   opacity: 0.55; }
+  50%     { transform: translateY(-7px) scale(1.08); opacity: 0.85; }
+}
+
+/* Agency: players running without direction */
+@keyframes pChaos {
+  0%   { transform: translate(0,0) rotate(0deg); }
+  15%  { transform: translate(6px,-4px) rotate(18deg); }
+  30%  { transform: translate(-5px, 3px) rotate(-12deg); }
+  45%  { transform: translate(8px,-6px) rotate(22deg); }
+  60%  { transform: translate(-7px, 2px) rotate(-18deg); }
+  75%  { transform: translate(4px,-5px) rotate(10deg); }
+  90%  { transform: translate(-3px, 1px) rotate(-6deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
+
+/* Agency: chaotic ball path */
+@keyframes ballChaos {
+  0%   { transform: translate(0,0) rotate(0deg); }
+  10%  { transform: translate(22px,-14px) rotate(45deg); }
+  20%  { transform: translate(-18px,-6px) rotate(90deg); }
+  30%  { transform: translate(28px,-22px) rotate(148deg); }
+  40%  { transform: translate(-12px,-9px) rotate(200deg); }
+  50%  { transform: translate(18px,-28px) rotate(255deg); }
+  60%  { transform: translate(-24px,-16px) rotate(302deg); }
+  70%  { transform: translate(14px,-5px) rotate(325deg); }
+  80%  { transform: translate(-9px,-20px) rotate(350deg); }
+  90%  { transform: translate(22px,-11px) rotate(375deg); }
+  100% { transform: translate(0,0) rotate(360deg); }
+}
+
+/* Consultivo: clean pass left–right–left */
+@keyframes ballPass {
+  0%,100% { transform: translateX(-32px) scale(0.88); }
+  48%     { transform: translateX(32px) scale(1.1); }
+}
+
+/* Consultivo: attack block (float up in unison) */
+@keyframes blockUp {
+  0%,100% { transform: translateY(0); filter: drop-shadow(0 0 0 rgba(22,163,74,0)); }
+  50%     { transform: translateY(-6px); filter: drop-shadow(0 4px 8px rgba(22,163,74,0.5)); }
+}
+
+/* Consultivo: defense block (float down in unison) */
+@keyframes blockDown {
+  0%,100% { transform: translateY(0); filter: drop-shadow(0 0 0 rgba(22,163,74,0)); }
+  50%     { transform: translateY(5px); filter: drop-shadow(0 -3px 8px rgba(22,163,74,0.4)); }
+}
+
+/* ── ANIMATION UTILITY CLASSES ── */
+
+/* Agency waiting players */
+.p-wait  { display:inline-block; animation: pWait  2.8s ease-in-out infinite; }
+.p-wait.d1 { animation-delay: 0.45s; }
+.p-wait.d2 { animation-delay: 0.9s; }
+
+/* Agency chaotic players */
+.p-chaos { display:inline-block; animation: pChaos 1.7s ease-in-out infinite; }
+.p-chaos.d1 { animation-delay: 0.2s; }
+.p-chaos.d2 { animation-delay: 0.5s; }
+.p-chaos.d3 { animation-delay: 0.85s; }
+
+/* Agency chaotic ball */
+.ball-chaos { display:inline-block; font-size:22px; animation: ballChaos 3.8s ease-in-out infinite; }
+
+/* Consultivo passing ball */
+.ball-pass { display:inline-block; font-size:22px; animation: ballPass 1.9s ease-in-out infinite; }
+
+/* Consultivo attack block */
+.p-up  { display:inline-block; animation: blockUp 2.2s ease-in-out infinite; }
+.p-up.d1 { animation-delay: 0.18s; }
+.p-up.d2 { animation-delay: 0.36s; }
+.p-up.d3 { animation-delay: 0.54s; }
+.p-up.d4 { animation-delay: 0.72s; }
+
+/* Consultivo defense block */
+.p-dn  { display:inline-block; animation: blockDown 2.2s ease-in-out infinite; }
+.p-dn.d1 { animation-delay: 0.22s; }
+.p-dn.d2 { animation-delay: 0.44s; }
+
+</style>
+</head>
+<body>
+
+<!-- ── PROGRESS BAR ── -->
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- ── TOP NAV ── -->
+<nav class="topnav">
+  <a href="index.html" class="topnav-logo" aria-label="Ingenia"><img src="logo.png" alt="Ingenia" /></a>
+  <span class="topnav-title">Pre-Reunión · 18 de Marzo 2026</span>
+  <a href="index.html" class="topnav-back">← Volver al hub</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- ══════════════════════════════════
+       META Y HERO
+  ══════════════════════════════════ -->
+  <div class="memo-header reveal">
+    <p class="read-time">~6 min de lectura</p>
+    <div class="memo-meta">
+      <span class="meta-key">Para:</span>    <span class="meta-val">Equipo Ingenia</span>
+      <span class="meta-key">De:</span>      <span class="meta-val">JC Guzmán</span>
+      <span class="meta-key">Fecha:</span>   <span class="meta-val">17 de Marzo, 2026</span>
+      <span class="meta-key">Reunión:</span> <span class="meta-val">Mañana, 18 de Marzo</span>
+    </div>
+    <h1 class="memo-title">Antes de que<br>nos veamos <span>mañana</span></h1>
+    <p class="memo-intro">Este documento es un anticipo de lo que conversaremos juntos mañana. Es una invitación a que llegues con contexto.</p>
+  </div>
+
+
+  <!-- ══════════════════════════════════
+       ¿DE QUÉ VAMOS A HABLAR?
+  ══════════════════════════════════ -->
+  <div class="ms reveal">
+    <h2>¿De qué vamos a hablar mañana?</h2>
+    <div class="ms-divider"></div>
+    <div class="agenda">
+      <div class="agenda-item">
+        <div class="agenda-num">1</div>
+        <div class="agenda-info">
+          <div class="agenda-title">El momento en que está Ingenia</div>
+          <div class="agenda-desc">Estamos creciendo. Y el crecimiento trae decisiones que vale la pena hacer juntos y con claridad.</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">2</div>
+        <div class="agenda-info">
+          <div class="agenda-title">Algunos cambios en la estructura</div>
+          <div class="agenda-desc">Cómo nos organizamos para que el modelo consultivo funcione mejor con más carga, más clientes y más proyectos.</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">3</div>
+        <div class="agenda-info">
+          <div class="agenda-title">Los nuevos ingresos — tres cambios en la estructura</div>
+          <div class="agenda-desc">No para presentaciones formales, sino para que entiendas qué rol viene a cubrir cada uno y cómo eso te afecta (o no) en tu trabajo diario.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════
+       EL MODELO QUE NOS DEFINE
+  ══════════════════════════════════ -->
+  <div class="ms reveal">
+    <h2>El modelo que nos define</h2>
+    <div class="ms-divider"></div>
+    <p>Antes de hablar de estructura, vale la pena recordar por qué hacemos las cosas como las hacemos.</p>
+    <p>Ingenia no es una agencia. <strong>Es una consultora.</strong> Y esa diferencia tiene consecuencias reales en cómo trabajamos.</p>
+    <p>Durante años, las agencias de publicidad produjeron sin coherencia: marcas sin negocio, comunicación sin estrategia, ejecución sin dirección. El cliente tampoco les daba acceso a su data real de negocio.</p>
+    <p><strong>El principal problema de las agencias: la desconexión.</strong><br>Entre negocio, marca y comunicación. Entre lo que el cliente necesita y lo que se produce.</p>
+    <p><strong>Ingenia existe para resolver eso. La coherencia es nuestra clave.</strong></p>
+
+    <div class="model-flow">
+      <div class="model-step ms1">
+        <div class="model-step-num">1</div>
+        <div class="model-step-body">
+          <div class="model-step-name">NEGOCIO</div>
+          <div class="model-step-desc">Entender el problema real, las tensiones, el contexto del cliente</div>
+        </div>
+      </div>
+      <div class="model-step ms2">
+        <div class="model-step-num">2</div>
+        <div class="model-step-body">
+          <div class="model-step-name">MARCA</div>
+          <div class="model-step-desc">Construir el territorio, la plataforma de valor, el criterio estratégico</div>
+        </div>
+      </div>
+      <div class="model-step ms3">
+        <div class="model-step-num">3</div>
+        <div class="model-step-body">
+          <div class="model-step-name">COMUNICACIÓN</div>
+          <div class="model-step-desc">Traducir la marca en mensajes, sistemas de lenguaje y canales</div>
+        </div>
+      </div>
+      <div class="model-step ms4">
+        <div class="model-step-num">4</div>
+        <div class="model-step-body">
+          <div class="model-step-name">CREATIVIDAD</div>
+          <div class="model-step-desc">Materializar en campañas, piezas y activos con coherencia</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Esta secuencia no es un capricho — es la razón por la que nuestro trabajo tiene valor acumulativo en lugar de ser producción por producción.</p>
+
+    <h3>¿Qué significa esto en la práctica?</h3>
+    <div class="conseq">
+      <table>
+        <thead><tr><th>Si empezáramos por…</th><th>El resultado sería…</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Creatividad</strong> (sin diagnóstico)</td><td>Ejecución sin dirección</td></tr>
+          <tr><td><strong>Comunicación</strong> (sin marca)</td><td>Mensajes sin identidad</td></tr>
+          <tr><td><strong>Producción</strong> (sin estrategia)</td><td>Más trabajo, menos impacto</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight">
+      <strong>El cliente no nos paga por piezas. Nos paga por criterio.</strong><br>
+      Criterio para decidir qué hacer, cuándo y por qué.
+    </div>
+
+
+    <!-- ════════════════════════════════════════
+         ⚽ ANALOGÍA INTERACTIVA
+    ════════════════════════════════════════ -->
+    <div class="analogy-section reveal">
+
+      <p class="analogy-section-title"><span class="atitle-icon">⚽</span> La analogía que más lo explica</p>
+      <p class="analogy-section-intro">Imagina un partido de fútbol. La pelota es el cliente: cuando va pasando entre cada uno, podemos hacer el gol — o perderla. El modelo consultivo te blinda: trabajo en bloque y pases limpios para que el cliente llegue a meta.</p>
+
+      <!-- Mobile tabs -->
+      <div class="analogy-tabs">
+        <button class="atab is-active" data-for="agency">😵 Modelo agencia</button>
+        <button class="atab" data-for="consultivo">🏆 Modelo consultivo</button>
+      </div>
+
+      <!-- Side-by-side comparison -->
+      <div class="analogy-grid">
+
+        <!-- ── AGENCIA ── -->
+        <div class="acard acard-agency mobile-show" id="acard-agency">
+          <div class="acard-head">
+            <div class="acard-name">El modelo de agencia</div>
+            <div class="acard-subtitle">Cada quien espera su turno</div>
+          </div>
+
+          <div class="apitch apitch-agency">
+
+            <!-- Zona delantera: creativos esperando -->
+            <div class="azone azone-agency">
+              <span class="az-badge az-badge-gray">Zona delantera — creativos</span>
+              <div class="az-players">
+                <span class="p-wait">🎨</span>
+                <span class="p-wait d1">✏️</span>
+                <span class="p-wait d2">🖼️</span>
+              </div>
+              <div class="az-label">Esperando que les pasen el brief</div>
+            </div>
+
+            <!-- Ball = cliente (chaos) -->
+            <div class="azone-ball azone-ball--col">
+              <span class="ball-hint">⚽ = el cliente</span>
+              <span class="ball-chaos">⚽</span>
+            </div>
+
+            <!-- Zona media: todos corren sin foco -->
+            <div class="azone azone-agency">
+              <span class="az-badge az-badge-gray">Zona media — estrategia &amp; cuentas</span>
+              <div class="az-players">
+                <span class="p-chaos">👔</span>
+                <span class="p-chaos d1">📊</span>
+                <span class="p-chaos d2">🗂️</span>
+                <span class="p-chaos d3">📱</span>
+              </div>
+              <div class="az-label">Todos hacen de todo · nadie tiene foco</div>
+            </div>
+
+            <!-- Zona defensa: reaccionando -->
+            <div class="azone azone-agency">
+              <span class="az-badge az-badge-gray">Defensa — ops &amp; admin</span>
+              <div class="az-players">
+                <span class="p-wait">⚙️</span>
+                <span class="p-wait d1">📋</span>
+              </div>
+              <div class="az-label">Reaccionando · nunca anticipando</div>
+            </div>
+
+          </div><!-- /apitch -->
+
+          <div class="acard-desc">
+            En el modelo de agencia, el cliente (la pelota) va de mano en mano sin sistema: se pierde, hay reprocesos, el "gol" no llega. Cada área espera que otra le pase el trabajo. Resultado: desconexión y pérdida de calidad.
+          </div>
+          <div class="acard-cancha acard-cancha--agency" aria-hidden="true">
+            <span class="cancha-label">La cancha agencia</span>
+            <div class="cancha-meta">⚽ se pierde · sin bloque</div>
+          </div>
+        </div><!-- /acard-agency -->
+
+        <!-- VS divider -->
+        <div class="analogy-vs">
+          <div class="analogy-vs-inner">VS</div>
+        </div>
+
+        <!-- ── CONSULTIVO ── -->
+        <div class="acard acard-consultivo" id="acard-consultivo">
+          <div class="acard-head">
+            <div class="acard-name">El modelo consultivo</div>
+            <div class="acard-subtitle">Trabajo en bloque · Duplas · Fricción que eleva</div>
+          </div>
+
+          <div class="apitch apitch-consultivo">
+
+            <!-- Ataque en bloque -->
+            <div class="azone azone-consultivo">
+              <span class="az-badge az-badge-green">↑ Ataque en bloque</span>
+              <div class="az-players">
+                <span class="p-up">📐</span>
+                <span class="p-up d1">📈</span>
+                <span class="p-up d2">🎨</span>
+                <span class="p-up d3">✏️</span>
+                <span class="p-up d4">🤝</span>
+              </div>
+              <div class="az-label az-label-green">Estrategia + Creativo + Cuentas + Digital</div>
+            </div>
+
+            <!-- Ball = cliente (pase limpio) -->
+            <div class="azone-ball azone-ball--col">
+              <span class="ball-hint ball-hint--green">⚽ = el cliente</span>
+              <span class="ball-pass">⚽</span>
+            </div>
+            <div class="duplas-row">
+              <span class="dupla-chip">Estrategia ↔ Growth Digital</span>
+              <span class="dupla-chip">Dir. Creativo ↔ Dir. de Arte</span>
+              <span class="dupla-chip">Redactor ↔ Diseñador</span>
+              <span class="dupla-chip">Operaciones ↔ Cuentas</span>
+            </div>
+
+            <!-- Defensa en bloque -->
+            <div class="azone azone-consultivo">
+              <span class="az-badge az-badge-green">↓ Defensa en bloque</span>
+              <div class="az-players">
+                <span class="p-dn">⚙️</span>
+                <span class="p-dn d1">💼</span>
+                <span class="p-dn d2">📊</span>
+              </div>
+              <div class="az-label az-label-green">Ops protege el modelo · Admin protege el margen</div>
+            </div>
+
+          </div><!-- /apitch -->
+
+          <div class="acard-desc">
+            En el modelo consultivo, el cliente (la pelota) fluye con sistema: pases limpios, bloque que protege. Nadie espera; todos se mueven juntos. Eso te blinda: el brief llega con criterio y el resultado llega al cliente con coherencia.
+          </div>
+          <div class="acard-cancha acard-cancha--consultivo" aria-hidden="true">
+            <span class="cancha-label">La cancha consultiva</span>
+            <div class="cancha-meta">⚽ al arco · en bloque</div>
+          </div>
+        </div><!-- /acard-consultivo -->
+
+      </div><!-- /analogy-grid -->
+
+      <div class="analogy-close-quote">
+        <strong>La diferencia no es quién trabaja más.</strong> Es si el equipo trabaja en sistema o en modo reactivo.
+      </div>
+      <p class="analogy-cta-note">Mañana hablamos de esto con más detalle.</p>
+
+    </div><!-- /analogy-section -->
+
+  </div><!-- /ms El modelo -->
+
+
+  <!-- ══════════════════════════════════
+       CÓMO ESTAMOS ORGANIZADOS
+  ══════════════════════════════════ -->
+  <div class="ms reveal">
+    <h2>Cómo estamos organizados — el mapa rápido</h2>
+    <div class="ms-divider"></div>
+    <p>La organización funciona en <strong>capas de valor</strong>, no en una jerarquía tradicional:</p>
+
+    <div class="layers">
+      <div class="layer layer-1">
+        <div class="layer-label">CREACIÓN DE VALOR</div>
+        <div class="layer-who">CEO · Dirección de Estrategia</div>
+        <div class="layer-mandate">→ Aquí nace la dirección. Aquí se toman las decisiones estratégicas.</div>
+      </div>
+      <div class="layer layer-2">
+        <div class="layer-label">GOBERNANZA DEL MODELO</div>
+        <div class="layer-who">Dir. de Operaciones Consultivas &amp; Pipeline</div>
+        <div class="layer-mandate">→ Protege que el sistema funcione. Ordena. Asegura entrega.</div>
+        <span class="layer-new">nuevo foco 2026</span>
+      </div>
+      <div class="layer layer-3">
+        <div class="layer-label">CONVERSIÓN ESTRATÉGICA</div>
+        <div class="layer-who">Dirección Creativa · Proyectos Digitales</div>
+        <div class="layer-mandate">→ Estrategia → sistemas → activos ejecutables.</div>
+      </div>
+      <div class="layer layer-4">
+        <div class="layer-label">SOSTENIBILIDAD</div>
+        <div class="layer-who">Administración</div>
+        <div class="layer-mandate">→ Margen, rentabilidad, cotizadores. Protege la viabilidad.</div>
+      </div>
+      <div class="layer layer-5">
+        <div class="layer-label">APRENDIZAJE ↺</div>
+        <div class="layer-who">Control del Valor · Planner Jr</div>
+        <div class="layer-mandate">→ KPIs, insights → retroalimenta el Roadmap. Cierra el círculo.</div>
+      </div>
+    </div>
+
+    <p>Lo que quiero que notes: <strong>cada capa tiene un mandato diferente</strong> — y cuando una capa invade a otra, el modelo se degrada. La última capa — Aprendizaje — es lo que convierte el modelo en un sistema que mejora con el tiempo.</p>
+  </div>
+
+
+  <!-- ══════════════════════════════════
+       LOS CAMBIOS PRINCIPALES
+  ══════════════════════════════════ -->
+  <div class="ms reveal">
+    <h2>Los cambios principales: tres movimientos</h2>
+    <div class="ms-divider"></div>
+    <p>Ingenia siempre tuvo en su diseño capas que requerían personas dedicadas. Con el crecimiento de la compañía, tres roles que eran implícitos o incompletos pasan a ser explícitos y formales.</p>
+    <p>No es un rediseño — es completar el modelo con las personas que necesitaba.</p>
+
+    <div class="new-profiles">
+      <div class="profile-card profile-card--new profile-card--accordion" data-accordion>
+        <div class="profile-card-head">
+          <div class="profile-card-head-inner">
+            <div class="profile-badge profile-badge--new">Nuevo ingreso</div>
+            <div class="profile-icon">🟠</div>
+            <div class="profile-name">Director de Operaciones Consultivas &amp; Pipeline</div>
+            <div class="profile-who">JC Guzmán</div>
+          </div>
+          <button type="button" class="profile-toggle" aria-expanded="false" aria-label="Ver detalle"><span class="profile-toggle-icon">▼</span></button>
+        </div>
+        <div class="profile-card-body">
+          <div class="profile-desc">El rol que protege el modelo operativamente. Custodia el pipeline con criterio estratégico, asegura que los entregables lleguen a tiempo, y conecta estrategia, cuentas, creatividad, digital y administración en un solo sistema.</div>
+          <div class="profile-what">Nivel 2 del sistema — entre la creación estratégica y la conversión creativa</div>
+        </div>
+      </div>
+      <div class="profile-card profile-card--internal profile-card--accordion" data-accordion>
+        <div class="profile-card-head">
+          <div class="profile-card-head-inner">
+            <div class="profile-badge profile-badge--internal">Cambio interno</div>
+            <div class="profile-icon">⭐</div>
+            <div class="profile-name">Supervisora de Cuentas</div>
+            <div class="profile-who">Reporta a Dirección de Operaciones</div>
+          </div>
+          <button type="button" class="profile-toggle" aria-expanded="false" aria-label="Ver detalle"><span class="profile-toggle-icon">▼</span></button>
+        </div>
+        <div class="profile-card-body">
+          <div class="profile-desc">Un movimiento interno que formaliza la supervisión de cuentas complejas y licitaciones. Capa de soporte, escalamiento y criterio sobre las ejecutivas — liberando a Operaciones para el trabajo estratégico de pipeline y gobernanza.</div>
+          <div class="profile-what">Cuentas complejas + licitaciones</div>
+        </div>
+      </div>
+      <div class="profile-card profile-card--new profile-card--accordion" data-accordion>
+        <div class="profile-card-head">
+          <div class="profile-card-head-inner">
+            <div class="profile-badge profile-badge--new">Nuevo perfil</div>
+            <div class="profile-icon">📈</div>
+            <div class="profile-name">Líder de Estrategia Digital y Growth</div>
+            <div class="profile-who">Reporta a Dirección de Estrategia</div>
+          </div>
+          <button type="button" class="profile-toggle" aria-expanded="false" aria-label="Ver detalle"><span class="profile-toggle-icon">▼</span></button>
+        </div>
+        <div class="profile-card-body">
+          <div class="profile-desc">Mano derecha del Director de Estrategia. Traduce el pensamiento estratégico en ecosistemas digitales, funnels de conversión y crecimiento. No inventa dirección — la ejecuta con profundidad técnica y lectura de negocio.</div>
+          <div class="profile-what">Lidera Community Managers</div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+
+  <!-- ══════════════════════════════════
+       POR QUÉ ESTE MOMENTO
+  ══════════════════════════════════ -->
+  <div class="ms reveal">
+    <h2>Por qué este momento</h2>
+    <div class="ms-divider"></div>
+    <p>Cuando una consultora crece, hay dos caminos:</p>
+
+    <div class="paths">
+      <div class="path-card path-a">
+        <div class="path-label">Camino A</div>
+        <div class="path-title">Crecer sin orden</div>
+        <ul class="path-items">
+          <li>Más carga, más fricción</li>
+          <li>Sobreentregas no detectadas</li>
+          <li>Pérdida de la promesa al cliente</li>
+          <li>Desgaste del equipo</li>
+        </ul>
+      </div>
+      <div class="path-card path-b">
+        <div class="path-label">Camino B ✓</div>
+        <div class="path-title">Crecer con sistema</div>
+        <ul class="path-items">
+          <li>El modelo se protege</li>
+          <li>El equipo tiene menos ruido</li>
+          <li>Los clientes perciben más valor</li>
+          <li>El pipeline avanza con criterio</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>Estos tres movimientos son una apuesta por el <strong>Camino B</strong>.</p>
+    <p>Cada uno cubre una capa que el modelo ya tenía en su diseño pero necesitaba personas dedicadas: operaciones que proteja el sistema, supervisión que escale con las cuentas, y liderazgo digital que traduzca estrategia en crecimiento.</p>
+  </div>
+
+
+  <!-- ══════════════════════════════════
+       LO QUE VEREMOS MAÑANA
+  ══════════════════════════════════ -->
+  <div class="ms reveal">
+    <h2>Lo que veremos mañana</h2>
+    <div class="ms-divider"></div>
+    <p>En la reunión vamos a entrar en detalle en:</p>
+    <div class="preview-list">
+      <div class="preview-item"><div class="preview-dot"></div><div class="preview-text">El organigrama completo y cómo leerlo</div></div>
+      <div class="preview-item"><div class="preview-dot"></div><div class="preview-text">Funciones y responsabilidades de cada rol — qué hace cada quién, qué entrega, a quién, en qué tiempo</div></div>
+      <div class="preview-item"><div class="preview-dot"></div><div class="preview-text">Ritmo consultivo y tiempos de entregables — el mapa de input/output por rol</div></div>
+      <div class="preview-item"><div class="preview-dot"></div><div class="preview-text">Matriz de autoridad — quién decide qué, y cómo se escala si no está definido</div></div>
+      <div class="preview-item"><div class="preview-dot"></div><div class="preview-text">Rituales de gobernanza — los rituales internos y con clientes que estructuran la semana</div></div>
+      <div class="preview-item"><div class="preview-dot"></div><div class="preview-text">Los tres nuevos roles: qué decide cada uno, con quién trabaja, qué no hace</div></div>
+      <div class="preview-item"><div class="preview-dot"></div><div class="preview-text">Quick wins ya implementados y por implementar: lineamientos de reuniones, comunicación con clientes</div></div>
+    </div>
+    <div class="reflection-cta">
+      <p class="reflection-cta-text">Trae una reflexión sobre cómo aplica esto a tu rol específico.</p>
+    </div>
+    <p style="margin-top:16px;">Si tienes preguntas o algo que quieras que abordemos específicamente, puedes avisarme antes de la reunión.</p>
+  </div>
+
+
+  <!-- ══════════════════════════════════
+       SIGN-OFF
+  ══════════════════════════════════ -->
+  <div class="signoff reveal">
+    <p class="signoff-msg">
+      El modelo funciona cuando <strong>cada quien se enfoca en su capa</strong>.<br><br>
+      Estrategia crea. Operaciones protege. Creatividad convierte. Ejecución materializa.<br><br>
+      No es sobre jerarquía — es sobre foco. Y el foco es lo que nos permite hacer trabajo que valga.
+    </p>
+    <p class="signoff-msg">Nos vemos mañana.</p>
+    <div class="signoff-sig">— JC</div>
+    <div class="signoff-footer">Ingenia Latam · Documento previo a reunión · 17 Marzo 2026 · ¿Preguntas previas? Escríbeme antes de la reunión.</div>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+/* ── SCROLL PROGRESS BAR ── */
+const fill = document.getElementById('progressFill');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total    = document.body.scrollHeight - window.innerHeight;
+  fill.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+}, { passive: true });
+
+/* ── REVEAL ON SCROLL ── */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+/* ── ANALOGY TABS (mobile) ── */
+const tabs      = document.querySelectorAll('.atab');
+const cardAgency     = document.getElementById('acard-agency');
+const cardConsultivo = document.getElementById('acard-consultivo');
+
+function showSide(side) {
+  if (side === 'agency') {
+    cardAgency.classList.add('mobile-show');
+    cardConsultivo.classList.remove('mobile-show');
+  } else {
+    cardAgency.classList.remove('mobile-show');
+    cardConsultivo.classList.add('mobile-show');
+  }
+  tabs.forEach(t => t.classList.toggle('is-active', t.dataset.for === side));
+}
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => showSide(tab.dataset.for));
+});
+showSide('agency');
+
+/* ── PROFILE ACCORDION ── */
+document.querySelectorAll('[data-accordion]').forEach(card => {
+  const head = card.querySelector('.profile-card-head');
+  const btn = card.querySelector('.profile-toggle');
+  const toggle = () => {
+    const open = card.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open);
+  };
+  head.addEventListener('click', (e) => { if (!e.target.closest('.profile-toggle') || e.target.closest('.profile-toggle')) toggle(); });
+  btn.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
+});
+</script>
+</body>
+</html>
