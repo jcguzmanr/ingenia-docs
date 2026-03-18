@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manual Organizacional V6 — Ingenia Latam</title>
+<title>Manual Organizacional V6.1 — Ingenia Latam</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
@@ -39,16 +39,8 @@ body { font-family: var(--fb); background: var(--bg); color: var(--text); min-he
 }
 .topnav-logo { font-family: var(--fh); font-weight: 700; font-size: 15px; color: var(--red); }
 .topnav-title { font-size: 13px; color: var(--muted); flex: 1; }
-.topnav-badge {
-  font-size: 11px; font-weight: 600;
-  background: rgba(255,17,10,0.1); color: var(--red);
-  border-radius: 4px; padding: 2px 8px;
-}
-.topnav-back {
-  font-size: 12px; color: var(--muted); text-decoration: none;
-  display: flex; align-items: center; gap: 4px;
-  transition: color 0.15s;
-}
+.topnav-badge { font-size: 11px; font-weight: 600; background: rgba(255,17,10,0.1); color: var(--red); border-radius: 4px; padding: 2px 8px; }
+.topnav-back { font-size: 12px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: color 0.15s; }
 .topnav-back:hover { color: var(--red); }
 
 /* ── LAYOUT ── */
@@ -62,81 +54,34 @@ body { font-family: var(--fb); background: var(--bg); color: var(--text); min-he
   border-right: 1px solid rgba(0,0,0,0.07);
   padding: 20px 0;
 }
-.sidebar-section {
-  font-family: var(--fh); font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 2px; color: var(--muted);
-  padding: 14px 20px 6px;
-}
-.sidebar-link {
-  display: flex; align-items: flex-start; gap: 8px;
-  padding: 7px 20px; font-size: 12px; color: var(--muted);
-  text-decoration: none; line-height: 1.35;
-  border-left: 3px solid transparent;
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
-}
+.sidebar-section { font-family: var(--fh); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); padding: 14px 20px 6px; }
+.sidebar-link { display: flex; align-items: flex-start; gap: 8px; padding: 7px 20px; font-size: 12px; color: var(--muted); text-decoration: none; line-height: 1.35; border-left: 3px solid transparent; transition: color 0.15s, border-color 0.15s, background 0.15s; }
 .sidebar-link .num { flex-shrink: 0; font-weight: 700; color: var(--light); font-family: var(--fh); font-size: 11px; }
 .sidebar-link:hover { color: var(--red); background: rgba(255,17,10,0.04); border-left-color: var(--red); }
 .sidebar-link.active { color: var(--red); background: rgba(255,17,10,0.06); border-left-color: var(--red); font-weight: 600; }
 
 /* ── MAIN ── */
-.main {
-  margin-left: var(--sidebar);
-  flex: 1; min-width: 0;
-  padding: 40px clamp(24px, 4vw, 64px) 80px;
-  max-width: 900px;
-}
+.main { margin-left: var(--sidebar); flex: 1; min-width: 0; padding: 40px clamp(24px, 4vw, 64px) 80px; max-width: 960px; }
 
 /* ── HERO ── */
-.hero {
-  background: var(--grad);
-  border-radius: 14px;
-  padding: clamp(32px, 5vw, 52px) clamp(28px, 4vw, 48px);
-  margin-bottom: 48px;
-  color: white;
-  position: relative; overflow: hidden;
-}
-.hero::after {
-  content: '';
-  position: absolute; top: -30%; right: -5%; width: 300px; height: 300px;
-  border: 50px solid rgba(255,255,255,0.08); border-radius: 50%;
-  pointer-events: none;
-}
+.hero { background: var(--grad); border-radius: 14px; padding: clamp(32px, 5vw, 52px) clamp(28px, 4vw, 48px); margin-bottom: 48px; color: white; position: relative; overflow: hidden; }
+.hero::after { content: ''; position: absolute; top: -30%; right: -5%; width: 300px; height: 300px; border: 50px solid rgba(255,255,255,0.08); border-radius: 50%; pointer-events: none; }
 .hero-tag { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-bottom: 8px; }
 .hero h1 { font-family: var(--fh); font-size: clamp(24px, 4vw, 40px); font-weight: 700; line-height: 1.1; letter-spacing: -0.5px; }
 .hero-sub { font-size: clamp(13px, 1.8vw, 16px); opacity: 0.8; margin-top: 8px; }
-.hero-model {
-  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  margin-top: 24px;
-}
-.hero-model-step {
-  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 6px; padding: 5px 12px;
-  font-family: var(--fh); font-weight: 600; font-size: 13px; color: white;
-}
+.hero-tagline { font-family: var(--fh); font-size: clamp(13px,1.6vw,17px); font-weight: 600; opacity: 0.95; margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 16px; font-style: italic; }
+.hero-model { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.hero-model-step { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; padding: 5px 12px; font-family: var(--fh); font-weight: 600; font-size: 13px; color: white; }
 .hero-arrow { color: rgba(255,255,255,0.6); font-size: 14px; }
 
 /* ── SECTIONS ── */
 .section { margin-bottom: 52px; scroll-margin-top: 72px; }
-.section-header {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-}
-.section-num {
-  font-family: var(--fh); font-size: 11px; font-weight: 700;
-  background: var(--grad); color: white;
-  border-radius: 50%; width: 28px; height: 28px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
+.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.section-num { font-family: var(--fh); font-size: 11px; font-weight: 700; background: var(--grad); color: white; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .section h2 { font-family: var(--fh); font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; color: var(--text); }
 .section-divider { height: 2px; background: var(--grad); width: 40px; border-radius: 2px; margin: 8px 0 16px; }
-.section h3 {
-  font-family: var(--fh); font-size: 16px; font-weight: 700;
-  color: var(--text); margin: 24px 0 10px;
-}
-.section h4 {
-  font-family: var(--fh); font-size: 14px; font-weight: 600;
-  color: var(--orange); margin: 16px 0 8px;
-}
+.section h3 { font-family: var(--fh); font-size: 16px; font-weight: 700; color: var(--text); margin: 24px 0 10px; }
+.section h4 { font-family: var(--fh); font-size: 14px; font-weight: 600; color: var(--orange); margin: 16px 0 8px; }
 .section p { font-size: 14px; line-height: 1.65; color: var(--muted); margin-bottom: 10px; }
 .section strong { color: var(--text); }
 
@@ -156,41 +101,192 @@ body { font-family: var(--fb); background: var(--bg); color: var(--text); min-he
 .tag--new { background: var(--red); color: white; }
 
 /* ── LEVEL TIERS ── */
-.tiers { display: flex; flex-direction: column; gap: 2px; }
-.tier {
-  border-radius: 6px; padding: 16px 20px;
+.tiers-wrap { position: relative; padding-left: 28px; }
+.tiers-wrap::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, var(--red), var(--orange), var(--accent), #aaa, #16a34a);
+  border-radius: 2px; opacity: 0.25;
 }
+.tiers { display: flex; flex-direction: column; gap: 2px; }
+.tier { border-radius: 6px; padding: 16px 20px; transition: box-shadow 0.4s ease, transform 0.3s ease, background 0.4s ease; }
 .tier-1 { background: linear-gradient(90deg, rgba(255,17,10,0.12), rgba(255,17,10,0.04)); border-left: 4px solid var(--red); }
 .tier-2 { background: linear-gradient(90deg, rgba(255,88,0,0.12), rgba(255,88,0,0.04)); border-left: 4px solid var(--orange); }
 .tier-3 { background: linear-gradient(90deg, rgba(255,148,0,0.12), rgba(255,148,0,0.04)); border-left: 4px solid var(--accent); }
 .tier-4 { background: linear-gradient(90deg, rgba(100,100,100,0.1), rgba(100,100,100,0.03)); border-left: 4px solid #aaa; }
+.tier-5 { background: linear-gradient(90deg, rgba(22,163,74,0.12), rgba(22,163,74,0.04)); border-left: 4px solid #16a34a; }
+.tier.tier-active { box-shadow: 0 4px 20px rgba(0,0,0,0.12); transform: translateX(2px); }
+.tier-1.tier-active { background: linear-gradient(90deg, rgba(255,17,10,0.2), rgba(255,17,10,0.08)); }
+.tier-2.tier-active { background: linear-gradient(90deg, rgba(255,88,0,0.2), rgba(255,88,0,0.08)); }
+.tier-3.tier-active { background: linear-gradient(90deg, rgba(255,148,0,0.2), rgba(255,148,0,0.08)); }
+.tier-4.tier-active { background: linear-gradient(90deg, rgba(100,100,100,0.18), rgba(100,100,100,0.08)); }
+.tier-5.tier-active { background: linear-gradient(90deg, rgba(22,163,74,0.2), rgba(22,163,74,0.08)); }
+.tier-arrow {
+  position: absolute; left: -4px; width: 12px; height: 12px; top: 0;
+  color: var(--red); transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2; pointer-events: none;
+}
+.tier-arrow.tier-arrow--returning { transition: top 0.8s cubic-bezier(0.4, 0, 0.2, 1); color: #16a34a; }
+.tier-arrow svg { width: 100%; height: 100%; }
 .tier-title { font-family: var(--fh); font-weight: 700; font-size: 14px; color: var(--text); }
 .tier-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
 .tier-mandate { font-size: 12px; color: var(--muted); margin-top: 4px; font-style: italic; }
+.tier-quote { font-size: 12px; color: var(--text); margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.06); font-style: italic; line-height: 1.5; opacity: 0.9; }
+
+/* ── 6-NODE CYCLE ── */
+.cycle-wrap { background: white; border-radius: 12px; box-shadow: var(--sh); padding: 28px 24px; margin: 16px 0; border: 1px solid rgba(0,0,0,0.06); }
+.cycle-row { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding-bottom: 4px; }
+.cycle-node {
+  flex: 1; min-width: 120px; max-width: 160px;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  padding: 14px 8px;
+  border-radius: 8px;
+  position: relative;
+}
+.cycle-node-1 { background: rgba(255,17,10,0.08); border: 1.5px solid rgba(255,17,10,0.25); }
+.cycle-node-2 { background: rgba(255,60,0,0.07); border: 1.5px solid rgba(255,60,0,0.2); }
+.cycle-node-3 { background: rgba(255,88,0,0.07); border: 1.5px solid rgba(255,88,0,0.2); }
+.cycle-node-4 { background: rgba(255,115,0,0.07); border: 1.5px solid rgba(255,115,0,0.2); }
+.cycle-node-5 { background: rgba(255,148,0,0.07); border: 1.5px solid rgba(255,148,0,0.2); }
+.cycle-node-6 { background: rgba(22,163,74,0.07); border: 1.5px solid rgba(22,163,74,0.25); }
+.cycle-num { font-family: var(--fh); font-size: 10px; font-weight: 700; margin-bottom: 6px; opacity: 0.6; }
+.cycle-label { font-family: var(--fh); font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+.cycle-desc { font-size: 10px; color: var(--muted); line-height: 1.3; }
+.cycle-arrow { display: flex; align-items: center; padding: 0 6px; color: var(--muted); font-size: 18px; flex-shrink: 0; align-self: center; }
+.cycle-return {
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 16px; gap: 8px;
+  color: #166534; font-family: var(--fh); font-size: 12px; font-weight: 700;
+  background: rgba(22,163,74,0.06); border-radius: 6px; padding: 8px 16px;
+}
+.cycle-return-line { flex: 1; height: 2px; background: linear-gradient(90deg, #16a34a, rgba(22,163,74,0.2)); border-radius: 2px; }
+.compare-table { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.compare-col { border-radius: 8px; padding: 16px; }
+.compare-col--bad { background: rgba(255,17,10,0.04); border: 1px solid rgba(255,17,10,0.12); }
+.compare-col--good { background: rgba(22,163,74,0.05); border: 1px solid rgba(22,163,74,0.2); }
+.compare-header { font-family: var(--fh); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+.compare-col--bad .compare-header { color: var(--red); }
+.compare-col--good .compare-header { color: #166534; }
+.compare-item { font-size: 12px; color: var(--muted); padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.04); line-height: 1.4; }
+.compare-item:last-child { border-bottom: none; }
+
+/* ── ANCHOR QUOTE ── */
+.anchor-quote {
+  border-left: 4px solid var(--red);
+  padding: 16px 20px; margin: 24px 0;
+  background: linear-gradient(90deg, rgba(255,17,10,0.04), transparent);
+  border-radius: 0 8px 8px 0;
+}
+.anchor-quote p {
+  font-family: var(--fh); font-size: clamp(15px,2vw,20px); font-weight: 700;
+  color: var(--text); margin: 0; line-height: 1.3; font-style: italic;
+}
+.anchor-quote span { font-size: 12px; color: var(--muted); margin-top: 4px; display: block; }
 
 /* ── ORG CHART ── */
 .org-tree { overflow-x: auto; padding: 8px 0; }
-.org-node {
-  display: inline-flex; align-items: center;
-  border-radius: 6px; padding: 8px 14px;
-  font-size: 12px; font-weight: 600; font-family: var(--fh);
-  white-space: nowrap;
-}
+.org-node { display: inline-flex; align-items: center; border-radius: 6px; padding: 8px 14px; font-size: 12px; font-weight: 600; font-family: var(--fh); white-space: nowrap; }
 .org-node--ceo { background: var(--grad); color: white; }
 .org-node--dir { background: rgba(255,17,10,0.1); color: var(--red); border: 1px solid rgba(255,17,10,0.2); }
 .org-node--dir-new { background: var(--red); color: white; }
 .org-node--mid { background: rgba(255,88,0,0.08); color: var(--orange); border: 1px solid rgba(255,88,0,0.15); }
 .org-node--leaf { background: var(--light); color: var(--muted); font-weight: 500; }
-
 .tree { list-style: none; }
 .tree li { padding: 2px 0; }
 .tree ul { padding-left: 24px; border-left: 2px solid var(--light); margin-left: 12px; margin-top: 4px; }
 .tree ul li { padding-left: 12px; position: relative; }
-.tree ul li::before {
-  content: '';
-  position: absolute; left: -2px; top: 50%;
-  width: 12px; height: 2px; background: var(--light);
+.tree ul li::before { content: ''; position: absolute; left: -2px; top: 50%; width: 12px; height: 2px; background: var(--light); }
+
+/* ── JC DECLARATION ── */
+.jc-declaration {
+  background: var(--grad);
+  border-radius: 12px; padding: 32px 36px; margin: 32px 0;
+  color: white; position: relative; overflow: hidden;
 }
+.jc-declaration::before {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 40%; background: rgba(0,0,0,0.08);
+  clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+}
+.jc-decl-tag { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; opacity: 0.75; margin-bottom: 12px; }
+.jc-decl-name { font-family: var(--fh); font-size: clamp(18px, 3vw, 28px); font-weight: 700; line-height: 1.15; margin-bottom: 4px; }
+.jc-decl-title { font-size: 14px; opacity: 0.85; margin-bottom: 20px; }
+.jc-decl-body { font-size: 14px; line-height: 1.7; opacity: 0.92; max-width: 560px; }
+.jc-decl-pillars { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.jc-decl-pillar { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; padding: 6px 14px; font-family: var(--fh); font-size: 12px; font-weight: 600; }
+
+/* ── ROLE CARDS — HORIZONTAL TAB SYSTEM ── */
+.roles-tabs-wrap { margin-bottom: 8px; }
+.roles-tabs {
+  display: flex; gap: 10px;
+  overflow-x: auto; padding-bottom: 12px;
+  scrollbar-width: thin; scrollbar-color: var(--light) transparent;
+}
+.roles-tabs::-webkit-scrollbar { height: 4px; }
+.roles-tabs::-webkit-scrollbar-thumb { background: var(--light); border-radius: 2px; }
+.role-tab {
+  flex-shrink: 0; min-width: 160px; max-width: 200px;
+  background: white; border-radius: 10px; box-shadow: var(--sh);
+  border: 2px solid transparent; padding: 14px 16px;
+  cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+  text-align: left; user-select: none;
+}
+.role-tab:hover { border-color: rgba(255,17,10,0.3); }
+.role-tab.active { border-color: var(--red); box-shadow: 0 4px 20px rgba(255,17,10,0.15); }
+.role-tab-num { font-family: var(--fh); font-size: 10px; font-weight: 700; color: var(--red); margin-bottom: 4px; }
+.role-tab-name { font-family: var(--fh); font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.25; margin-bottom: 4px; }
+.role-tab-person { font-size: 11px; color: var(--muted); }
+.role-tab-badge { display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; background: rgba(255,17,10,0.1); color: var(--red); border-radius: 3px; padding: 1px 5px; margin-top: 4px; }
+.role-detail {
+  display: none; background: white; border-radius: 10px; box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.06); border-top: 4px solid var(--red);
+  padding: 24px; margin-top: 2px;
+}
+.role-detail.active { display: block; }
+.role-detail-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+.role-detail-name { font-family: var(--fh); font-size: 20px; font-weight: 700; color: var(--text); }
+.role-detail-person { font-size: 13px; color: var(--red); font-weight: 600; margin-top: 2px; }
+.role-detail-mandate {
+  background: rgba(255,17,10,0.05); border-left: 3px solid var(--red);
+  border-radius: 0 8px 8px 0; padding: 12px 16px;
+  font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.5; margin-bottom: 20px; font-style: italic;
+}
+.role-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.role-detail-block {}
+.role-detail-block-title { font-family: var(--fh); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 8px; }
+.role-detail-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.role-detail-list li { font-size: 13px; color: var(--muted); padding-left: 14px; position: relative; line-height: 1.4; }
+.role-detail-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
+.role-detail-limit { font-size: 12px; color: var(--red); background: rgba(255,17,10,0.06); border-radius: 6px; padding: 8px 12px; margin-top: 16px; line-height: 1.5; }
+
+/* ── DISCLOSE GROUPS (Manual de funciones por grupo) ── */
+.disclose-groups { display: flex; flex-direction: column; gap: 24px; }
+.disclose-group { display: flex; flex-direction: column; gap: 6px; }
+.disclose-group-title { font-family: var(--fh); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); padding-bottom: 6px; border-bottom: 2px solid var(--light); margin-bottom: 4px; }
+.disclose-item { background: white; border-radius: var(--r); box-shadow: var(--sh); border: 1px solid rgba(0,0,0,0.06); overflow: hidden; }
+.disclose-head {
+  width: 100%; padding: 14px 18px; text-align: left; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  background: transparent; border: none; font-family: var(--fb); font-size: 14px; color: var(--text);
+  transition: background 0.15s;
+}
+.disclose-head:hover { background: rgba(0,0,0,0.02); }
+.disclose-head .disclose-title { font-family: var(--fh); font-weight: 700; font-size: 14px; color: var(--text); }
+.disclose-head .disclose-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.disclose-head .disclose-icon { color: var(--red); font-size: 14px; flex-shrink: 0; transition: transform 0.2s; }
+.disclose-item.open .disclose-icon { transform: rotate(90deg); }
+.disclose-body { display: none; padding: 0 18px 20px; border-top: 1px solid var(--light); }
+.disclose-item.open .disclose-body { display: block; }
+.disclose-body .role-detail-mandate { margin-top: 14px; margin-bottom: 16px; }
+.disclose-body .role-detail-grid { margin-top: 0; }
+.disclose-body .role-detail-limit { margin-top: 14px; }
+.disclose-item--muted { opacity: 0.6; }
+.disclose-item--muted .disclose-head .disclose-title,
+.disclose-item--muted .disclose-head .disclose-meta { color: var(--muted); }
+.disclose-item--muted .disclose-head .disclose-icon { color: var(--muted); }
+.disclose-item--quiebre .disclose-head .disclose-title { color: var(--red); }
+.disclose-item--quiebre .disclose-body { border-top-color: rgba(255,17,10,0.2); padding-top: 16px; }
 
 /* ── TABLES ── */
 .table-wrap { overflow-x: auto; border-radius: var(--r); box-shadow: var(--sh); margin-bottom: 20px; }
@@ -205,42 +301,91 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
 .td-C { color: #7a5000; }
 .td-I { color: var(--muted); }
 
-/* ── ROLE CARDS ── */
-.role-card {
-  background: white; border-radius: var(--r); box-shadow: var(--sh);
-  border: 1px solid rgba(0,0,0,0.06); margin-bottom: 14px;
-  overflow: hidden;
+/* ── MATRIZ FILTER (S6) ── */
+.matriz-filter-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+  margin-bottom: 16px; padding: 12px 16px;
+  background: rgba(255,255,255,0.8); border-radius: var(--r);
+  border: 1px solid rgba(0,0,0,0.06);
 }
-.role-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 20px; cursor: pointer; gap: 12px;
-  transition: background 0.15s;
+.matriz-filter-label { font-size: 12px; font-weight: 600; color: var(--muted); }
+.matriz-filter-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.matriz-filter-btn {
+  font-family: var(--fb); font-size: 12px; font-weight: 600;
+  padding: 6px 12px; border-radius: 6px; border: 1px solid var(--light);
+  background: white; color: var(--text); cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
-.role-header:hover { background: rgba(0,0,0,0.02); }
-.role-header-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-.role-num { font-family: var(--fh); font-size: 12px; font-weight: 700; color: var(--red); min-width: 24px; }
-.role-name { font-family: var(--fh); font-weight: 700; font-size: 14px; color: var(--text); }
-.role-toggle { color: var(--muted); transition: transform 0.2s; flex-shrink: 0; }
-.role-card.open .role-toggle { transform: rotate(90deg); }
-.role-body { display: none; padding: 0 20px 20px 54px; border-top: 1px solid var(--light); background: rgba(0,0,0,0.01); }
-.role-card.open .role-body { display: block; }
-.role-mandate {
-  margin-top: 14px; padding: 10px 14px;
-  background: rgba(255,17,10,0.05); border-left: 3px solid var(--red);
-  border-radius: 0 6px 6px 0;
-  font-size: 13px; color: var(--text); font-style: italic; line-height: 1.5;
+.matriz-filter-btn:hover { background: var(--light); border-color: rgba(0,0,0,0.1); }
+.matriz-filter-btn.active {
+  background: var(--red); color: white; border-color: var(--red);
 }
-.role-section-title {
-  font-family: var(--fh); font-size: 11px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted);
-  margin: 14px 0 6px;
-}
-.role-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-.role-list li { font-size: 13px; color: var(--muted); padding-left: 14px; position: relative; line-height: 1.4; }
-.role-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
-.role-limit { font-size: 12px; color: var(--red); background: rgba(255,17,10,0.06); border-radius: 4px; padding: 6px 10px; margin-top: 8px; line-height: 1.4; }
+#matriz-autoridad tbody tr { transition: opacity 0.25s ease; }
+#matriz-autoridad tbody tr.matriz-dimmed { opacity: 0.32; }
+#matriz-autoridad tbody tr.matriz-dimmed td { background: transparent !important; }
+#matriz-autoridad tbody td { transition: background 0.2s ease, font-weight 0.2s; }
+#matriz-autoridad tbody td.matriz-highlight { background: rgba(255,17,10,0.12) !important; font-weight: 700; }
 
-/* ── RITUAL TABLE ── */
+/* ── TABLE FILTER (entregables, flujo revisión) ── */
+.table-filter-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+  margin-bottom: 14px; padding: 10px 14px;
+  background: rgba(255,255,255,0.8); border-radius: var(--r);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.table-filter-label { font-size: 12px; font-weight: 600; color: var(--muted); }
+.table-filter-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.table-filter-btn {
+  font-family: var(--fb); font-size: 11px; font-weight: 600;
+  padding: 5px 10px; border-radius: 6px; border: 1px solid var(--light);
+  background: white; color: var(--text); cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.table-filter-btn:hover { background: var(--light); border-color: rgba(0,0,0,0.1); }
+.table-filter-btn.active { background: var(--red); color: white; border-color: var(--red); }
+.table-filterable tbody tr { transition: opacity 0.25s ease; }
+.table-filterable tbody tr.table-dimmed { opacity: 0.32; }
+.table-filterable tbody tr.table-dimmed td { background: transparent !important; }
+.table-filterable tbody td { transition: background 0.2s ease; }
+.table-filterable tbody td.table-highlight { background: rgba(255,17,10,0.12) !important; font-weight: 700; }
+.checklist-group { margin-top: 20px; }
+.checklist-group-label { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 10px; }
+.checklist-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.checklist-btn {
+  font-family: var(--fb); font-size: 12px; font-weight: 600;
+  padding: 8px 14px; border-radius: 6px; border: 1px solid var(--light);
+  background: white; color: var(--text); cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.checklist-btn:hover { background: var(--light); border-color: rgba(0,0,0,0.1); }
+.checklist-btn.active { background: var(--red); color: white; border-color: var(--red); }
+.checklist-btn.relevant { box-shadow: 0 0 0 2px rgba(255,17,10,0.3); }
+.checklist-btn .checklist-btn-icon { font-size: 10px; transition: transform 0.25s ease; }
+.checklist-btn.open .checklist-btn-icon { transform: rotate(90deg); }
+.checklist-panel {
+  display: none; overflow: hidden;
+  background: white; border-radius: var(--r); box-shadow: var(--sh);
+  border: 1px solid rgba(0,0,0,0.06); margin-top: 8px;
+  padding: 16px 20px; animation: checklistSlide 0.3s ease;
+}
+.checklist-panel.open { display: block; }
+@keyframes checklistSlide {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ritual-row { transition: opacity 0.25s ease; }
+.ritual-row.ritual-dimmed { opacity: 0.32; }
+.ritual-row.ritual-highlight { box-shadow: inset 3px 0 0 var(--red); margin-left: -4px; padding-left: 4px; }
+
+/* ── STEPS ── */
+.steps { display: flex; flex-direction: column; gap: 10px; }
+.step { display: flex; gap: 14px; align-items: flex-start; }
+.step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--grad); color: white; font-family: var(--fh); font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-body { font-size: 13px; color: var(--muted); line-height: 1.5; padding-top: 4px; }
+.step-body strong { color: var(--text); }
+
+/* ── RITUAL ── */
 .ritual-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--light); }
 .ritual-row:last-child { border-bottom: none; }
 .ritual-freq { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; min-width: 70px; flex-shrink: 0; padding-top: 2px; }
@@ -249,101 +394,111 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
 .ritual-owner { font-size: 12px; color: var(--orange); margin-top: 1px; }
 .ritual-output { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-/* ── STEPS ── */
-.steps { display: flex; flex-direction: column; gap: 10px; }
-.step { display: flex; gap: 14px; align-items: flex-start; }
-.step-num {
-  width: 28px; height: 28px; border-radius: 50%;
-  background: var(--grad); color: white;
-  font-family: var(--fh); font-weight: 700; font-size: 12px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.step-body { font-size: 13px; color: var(--muted); line-height: 1.5; padding-top: 4px; }
-.step-body strong { color: var(--text); }
-
-/* ── CHECKLIST ── */
-.checklist { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.checklist li {
-  display: flex; gap: 8px; align-items: flex-start;
-  font-size: 13px; color: var(--muted); line-height: 1.4;
-}
-.checklist li::before {
-  content: '☐'; flex-shrink: 0; font-size: 15px;
-  color: var(--red); margin-top: -1px;
-}
-
-/* ── TIME BADGES ── */
-.td-time { white-space: nowrap; }
-.badge-ok { display: inline-block; background: rgba(22,163,74,0.1); color: #166534; border-radius: 4px; padding: 1px 6px; font-size: 11px; font-weight: 600; }
-.badge-warn { display: inline-block; background: rgba(255,148,0,0.12); color: #b36600; border-radius: 4px; padding: 1px 6px; font-size: 11px; font-weight: 600; }
-.badge-max { display: inline-block; background: rgba(255,17,10,0.1); color: var(--red); border-radius: 4px; padding: 1px 6px; font-size: 11px; font-weight: 600; }
-
 /* ── MODEL 24-72-7 ── */
 .model-247 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.model-247-card {
-  background: white; border-radius: var(--r); box-shadow: var(--sh);
-  padding: 20px; text-align: center;
-}
+.model-247-card { background: white; border-radius: var(--r); box-shadow: var(--sh); padding: 20px; text-align: center; }
 .model-247-num { font-family: var(--fh); font-size: 32px; font-weight: 700; color: var(--red); }
 .model-247-unit { font-size: 12px; color: var(--muted); }
 .model-247-desc { font-size: 13px; color: var(--text); margin-top: 6px; line-height: 1.4; }
 
-/* ── DUPLA TABLE ── */
+/* ── DUPLA GRID ── */
 .dupla-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.dupla-card {
-  background: white; border-radius: var(--r); box-shadow: var(--sh);
-  padding: 16px; border-top: 3px solid var(--orange);
-}
+.dupla-card { background: white; border-radius: var(--r); box-shadow: var(--sh); padding: 16px; border-top: 3px solid var(--orange); }
 .dupla-name { font-family: var(--fh); font-size: 12px; font-weight: 700; color: var(--text); }
 .dupla-roles { display: flex; flex-direction: column; gap: 3px; margin-top: 6px; }
 .dupla-role { font-size: 12px; color: var(--muted); padding-left: 10px; position: relative; }
 .dupla-role::before { content: '·'; position: absolute; left: 2px; color: var(--accent); font-weight: 700; }
 
-/* ── WHAT INGENIA IS/ISN'T ── */
+/* ── TIME BADGES ── */
+.badge-ok { display: inline-block; background: rgba(22,163,74,0.1); color: #166534; border-radius: 4px; padding: 1px 6px; font-size: 11px; font-weight: 600; }
+.badge-warn { display: inline-block; background: rgba(255,148,0,0.12); color: #b36600; border-radius: 4px; padding: 1px 6px; font-size: 11px; font-weight: 600; }
+.badge-max { display: inline-block; background: rgba(255,17,10,0.1); color: var(--red); border-radius: 4px; padding: 1px 6px; font-size: 11px; font-weight: 600; }
+
+/* ── ISNOT ── */
 .isnot { background: rgba(255,17,10,0.04); border: 1px solid rgba(255,17,10,0.1); border-radius: var(--r); padding: 16px 20px; }
 .isnot h4 { color: var(--red); font-family: var(--fh); font-size: 13px; font-weight: 700; margin-bottom: 8px; }
 .isnot ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
 .isnot ul li { font-size: 13px; color: var(--muted); padding-left: 14px; position: relative; }
 .isnot ul li::before { content: '✕'; position: absolute; left: 0; color: var(--red); font-size: 10px; }
 
+/* ── ROLE LIST (generic) ── */
+.role-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.role-list li { font-size: 13px; color: var(--muted); padding-left: 14px; position: relative; line-height: 1.4; }
+.role-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
+
 /* ── NEW ROLE CARDS (S12) ── */
 .new-role-cards { display: flex; flex-direction: column; gap: 14px; }
-.new-role-card {
-  background: var(--white); border-radius: var(--r); box-shadow: var(--sh);
-  padding: 20px 22px; border-left: 4px solid var(--red);
-}
+.new-role-card { background: var(--white); border-radius: var(--r); box-shadow: var(--sh); padding: 20px 22px; border-left: 4px solid var(--red); }
 .new-role-card--internal { border-left-color: var(--orange); }
-
-.new-role-badge {
-  display: inline-block; font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 1px;
-  border-radius: 4px; padding: 2px 8px; margin-bottom: 10px;
-}
-.new-role-badge--new      { background: rgba(255,17,10,0.1); color: var(--red); }
+.new-role-badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; padding: 2px 8px; margin-bottom: 10px; }
+.new-role-badge--new { background: rgba(255,17,10,0.1); color: var(--red); }
 .new-role-badge--internal { background: rgba(255,88,0,0.1); color: var(--orange); }
-
-.new-role-title {
-  font-family: var(--fh); font-size: 16px; font-weight: 700;
-  color: var(--text); margin-bottom: 3px;
-}
-.new-role-person {
-  font-size: 12px; font-weight: 600; color: var(--red);
-  margin-bottom: 8px;
-}
-.new-role-desc {
-  font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px;
-}
+.new-role-title { font-family: var(--fh); font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.new-role-person { font-size: 12px; font-weight: 600; color: var(--red); margin-bottom: 8px; }
+.new-role-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
 .new-role-impact { background: rgba(0,0,0,0.02); border-radius: 6px; padding: 10px 12px; }
-.new-role-impact-title {
-  font-family: var(--fh); font-size: 11px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 4px;
-}
+.new-role-impact-title { font-family: var(--fh); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 4px; }
 
-/* ── SCROLLBAR ── */
+/* ── GUIÓN ── */
+.guion-block { background: white; border-radius: var(--r); box-shadow: var(--sh); padding: 20px 24px; margin-bottom: 14px; border-left: 4px solid var(--orange); }
+.guion-block--red { border-left-color: var(--red); }
+.guion-block--green { border-left-color: #16a34a; }
+.guion-time { font-family: var(--fh); font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; }
+.guion-title { font-family: var(--fh); font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.guion-owner { font-size: 12px; color: var(--orange); font-weight: 600; margin-bottom: 8px; }
+.guion-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.guion-quote { font-style: italic; font-size: 14px; color: var(--text); border-left: 3px solid var(--accent); padding-left: 12px; margin: 10px 0; line-height: 1.5; }
+.guion-note { font-size: 11px; color: var(--red); background: rgba(255,17,10,0.05); border-radius: 4px; padding: 5px 10px; margin-top: 8px; }
+
+/* ── FAQ ── */
+.faq-item { background: white; border-radius: var(--r); box-shadow: var(--sh); margin-bottom: 10px; overflow: hidden; }
+.faq-q { padding: 14px 18px; cursor: pointer; font-family: var(--fh); font-size: 14px; font-weight: 600; color: var(--text); display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: background 0.15s; }
+.faq-q:hover { background: rgba(0,0,0,0.02); }
+.faq-q .faq-icon { color: var(--red); transition: transform 0.2s; flex-shrink: 0; font-size: 18px; line-height: 1; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a { display: none; padding: 0 18px 16px 18px; font-size: 13px; color: var(--muted); line-height: 1.6; border-top: 1px solid var(--light); padding-top: 12px; }
+.faq-item.open .faq-a { display: block; }
+
+/* ── SCROLLBAR (sidebar) ── */
 .sidebar::-webkit-scrollbar { width: 4px; }
 .sidebar::-webkit-scrollbar-track { background: transparent; }
 .sidebar::-webkit-scrollbar-thumb { background: var(--light); border-radius: 2px; }
+
+/* ── ANIMACIONES PRESENTACIÓN ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.anim-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-on-scroll.anim-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.anim-on-scroll.anim-delay-1 { transition-delay: 0.08s; }
+.anim-on-scroll.anim-delay-2 { transition-delay: 0.16s; }
+.anim-on-scroll.anim-delay-3 { transition-delay: 0.24s; }
+.anim-on-scroll.anim-delay-4 { transition-delay: 0.32s; }
+.anim-on-scroll.anim-delay-5 { transition-delay: 0.4s; }
+.anim-on-scroll.anim-delay-6 { transition-delay: 0.48s; }
+.card, .ritual-row, .step, .guion-block, .faq-item, .new-role-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.card:hover, .new-role-card:hover { transform: translateY(-2px); }
+.ritual-row:hover, .step:hover { background: rgba(0,0,0,0.02); }
+.table-wrap table tbody tr { transition: background 0.2s ease; }
+.table-wrap table tbody tr:hover { background: rgba(255,17,10,0.04) !important; }
+.model-247-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.model-247-card:hover { transform: scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
@@ -351,6 +506,8 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
   .main { margin-left: 0; }
   .model-247 { grid-template-columns: 1fr; }
   .dupla-grid { grid-template-columns: 1fr; }
+  .compare-table { grid-template-columns: 1fr; }
+  .role-detail-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -360,37 +517,45 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
   <span class="topnav-logo">🟠 Ingenia</span>
   <span class="topnav-title">Manual Organizacional Consultivo</span>
   <a href="index.html" class="topnav-back">← Volver al hub</a>
-  <span class="topnav-badge">V6.0 · Marzo 2026</span>
+  <span class="topnav-badge">V6.1 · Marzo 2026</span>
 </nav>
 
 <div class="layout">
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <div class="sidebar-section">Contenido</div>
+    <div class="sidebar-section">Documento</div>
     <a class="sidebar-link" href="#s1"><span class="num">01</span> Identidad y valor</a>
-    <a class="sidebar-link" href="#s2"><span class="num">02</span> El modelo consultivo</a>
+    <a class="sidebar-link" href="#s2"><span class="num">02</span> El sistema — 6 nodos</a>
     <a class="sidebar-link" href="#s3"><span class="num">03</span> Arquitectura — 5 niveles</a>
     <a class="sidebar-link" href="#s4"><span class="num">04</span> Organigrama 2026</a>
+    <div class="sidebar-section">Roles</div>
+    <a class="sidebar-link" href="#s-jc"><span class="num">—</span> Dirección de Ops</a>
     <a class="sidebar-link" href="#s5"><span class="num">05</span> Manual de funciones</a>
     <a class="sidebar-link" href="#s6"><span class="num">06</span> Matriz de autoridad</a>
-    <a class="sidebar-link" href="#s7"><span class="num">07</span> Mapa de entregables</a>
+    <div class="sidebar-section">Operación</div>
+    <a class="sidebar-link" href="#s7"><span class="num">07</span> Padrón de entregables</a>
     <a class="sidebar-link" href="#s8"><span class="num">08</span> Flujo de revisión</a>
     <a class="sidebar-link" href="#s9"><span class="num">09</span> Rituales de gobernanza</a>
     <a class="sidebar-link" href="#s10"><span class="num">10</span> Workflow económico</a>
     <a class="sidebar-link" href="#s11"><span class="num">11</span> Reglas de integración</a>
+    <div class="sidebar-section">Reunión</div>
     <a class="sidebar-link" href="#s12"><span class="num">12</span> Contexto Marzo 2026</a>
-    <a class="sidebar-link" href="#s13"><span class="num">13</span> Anexos</a>
+    <a class="sidebar-link" href="#s13"><span class="num">13</span> Guión — 18 Marzo</a>
+    <a class="sidebar-link" href="#s15"><span class="num">15</span> Anexos</a>
   </aside>
 
   <!-- MAIN -->
   <main class="main">
 
     <!-- HERO -->
-    <div class="hero">
-      <div class="hero-tag">Documento maestro confidencial · Versión 6.0</div>
+    <div class="hero anim-on-scroll">
+      <div class="hero-tag">Documento maestro confidencial · Versión 6.1 · 18 Marzo 2026</div>
       <h1>Manual Organizacional<br>Consultivo</h1>
-      <div class="hero-sub">Identidad, estructura, roles, entregables, gobernanza y método</div>
+      <div class="hero-sub">Identidad, sistema, roles, gobernanza y método</div>
+      <div class="hero-tagline">
+        "Ingenia no trabaja en capas.<br>Trabaja en ciclos de decisión que se retroalimentan."
+      </div>
       <div class="hero-model">
         <span class="hero-model-step">1 · Negocio</span>
         <span class="hero-arrow">→</span>
@@ -401,6 +566,7 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
         <span class="hero-model-step">4 · Creatividad</span>
       </div>
     </div>
+
 
     <!-- S1: IDENTIDAD -->
     <section class="section" id="s1">
@@ -414,7 +580,7 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
         <h3 style="margin-top:0;">Qué es Ingenia</h3>
         <p>Ingenia Latam es una <strong>consultora de negocio, marca y crecimiento</strong> — no una agencia de piezas.</p>
         <p>La unidad de valor no es el volumen de entregables. Es la calidad de las <strong>decisiones estratégicas habilitadas</strong>: qué hacer, qué no hacer, cómo hacerlo con coherencia y sostenibilidad.</p>
-        <h4>Producto real</h4>
+        <h4>El producto real</h4>
         <ul class="role-list">
           <li>Gobernanza y criterio bajo presión</li>
           <li>Arquitectura de sistemas de valor acumulativo</li>
@@ -425,7 +591,7 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
       <div class="card card--accent" style="margin-top:10px;">
         <h4 style="margin-top:0;">Qué compra el cliente cuando contrata Ingenia</h4>
         <ul class="role-list">
-          <li><strong>Criterio</strong> para decidir bajo presión (comercial, reputacional, operativa)</li>
+          <li><strong>Criterio</strong> para decidir bajo presión — comercial, reputacional, operativa</li>
           <li><strong>Reducción de riesgo:</strong> margen, reputación, dispersión, pérdida de foco</li>
           <li><strong>Coherencia anual:</strong> roadmap, plataformas, sistemas y gobernanza integrados</li>
           <li><strong>Sistemas escalables:</strong> plataformas creativas, sistemas visuales, activos digitales</li>
@@ -443,37 +609,95 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
           <li>No confunde reportes tácticos con control estratégico del valor</li>
         </ul>
       </div>
+
+      <div class="anchor-quote">
+        <p>"No es más trabajo. Es mejor trabajo."</p>
+        <span>El diferencial de Ingenia no se mide en volumen — se mide en coherencia.</span>
+      </div>
     </section>
 
-    <!-- S2: MODELO -->
+    <!-- S2: SISTEMA — 6 NODOS -->
     <section class="section" id="s2">
       <div class="section-header">
         <div class="section-num">2</div>
-        <h2>El modelo consultivo — por qué importa</h2>
+        <h2>El sistema consultivo — cómo funciona Ingenia</h2>
       </div>
       <div class="section-divider"></div>
 
-      <div class="tiers">
-        <div class="tier tier-1">
-          <div class="tier-title">1 · NEGOCIO</div>
-          <div class="tier-sub">Entender el problema real, las tensiones, el contexto</div>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:4px;">Ingenia no funciona en capas. Funciona en un <strong>ciclo de 6 nodos que se retroalimentan</strong>. Cada nodo depende del anterior — y el último alimenta al primero.</p>
+
+      <div class="cycle-wrap">
+        <div class="cycle-row">
+          <div class="cycle-node cycle-node-1">
+            <div class="cycle-num">01</div>
+            <div class="cycle-label">DIRECCIÓN</div>
+            <div class="cycle-desc">Estrategia define foco · prioriza · decide qué NO hacer</div>
+          </div>
+          <div class="cycle-arrow">→</div>
+          <div class="cycle-node cycle-node-2">
+            <div class="cycle-num">02</div>
+            <div class="cycle-label">ORQUESTACIÓN</div>
+            <div class="cycle-desc">Ops traduce estrategia en plan · prioriza carga real · elimina fricción</div>
+          </div>
+          <div class="cycle-arrow">→</div>
+          <div class="cycle-node cycle-node-3">
+            <div class="cycle-num">03</div>
+            <div class="cycle-label">CONVERSIÓN / SISTEMAS EJECUTABLES</div>
+            <div class="cycle-desc">Creativo + Digital construyen sistemas ejecutables · coherencia de campaña</div>
+          </div>
+          <div class="cycle-arrow">→</div>
+          <div class="cycle-node cycle-node-4">
+            <div class="cycle-num">04</div>
+            <div class="cycle-label">PRODUCCIÓN CONTROLADA</div>
+            <div class="cycle-desc">Redactor + Diseñador + Cuentas ejecutan con checklist · evita retrabajo · respeta sistema</div>
+          </div>
+          <div class="cycle-arrow">→</div>
+          <div class="cycle-node cycle-node-5">
+            <div class="cycle-num">05</div>
+            <div class="cycle-label">PROTECCIÓN</div>
+            <div class="cycle-desc">Admin controla rentabilidad por DECISIÓN — no solo por proyecto</div>
+          </div>
+          <div class="cycle-arrow">→</div>
+          <div class="cycle-node cycle-node-6">
+            <div class="cycle-num">06</div>
+            <div class="cycle-label">APRENDIZAJE</div>
+            <div class="cycle-desc">Mide impacto real, no actividad · genera insights accionables · retroalimenta estrategia</div>
+          </div>
         </div>
-        <div class="tier tier-2">
-          <div class="tier-title">2 · MARCA</div>
-          <div class="tier-sub">Construir el territorio, la plataforma, el criterio</div>
+        <div class="cycle-return">
+          <div class="cycle-return-line"></div>
+          <span>🔁 Retroalimenta a DIRECCIÓN</span>
+          <div class="cycle-return-line" style="background:linear-gradient(270deg, #16a34a, rgba(22,163,74,0.2));"></div>
         </div>
-        <div class="tier tier-3">
-          <div class="tier-title">3 · COMUNICACIÓN</div>
-          <div class="tier-sub">Traducir la marca en mensajes y sistemas de lenguaje</div>
+      </div>
+
+      <div class="anchor-quote">
+        <p>"Si no vuelve… no es sistema. Es producción."</p>
+        <span>El aprendizaje cierra el loop. Sin ese retorno, todo lo anterior es ejecución sin acumulación.</span>
+      </div>
+
+      <h3>Agencia vs. sistema consultivo</h3>
+      <div class="compare-table">
+        <div class="compare-col compare-col--bad">
+          <div class="compare-header">❌ Modelo agencia</div>
+          <div class="compare-item">Trabajo por partes</div>
+          <div class="compare-item">Reacción constante</div>
+          <div class="compare-item">Retrabajo permanente</div>
+          <div class="compare-item">Baja coherencia entre ciclos</div>
+          <div class="compare-item">Ejecución antes de criterio</div>
         </div>
-        <div class="tier tier-4">
-          <div class="tier-title">4 · CREATIVIDAD</div>
-          <div class="tier-sub">Materializar en campañas, piezas y activos</div>
+        <div class="compare-col compare-col--good">
+          <div class="compare-header">✅ Modelo Ingenia</div>
+          <div class="compare-item">Trabajo en sistema</div>
+          <div class="compare-item">Decisión antes de ejecución</div>
+          <div class="compare-item">Flujo continuo con criterio</div>
+          <div class="compare-item">Coherencia acumulativa</div>
+          <div class="compare-item">El sistema protege la calidad</div>
         </div>
       </div>
 
       <div class="card" style="margin-top:16px;">
-        <h4 style="margin-top:0;">Por qué esta secuencia es crítica</h4>
+        <h4 style="margin-top:0;">Por qué la secuencia del método es crítica</h4>
         <ul class="role-list">
           <li>Sin diagnóstico de negocio → creatividad sin dirección</li>
           <li>Sin territorio de marca → comunicación sin identidad</li>
@@ -483,6 +707,10 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
           <strong>El modelo protege al cliente</strong> de invertir en ejecución que no sostiene crecimiento.<br>
           <strong>El modelo protege a Ingenia</strong> de convertirse en una agencia de producción sin valor diferencial.
         </div>
+      </div>
+
+      <div class="anchor-quote">
+        <p>"Si no pensamos primero, ejecutamos mal."</p>
       </div>
     </section>
 
@@ -495,46 +723,80 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
       <div class="section-divider"></div>
       <p>La organización se estructura en cinco niveles integrados. Cada nivel tiene un mandato y límites claros. <strong>Cuando un nivel invade a otro, el modelo se degrada.</strong></p>
 
-      <div class="tiers">
-        <div class="tier tier-1">
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <span class="tag tag--red">Nivel 1</span>
-            <div class="tier-title">Dirección Estratégica</div>
-          </div>
-          <div class="tier-sub">Función: Crear valor · Entregable: Marco estratégico, Roadmap, Trade-offs</div>
-          <div class="tier-mandate">Límite: No bajar a producción</div>
+      <h3>Cambio de paradigma</h3>
+      <div class="anchor-quote" style="border-width:4px;">
+        <p>"Ingenia no funciona como áreas."</p>
+        <p style="margin-top:8px;">"Funciona como un sistema."</p>
+      </div>
+
+      <h3>Explicación del ciclo — señalando cada nodo</h3>
+      <div class="tiers-wrap" id="tiers-wrap">
+        <div class="tier-arrow" id="tier-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         </div>
-        <div class="tier tier-2">
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <span class="tag tag--new">Nivel 2 · NUEVO 2026</span>
-            <div class="tier-title">Operaciones Consultivas & Pipeline</div>
+        <div class="tiers">
+          <div class="tier tier-1" data-tier="1">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <span class="tag tag--red">1. Estrategia</span>
+              <div class="tier-title">Dirección Estratégica</div>
+            </div>
+            <div class="tier-sub">Función: Crear valor · Entregable: Marco estratégico, Roadmap, Trade-offs</div>
+            <div class="tier-mandate">Límite: No bajar a producción</div>
+            <div class="tier-quote">"Todo empieza acá."<br>"No con un pedido. No con una campaña."<br>"Con una decisión."</div>
           </div>
-          <div class="tier-sub">Función: Proteger valor · Entregable: Gobernanza, Pipeline, Alcance, Candados</div>
-          <div class="tier-mandate">Límite: No redefinir estrategia ni creatividad</div>
+          <div class="tier tier-2" data-tier="2">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <span class="tag tag--orange">2. Operaciones</span>
+              <div class="tier-title">Operaciones Consultivas & Pipeline</div>
+            </div>
+            <div class="tier-sub">Función: Orquestar y custodiar el valor · Entregable: Gobernanza, Pipeline, Alcance, Candados</div>
+            <div class="tier-mandate">Límite: No redefinir estrategia ni creatividad</div>
+            <div class="tier-quote">"Después, esto no se reparte…"<br>"Se ordena. Se prioriza. Se decide qué sí y qué no."</div>
+          </div>
+          <div class="tier tier-3" data-tier="3">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="tag tag--accent">3. Creativo / Digital</span>
+              <div class="tier-title">Diseño de Sistemas Ejecutables</div>
+            </div>
+            <div class="tier-sub">Función: Convertir valor en activos · Entregable: Territorio, Plataforma, Sistema visual</div>
+            <div class="tier-mandate">Límite: No inventar estrategia</div>
+            <div class="tier-quote">"Luego no se 'hacen piezas'…"<br>"Se construyen sistemas. Que puedan ejecutarse con coherencia."</div>
+          </div>
+          <div class="tier tier-4" data-tier="4">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="tag tag--gray">4. Ejecución</span>
+              <div class="tier-title">Producción Controlada</div>
+            </div>
+            <div class="tier-sub">Función: Redactor + Diseñador + Cuentas materializan valor · Entregable: Piezas, Campañas, Contenidos</div>
+            <div class="tier-mandate">Límite: No redefinir criterios</div>
+            <div class="tier-quote">"Recién acá se produce."<br>"Pero ya no desde cero… sino con criterio."</div>
+          </div>
+          <div class="tier tier-5" data-tier="5">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="tag tag--green">5. Medición</span>
+              <div class="tier-title">Control Estratégico del Valor (Aprendizaje)</div>
+            </div>
+            <div class="tier-sub">Función: Aprendizaje = mide impacto real, no actividad · Entregable: KPIs, Aprendizajes, Reenfoque</div>
+            <div class="tier-mandate">Límite: No producir por producir</div>
+            <div class="tier-quote">"Y esto es clave."<br>"No se termina cuando se entrega."<br>"Se mide. Se entiende qué funcionó y qué no."</div>
+          </div>
         </div>
-        <div class="tier tier-3">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span class="tag tag--accent">Nivel 3</span>
-            <div class="tier-title">Diseño de Sistemas</div>
+      </div>
+
+      <div class="disclose-item disclose-item--quiebre" style="margin-top:20px;background:rgba(255,17,10,0.04);border:1px solid rgba(255,17,10,0.15);border-left:4px solid var(--red);">
+        <button type="button" class="disclose-head" aria-expanded="false">
+          <div>
+            <span class="disclose-title">⚡ Pregunta importante!</span>
+            <div class="disclose-meta">El momento de quiebre — más importante de la reunión</div>
           </div>
-          <div class="tier-sub">Función: Convertir valor en activos · Entregable: Territorio, Plataforma, Sistema visual</div>
-          <div class="tier-mandate">Límite: No inventar estrategia</div>
-        </div>
-        <div class="tier tier-4">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span class="tag tag--gray">Nivel 4</span>
-            <div class="tier-title">Ejecución</div>
+          <span class="disclose-icon">›</span>
+        </button>
+        <div class="disclose-body">
+          <div class="anchor-quote" style="margin:0;border-color:var(--red);">
+            <p>"Hoy, siendo honestos…"</p>
+            <p>"¿Trabajamos así?"</p>
           </div>
-          <div class="tier-sub">Función: Materializar valor · Entregable: Piezas, Campañas, Contenidos</div>
-          <div class="tier-mandate">Límite: No redefinir criterios</div>
-        </div>
-        <div class="tier" style="background:rgba(22,163,74,0.06);border-left:4px solid #16a34a;">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span class="tag tag--green">Nivel 5</span>
-            <div class="tier-title">Control Estratégico del Valor</div>
-          </div>
-          <div class="tier-sub">Función: Validar y retroalimentar · Entregable: KPIs, Aprendizajes, Reenfoque</div>
-          <div class="tier-mandate">Límite: No producir por producir</div>
+          <p style="margin:12px 0 0;font-size:13px;color:var(--muted);font-style:italic;">Silencio incómodo — dejarlo pasar. No llenarlo.</p>
         </div>
       </div>
     </section>
@@ -547,64 +809,81 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
       </div>
       <div class="section-divider"></div>
 
+      <div class="card card--left" style="margin-bottom:16px;">
+        <p style="margin:0;font-size:13px;font-style:italic;color:var(--muted);">Tres movimientos estructurales: un nuevo ingreso, un cambio interno, un nuevo perfil. No es un rediseño — es completar el sistema con las personas que cada capa necesitaba.</p>
+      </div>
+
       <div class="card" style="overflow-x:auto;">
         <ul class="tree">
           <li>
             <span class="org-node org-node--ceo">CEO — Luis Holder</span>
             <ul>
               <li>
-                <span class="org-node org-node--dir">Dirección de Estrategia</span>
+                <span class="org-node org-node--dir">Dirección de Estrategia — Rodrigo De Las Casas Francia</span>
                 <ul>
-                  <li><span class="org-node org-node--mid">Planner Estratégico Jr</span></li>
+                  <li><span class="org-node org-node--mid">Planner Estratégico Jr — Sebastián Talavera</span></li>
                   <li>
-                    <span class="org-node org-node--dir-new">Líder Estrategia Digital & Growth ★ nuevo perfil</span>
-                    <ul><li><span class="org-node org-node--leaf">Community Managers</span></li></ul>
+                    <span class="org-node org-node--dir-new">Líder Estrategia Digital &amp; Growth — Andrea Córdoba Torres</span>
+                    <ul>
+                      <li>
+                        <span class="org-node org-node--leaf">Community Managers</span>
+                        <ul>
+                          <li><span class="org-node org-node--leaf">Camila Guillén (S)</span></li>
+                          <li><span class="org-node org-node--leaf">Katia Quispe (J)</span></li>
+                        </ul>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </li>
               <li>
-                <span class="org-node org-node--dir-new">Dirección de Operaciones Consultivas & Pipeline ★ nuevo ingreso</span>
+                <span class="org-node org-node--dir-new">Dirección de Operaciones Consultivas &amp; Pipeline — JC Guzmán</span>
                 <ul>
                   <li>
-                    <span class="org-node org-node--dir-new" style="background:rgba(255,88,0,0.85);">Supervisora de Cuentas ↑ cambio interno</span>
+                    <span class="org-node org-node--dir-new">Supervisorx de Cuentas — Mercedes Lau</span>
                     <ul>
-                      <li><span class="org-node org-node--leaf">Ejecutivas Senior</span></li>
-                      <li><span class="org-node org-node--leaf">Ejecutivas de Cuenta</span></li>
+                      <li><span class="org-node org-node--leaf">Ejecutivxs de Cuenta — Isabel Saco Vértiz</span></li>
                     </ul>
                   </li>
-                  <li><span class="org-node org-node--mid">Ejecutivas de Cuentas Medianas</span></li>
-                  <li><span class="org-node org-node--mid">Consultora Comercial Consultiva</span></li>
                 </ul>
               </li>
               <li>
                 <span class="org-node org-node--dir">Dirección Creativa (dupla)</span>
                 <ul>
                   <li>
-                    <span class="org-node org-node--mid">Director Creativo</span>
+                    <span class="org-node org-node--mid">Director Creativo — Daniel de la Flor</span>
                     <ul>
-                      <li><span class="org-node org-node--leaf">Redactor Creativo Senior → Redactores</span></li>
+                      <li>
+                        <span class="org-node org-node--leaf">Redactor Creativo Senior — Diego Cifuentes</span>
+                        <ul>
+                          <li><span class="org-node org-node--leaf">Redactores — Andrés Torero</span></li>
+                        </ul>
+                      </li>
                     </ul>
                   </li>
                   <li>
-                    <span class="org-node org-node--mid">Director de Arte</span>
+                    <span class="org-node org-node--mid">Director de Arte — Carlos Díaz</span>
                     <ul>
-                      <li><span class="org-node org-node--leaf">Diseñador Senior → Diseñadores</span></li>
+                      <li>
+                        <span class="org-node org-node--leaf">Diseñador Senior — Ritt Guevara</span>
+                        <ul>
+                          <li><span class="org-node org-node--leaf">Diseñadores — Shaylin Chang · Arian López · Daniel Pio</span></li>
+                        </ul>
+                      </li>
                     </ul>
                   </li>
                 </ul>
               </li>
               <li>
-                <span class="org-node org-node--dir">Dirección de Proyectos Digitales</span>
+                <span class="org-node org-node--dir">Dirección de Sistemas Ejecutables — Crhistiam Omar Cuba García</span>
                 <ul>
-                  <li><span class="org-node org-node--leaf">Ejecutivas Digitales / PMs</span></li>
-                  <li><span class="org-node org-node--leaf">UX / CX · SEO & Analítica</span></li>
-                  <li><span class="org-node org-node--leaf">Desarrollo y Programación</span></li>
-                  <li><span class="org-node org-node--leaf">Contenidos Digitales</span></li>
+                  <li><span class="org-node org-node--leaf">Ejecutivxs Digitales / PMs — Lucero Llerena</span></li>
+                  <li><span class="org-node org-node--leaf">UX / CX · SEO &amp; Analítica — Anderson Chávez</span></li>
+                  <li><span class="org-node org-node--leaf">Desarrollo y Programación — (externo)</span></li>
                 </ul>
               </li>
               <li>
-                <span class="org-node org-node--dir">Jefe de Administración</span>
-                <ul><li><span class="org-node org-node--leaf">Control Económico (cotizadores, margen)</span></li></ul>
+                <span class="org-node org-node--dir">Jefe de Administración — Karen Villanueva</span>
               </li>
             </ul>
           </li>
@@ -616,227 +895,967 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
         <div class="dupla-card">
           <div class="dupla-name">Estrategia</div>
           <div class="dupla-roles">
-            <div class="dupla-role">Director de Estrategia</div>
-            <div class="dupla-role">Líder Digital & Growth</div>
+            <div class="dupla-role">Rodrigo De Las Casas — Dir. Estrategia</div>
+            <div class="dupla-role">Andrea Córdoba — Líder Digital &amp; Growth</div>
           </div>
         </div>
         <div class="dupla-card">
           <div class="dupla-name">Creatividad</div>
           <div class="dupla-roles">
-            <div class="dupla-role">Director Creativo</div>
-            <div class="dupla-role">Director de Arte</div>
+            <div class="dupla-role">Daniel de la Flor — Director Creativo</div>
+            <div class="dupla-role">Carlos Díaz — Director de Arte</div>
           </div>
         </div>
         <div class="dupla-card">
           <div class="dupla-name">Campañas</div>
           <div class="dupla-roles">
-            <div class="dupla-role">Redactor Creativo Senior</div>
-            <div class="dupla-role">Diseñador Senior</div>
+            <div class="dupla-role">Diego Cifuentes — Redactor Creativo Senior</div>
+            <div class="dupla-role">Ritt Guevara — Diseñador Senior</div>
           </div>
         </div>
         <div class="dupla-card">
           <div class="dupla-name">Cuentas</div>
           <div class="dupla-roles">
-            <div class="dupla-role">Supervisora de Cuentas</div>
-            <div class="dupla-role">Ejecutivas</div>
+            <div class="dupla-role">Mercedes Lau — Supervisorx de Cuentas</div>
+            <div class="dupla-role">Isabel Saco Vértiz — Ejecutivx de Cuenta</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- S5: ROLES -->
+
+    <!-- JC ROLE DECLARATION -->
+    <div class="section" id="s-jc" style="scroll-margin-top:72px;">
+      <div class="jc-declaration">
+        <div class="jc-decl-tag">★ Nuevo rol · Nivel 2 · Ingreso Marzo 2026</div>
+        <div class="jc-decl-name">JC Guzmán</div>
+        <div class="jc-decl-title">Director de Operaciones Consultivas &amp; Pipeline</div>
+        <div class="jc-decl-body">
+          Mi función no es administrar. Es <strong style="color:white;">custodiar el modelo</strong>.<br><br>
+          Ordeno. Priorizo. Decido qué no pasa. Custodio el alcance del cliente y el tiempo del equipo.
+          Cuando el sistema se sale del carril, lo devuelvo. Cuando hay riesgo que el equipo no ve, lo escalo.
+          Cuando hay una oportunidad en el pipeline, la activo con criterio — no con prisa.<br><br>
+          <strong style="color:white;">No reaccionamos. Decidimos.</strong>
+        </div>
+        <div class="jc-decl-pillars">
+          <span class="jc-decl-pillar">Custodio del modelo</span>
+          <span class="jc-decl-pillar">Gobernanza de pipeline</span>
+          <span class="jc-decl-pillar">Custodia de alcance</span>
+          <span class="jc-decl-pillar">Priorización semanal</span>
+          <span class="jc-decl-pillar">Escalamiento de riesgos</span>
+          <span class="jc-decl-pillar">Control de sobreentrega</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
+        <div class="anchor-quote" style="margin:0;">
+          <p>"El modelo se ejecuta, no se explica."</p>
+        </div>
+        <div class="anchor-quote" style="margin:0;border-color:var(--orange);background:linear-gradient(90deg,rgba(255,88,0,0.05),transparent);">
+          <p style="font-size:clamp(13px,1.5vw,16px);">"Priorizar no es emocional."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- S5: MANUAL DE FUNCIONES — HORIZONTAL CARDS -->
     <section class="section" id="s5">
       <div class="section-header">
         <div class="section-num">5</div>
         <h2>Manual de funciones por rol</h2>
       </div>
       <div class="section-divider"></div>
-      <p style="margin-bottom:16px;">Cada rol se define por: <strong>mandato · entregables · decisiones · interfaces · cadencia · KPIs · límites</strong>. Haz clic para expandir.</p>
+      <p style="margin-bottom:16px;font-size:13px;color:var(--muted);">Cada rol se define por: mandato, entregables, decisiones, interfaces, cadencia, KPIs y límites. Expandir para ver detalle.</p>
 
-      <!-- CEO -->
-      <div class="role-card" onclick="toggleRole(this)">
-        <div class="role-header">
-          <div class="role-header-left">
-            <span class="role-num">5.1</span>
-            <div>
-              <div class="role-name">CEO</div>
-              <div style="font-size:11px;color:var(--muted);">Luis Holder</div>
+      <div class="disclose-groups">
+        <!-- Grupo Nivel 1 -->
+        <div class="disclose-group">
+          <div class="disclose-group-title">Nivel 1 — Dirección estratégica</div>
+          <!-- CEO -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">CEO</span>
+                <div class="disclose-meta">Luis Holder</div>
+              </div>
+              <span class="tag tag--red">Nivel 1</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Crear valor estratégico, sostener autoridad con decisores y proteger el modelo como sistema.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Trade-offs y renuncias estratégicas por cuenta</li>
+                    <li>Aprobación final de propuesta económica (con Administración)</li>
+                    <li>Intervenciones de cierre en cuentas críticas</li>
+                    <li>Decisiones de priorización macro del portafolio de cuentas</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Entrada/salida de apuestas estratégicas</li>
+                    <li>Excepciones al método (solo si es inevitable y con Operaciones)</li>
+                    <li>Descuentos excepcionales</li>
+                    <li>Escalamiento de riesgos reputacionales</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Operaciones, Estrategia, Administración y clientes decisores según cuenta</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Revisión pipeline semanal</li>
+                    <li>Gobernanza económica semanal</li>
+                    <li>Comité estratégico con cliente mensual / trimestral</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>% de cierres en cuentas estratégicas</li>
+                    <li>Margen global</li>
+                    <li>Crecimiento neto (fee + no-fee)</li>
+                    <li>Tasa de renovación</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="role-detail-limit">✕ No gestiona el día a día de cuentas · no corrige piezas · no promete entregables sin marco</div>
             </div>
           </div>
-          <div class="role-toggle">›</div>
+          <!-- Dirección de Estrategia -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Dirección de Estrategia</span>
+                <div class="disclose-meta">Rodrigo De Las Casas Francia</div>
+              </div>
+              <span class="tag tag--red">Nivel 1</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Traducir negocio a arquitectura estratégica defendible: foco, criterios, prioridades y roadmap.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Roadmap anual y por trimestres</li>
+                    <li>Marco estratégico (problema real, tensiones, KPIs)</li>
+                    <li>Brief estratégico a creativo, growth y digital</li>
+                    <li>Guías de decisión para campañas, funnels y activos</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Problema prioritario</li>
+                    <li>Criterios BECD</li>
+                    <li>Tipología de campaña y foco por segmento</li>
+                    <li>Aprobación final de plataforma creativa (con Dir. Creativa)</li>
+                    <li>Priorización del enfoque growth digital (con su mano derecha)</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>CEO, Operaciones, Planner Jr, Dir. Creativa, Líder Digital &amp; Growth, Dir. Digital</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Comité estrategia semanal</li>
+                    <li>Retro de valor mensual</li>
+                    <li>Comité cliente mensual / trimestral</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Calidad de claridad estratégica</li>
+                    <li>Roadmaps aprobados sin fricción</li>
+                    <li>Número de decisiones habilitadas</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="role-detail-limit">✕ No administra ClickUp · no hace seguimiento operativo diario · no produce piezas</div>
+            </div>
+          </div>
+          <!-- Planner Estratégico Jr -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Planner Estratégico Jr</span>
+                <div class="disclose-meta">Sebastián Talavera</div>
+              </div>
+              <span class="tag tag--red">Nivel 1</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Generar evidencia (insights, research, data) para mejorar decisiones y retroalimentar el modelo. Rol junior con foco en aprendizaje y soporte a Estrategia.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Informes de investigación y conclusiones accionables</li>
+                    <li>Mapa competitivo y narrativo</li>
+                    <li>Dashboard interpretado</li>
+                    <li>Documento trimestral de aprendizajes</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Metodología de investigación</li>
+                    <li>Hipótesis a validar (con Estrategia)</li>
+                    <li>Recomendaciones basadas en data</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Dir. de Estrategia, Operaciones, Growth, Digital, Creativo</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Lectura previa por oportunidad</li>
+                    <li>Retro de valor mensual</li>
+                    <li>Reporte trimestral por cuenta</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Tiempo de respuesta de insights</li>
+                    <li>Uso efectivo de aprendizajes en decisiones</li>
+                    <li>Calidad de evidencia para comité</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Líder Estrategia Digital y Growth -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Líder de Estrategia Digital y Growth</span>
+                <div class="disclose-meta">Andrea Córdoba Torres</div>
+              </div>
+              <span class="tag tag--red">Nivel 1</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Mano derecha del Director de Estrategia. Traduce pensamiento estratégico en ecosistemas digitales, funnels de conversión, trazabilidad de KPIs y optimización continua del crecimiento.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Arquitectura de funnel y conversión por cuenta/proyecto</li>
+                    <li>Sistema de KPIs digitales y trazabilidad</li>
+                    <li>Planes de nurturing, performance y optimización</li>
+                    <li>Recomendaciones de IA aplicada a productividad y crecimiento</li>
+                    <li>Lineamientos digitales para CMs y ecosistema de contenidos</li>
+                    <li>Reportes interpretados con lectura de negocio</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Priorización de activos digitales dentro del marco estratégico</li>
+                    <li>Criterios de growth, automatización y eficiencia</li>
+                    <li>Herramientas y usos de IA para productividad digital</li>
+                    <li>Ajustes tácticos del ecosistema digital dentro del marco de Estrategia</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Dir. de Estrategia, Operaciones, Dir. Creativa, Dir. Digital, Community Managers, Clientes cuando el frente digital sea clave</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Comité semanal de growth y digital</li>
+                    <li>Revisión semanal de funnels, KPIs y performance</li>
+                    <li>Reporte mensual interpretado por cuenta si aplica</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Conversión del funnel</li>
+                    <li>Calidad del lead / tráfico / intención</li>
+                    <li>Trazabilidad completa de activos digitales</li>
+                    <li>Uso efectivo de IA</li>
+                    <li>Integración ecosistema digital con la estrategia</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="role-detail-limit">✕ No inventa estrategia por fuera del Director de Estrategia · no produce creatividad sin plataforma · no se limita a publicar o reportar métricas aisladas</div>
+            </div>
+          </div>
         </div>
-        <div class="role-body">
-          <div class="role-mandate">Crear valor estratégico, sostener autoridad con decisores y proteger el modelo como sistema.</div>
-          <div class="role-section-title">Entregables</div>
-          <ul class="role-list">
-            <li>Trade-offs y renuncias estratégicas por cuenta</li>
-            <li>Aprobación final de propuesta económica</li>
-            <li>Intervenciones de cierre en cuentas críticas</li>
-            <li>Decisiones de priorización macro del portafolio</li>
-          </ul>
-          <div class="role-section-title">Decide</div>
-          <ul class="role-list">
-            <li>Entrada/salida de apuestas estratégicas</li>
-            <li>Excepciones al método · descuentos excepcionales</li>
-            <li>Escalamiento de riesgos reputacionales</li>
-          </ul>
-          <div class="role-section-title">Cadencia mínima</div>
-          <ul class="role-list">
-            <li>Revisión pipeline semanal</li>
-            <li>Gobernanza económica semanal</li>
-            <li>Comité con cliente mensual/trimestral</li>
-          </ul>
-          <div class="role-limit">✕ No gestiona el día a día de cuentas · no corrige piezas · no promete entregables sin marco</div>
+
+        <!-- Grupo Nivel 2 -->
+        <div class="disclose-group">
+          <div class="disclose-group-title">Nivel 2 — Operaciones &amp; Pipeline</div>
+          <!-- Dirección de Operaciones -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Dirección de Operaciones Consultivas &amp; Pipeline</span>
+                <div class="disclose-meta">JC Guzmán</div>
+              </div>
+              <span class="tag tag--orange">Nivel 2</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Custodiar el modelo, sostener la relación estratégica en fee, gobernar pipeline, proteger alcance y evitar deriva táctica.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Pipeline único actualizado</li>
+                    <li>Actas consultivas (SLA 24h)</li>
+                    <li>Gobernanza de licitaciones</li>
+                    <li>Change Control formal</li>
+                    <li>Plan de renovación desde mes 3</li>
+                    <li>Alertas de sobreentrega y control de carga</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>GO/NO GO con consulta</li>
+                    <li>Priorización semanal de carga</li>
+                    <li>Detener trabajo sin contrato</li>
+                    <li>Escalar riesgos a CEO</li>
+                    <li>Aprobar cambios operativos dentro del marco</li>
+                    <li>Decidir apoyo de Dir. Creativo a Estrategia (con CEO)</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>CEO, Estrategia, Administración, Supervisorx de Cuentas, Ejecutivxs, Dir. Digital, Growth</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Status diario</li>
+                    <li>Pipeline semanal</li>
+                    <li>Gobernanza económica semanal</li>
+                    <li>Comité cliente mensual</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>% sobreentrega (objetivo: 0)</li>
+                    <li>Tasa de renovación</li>
+                    <li>Salud del pipeline</li>
+                    <li>Satisfacción del decisor</li>
+                    <li>Cumplimiento de tiempos programados de entregables</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="role-detail-limit">✕ No redefine estrategia · no diseña creatividad · no se vuelve administrativa sin decisiones</div>
+            </div>
+          </div>
+          <!-- Supervisorx de Cuentas -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Supervisorx de Cuentas</span>
+                <div class="disclose-meta">Mercedes Lau — Cuentas complejas + licitaciones</div>
+              </div>
+              <span class="tag tag--orange">Nivel 2</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Supervisar la operación y gobernanza de cuentas complejas, asegurando que estrategia, roadmap y entregables se ejecuten con orden. Apoya también en licitaciones complejas.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Prioridades semanales de cuenta</li>
+                    <li>Supervisión de agendas, minutas y riesgos</li>
+                    <li>Control de cumplimiento del roadmap trimestral</li>
+                    <li>Escalamiento temprano de bloqueos y cambios de alcance</li>
+                    <li>Apoyo en armado y seguimiento de licitaciones</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Orden de seguimiento dentro del marco de Operaciones</li>
+                    <li>Escalamiento de riesgos y necesidades de comité</li>
+                    <li>Solicitud de Change Control cuando la cuenta se desvía</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Dir. de Operaciones, Estrategia, Ejecutivxs Senior, Ejecutivxs de Cuenta, Cliente operativo</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Revisión diaria de cuentas complejas</li>
+                    <li>Comité interno semanal</li>
+                    <li>Comité cliente según calendario</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Cumplimiento de hitos</li>
+                    <li>Orden y documentación</li>
+                    <li>Riesgos detectados antes de crisis</li>
+                    <li>Satisfacción del cliente en cuentas complejas</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="role-detail-limit">✕ No redefine estrategia · no negocia descuentos · no promete cambios sin validación</div>
+            </div>
+          </div>
+          <!-- Ejecutivx Senior / Ejecutivx de Cuenta -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Ejecutivx Senior / Ejecutivx de Cuenta</span>
+                <div class="disclose-meta">Isabel Saco Vértiz</div>
+              </div>
+              <span class="tag tag--orange">Nivel 2</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Gestionar el día a día de la cuenta bajo gobernanza, control de tiempos y escalamiento correcto.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Plan semanal de entregables</li>
+                    <li>Minutas y agenda de comités</li>
+                    <li>Registro ClickUp completo</li>
+                    <li>Riesgos y dependencias</li>
+                    <li>Solicitud de Change Control cuando aplica</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Orden de ejecución dentro del plan</li>
+                    <li>Escalar tensiones estratégicas</li>
+                    <li>Bloquear pedidos fuera de alcance iniciando Change Control</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Operaciones / Supervisorx, Creativo / Ejecución, Digital / Growth, Cliente operativo</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Seguimiento diario</li>
+                    <li>Comité semanal de cuenta</li>
+                    <li>Reporte de avance</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Cumplimiento de hitos</li>
+                    <li>Cero reprocesos por falta de claridad</li>
+                    <li>Tiempo de respuesta</li>
+                    <li>Orden y documentación</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Consultorx Comercial Consultivx (rol inactivo) -->
+          <div class="disclose-item disclose-item--muted" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Consultorx Comercial Consultivx</span>
+                <div class="disclose-meta">Pipeline y cierres</div>
+              </div>
+              <span class="tag tag--gray">Nivel 2</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Acelerar cierres sin degradar el modelo: vender gobernanza y decisiones, no producción.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Mapa de oportunidades</li>
+                    <li>Secuencia de contacto consultivo</li>
+                    <li>Acta de primera reunión (con Operaciones)</li>
+                    <li>Cierre con propuesta consultiva</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Priorización de oportunidades (con Operaciones)</li>
+                    <li>Estrategia de negociación (con CEO)</li>
+                    <li>Siguiente hito por prospecto</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Operaciones, CEO, Estrategia</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Revisión pipeline semanal</li>
+                    <li>Seguimiento de prospectos activos</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Tasa de conversión a reuniones</li>
+                    <li>Tasa de cierre</li>
+                    <li>Calidad del cliente (fit consultivo)</li>
+                    <li>No comprometer margen</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grupo Nivel 3 — Creativo -->
+        <div class="disclose-group">
+          <div class="disclose-group-title">Nivel 3 — Conversión / Sistemas ejecutables</div>
+          <!-- Dirección Creativa -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Dirección Creativa (Director Creativo)</span>
+                <div class="disclose-meta">Daniel de la Flor — Dupla con Dir. de Arte</div>
+              </div>
+              <span class="tag tag--accent">Nivel 3</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Convertir estrategia en plataforma creativa y narrativa escalable defendible en comité. Forma dupla con Director de Arte, cada uno con rol independiente.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Territorio creativo</li>
+                    <li>Plataforma creativa</li>
+                    <li>Concepto madre</li>
+                    <li>Guía de mensajes</li>
+                    <li>Criterios de campaña por tipología</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Aprobación conceptual de territorios</li>
+                    <li>Qué se comunica / qué NO</li>
+                    <li>Jerarquía de mensajes</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Estrategia, Dir. de Arte, Redactor Creativo Senior, Operaciones, Cliente (presentación)</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Comité creativo semanal</li>
+                    <li>Revisión de plataformas</li>
+                    <li>Comité con cliente cuando aplique</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Defendibilidad en comité</li>
+                    <li>Reutilización del sistema</li>
+                    <li>Coherencia anual</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="role-detail-limit">✕ No inventa estrategia · no baja a adaptación masiva sin sistema · no acepta briefs sin marco</div>
+            </div>
+          </div>
+          <!-- Redactor Creativo Senior -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Redactor Creativo Senior</span>
+                <div class="disclose-meta">Diego Cifuentes</div>
+              </div>
+              <span class="tag tag--accent">Nivel 3</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Mano derecha del Director Creativo. Convierte la plataforma creativa en campañas, narrativas y piezas conceptuales ejecutables sin perder el marco estratégico.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Bajada narrativa de campañas</li>
+                    <li>Desarrollo de conceptos de ejecución</li>
+                    <li>Arquitectura de mensajes para campañas y piezas</li>
+                    <li>Guiones y copies estructurales</li>
+                    <li>Supervisión narrativa de redactores del equipo</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Cómo aterrizar la plataforma creativa en campañas</li>
+                    <li>Jerarquía de mensajes dentro del marco de Dir. Creativa</li>
+                    <li>Ajustes narrativos para mantener coherencia</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Dir. Creativa, Estrategia, Dir. de Arte, Diseñador Senior, Operaciones</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Comité creativo semanal</li>
+                    <li>Revisión de campañas en curso</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Coherencia con plataforma creativa</li>
+                    <li>Claridad conceptual</li>
+                    <li>Velocidad sin degradación</li>
+                    <li>Cero retrabajos por confusión narrativa</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="role-detail-limit">✕ No redefine la estrategia · no reemplaza al Director Creativo · no trabaja campañas sin plataforma validada</div>
+            </div>
+          </div>
+          <!-- Dirección de Arte -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Dirección de Arte</span>
+                <div class="disclose-meta">Carlos Díaz — Dupla con Dir. Creativo</div>
+              </div>
+              <span class="tag tag--accent">Nivel 3</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Construir sistema visual robusto, coherente y escalable para todo el ecosistema. Forma dupla con Director Creativo, cada uno con rol independiente.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Sistema visual</li>
+                    <li>Guía visual</li>
+                    <li>Plantillas base</li>
+                    <li>Reglas de consistencia</li>
+                    <li>Key visuals</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Criterios de diseño y consistencia</li>
+                    <li>Aprobación de línea visual</li>
+                    <li>Estándares de calidad</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Dir. Creativa, Diseñador Senior, Diseño, Digital, Operaciones</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Comité creativo semanal</li>
+                    <li>Revisión de sistema visual</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Consistencia multi-touchpoint</li>
+                    <li>Velocidad sin degradación</li>
+                    <li>Cero retrabajos por inconsistencia</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Diseñador Senior -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Diseñador Senior</span>
+                <div class="disclose-meta">Ritt Guevara</div>
+              </div>
+              <span class="tag tag--accent">Nivel 3</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Mano derecha del Director de Arte y ejecutor senior de campañas, adaptaciones y piezas dentro del sistema visual aprobado.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Desarrollo visual de campañas</li>
+                    <li>Adaptaciones de key visual</li>
+                    <li>Piezas críticas de alto estándar</li>
+                    <li>Supervisión visual de diseñadores</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Aplicación visual correcta del sistema en campañas</li>
+                    <li>Recomendaciones de consistencia y ajuste visual</li>
+                    <li>Soluciones visuales dentro del marco aprobado por Dir. de Arte</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Dir. de Arte, Dir. Creativa, Redactor Creativo Senior, Operaciones, Digital si aplica</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Comité creativo semanal</li>
+                    <li>Revisión de piezas</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Consistencia del sistema visual</li>
+                    <li>Calidad de ejecución</li>
+                    <li>Tiempo de producción</li>
+                    <li>Cero retrabajos por mala aplicación</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="role-detail-limit">✕ No redefine el sistema visual · no decide narrativa · no diseña fuera de guía</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grupo Digital -->
+        <div class="disclose-group">
+          <div class="disclose-group-title">Nivel 3 — Sistemas ejecutables</div>
+          <!-- Dirección de Sistemas Ejecutables -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Dirección de Sistemas Ejecutables</span>
+                <div class="disclose-meta">Crhistiam Omar Cuba García</div>
+              </div>
+              <span class="tag tag--accent">Nivel 3</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Diseñar y gestionar sistemas digitales (web, plataformas, innovación) como activos estratégicos.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Backlog y plan de proyecto</li>
+                    <li>Arquitectura UX</li>
+                    <li>Requerimientos funcionales</li>
+                    <li>Plan de despliegue</li>
+                    <li>Documentación de mantenimiento</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Priorización técnica (con Operaciones / Estrategia)</li>
+                    <li>Criterios de aceptación</li>
+                    <li>Arquitectura tecnológica (con dev)</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Operaciones, Estrategia, Growth, Administración, PMs, UX, Dev</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Comité digital semanal</li>
+                    <li>Revisión de backlog</li>
+                    <li>Seguimiento de despliegues</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Cumplimiento de hitos</li>
+                    <li>Calidad (bugs / QA)</li>
+                    <li>Impacto en KPI digital</li>
+                    <li>Satisfacción del usuario</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Community Managers -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Community Managers</span>
+                <div class="disclose-meta">Camila Guillén · Katia Quispe</div>
+              </div>
+              <span class="tag tag--accent">Nivel 3</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Ejecutar con excelencia operativa los contenidos, interacciones y publicaciones definidas dentro del sistema digital y de growth.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Publicación y calendarización</li>
+                    <li>Gestión de comunidad</li>
+                    <li>Reporte de incidencias y hallazgos</li>
+                    <li>Soporte en medición operativa</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Ejecución dentro del calendario aprobado</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>Líder de Estrategia Digital y Growth, Operaciones, Cliente operativo cuando aplique</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Seguimiento diario</li>
+                    <li>Reporte semanal de comunidad</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Cumplimiento de calendario</li>
+                    <li>Calidad de interacción</li>
+                    <li>Incidencias reportadas a tiempo</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="role-detail-limit">✕ No redefine mensajes · no modifica piezas · no cambia lineamientos por criterio propio</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grupo Control -->
+        <div class="disclose-group">
+          <div class="disclose-group-title">Control &amp; Administración</div>
+          <!-- Jefe de Administración -->
+          <div class="disclose-item" data-role>
+            <button type="button" class="disclose-head" aria-expanded="false">
+              <div>
+                <span class="disclose-title">Jefe de Administración (Control Económico)</span>
+                <div class="disclose-meta">Karen Villanueva</div>
+              </div>
+              <span class="tag tag--green">Nivel 5</span>
+              <span class="disclose-icon">›</span>
+            </button>
+            <div class="disclose-body">
+              <div class="role-detail-mandate">Blindar margen y sostenibilidad: costear, validar y controlar rentabilidad por cuenta / proyecto.</div>
+              <div class="role-detail-grid">
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Entregables oficiales</div>
+                  <ul class="role-detail-list">
+                    <li>Cotizadores por perfil y proyecto</li>
+                    <li>Aprobación económica (con CEO)</li>
+                    <li>Reporte de rentabilidad por cuenta</li>
+                    <li>Alertas de desviación</li>
+                    <li>Modelo de costos actualizado</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Decide</div>
+                  <ul class="role-detail-list">
+                    <li>Viabilidad económica</li>
+                    <li>Margen mínimo objetivo</li>
+                    <li>Ajustes de precio / alcance (con CEO)</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Interfaces obligatorias</div>
+                  <ul class="role-detail-list">
+                    <li>CEO, Operaciones, Estrategia, Ejecutivxs</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">Cadencia mínima</div>
+                  <ul class="role-detail-list">
+                    <li>Gobernanza económica semanal</li>
+                    <li>Revisión de cotizadores</li>
+                    <li>Reporte mensual de rentabilidad</li>
+                  </ul>
+                </div>
+                <div class="role-detail-block">
+                  <div class="role-detail-block-title">KPIs mínimos</div>
+                  <ul class="role-detail-list">
+                    <li>Margen real vs estimado</li>
+                    <li>Desviación por sobreentrega</li>
+                    <li>Tiempo de aprobación de cotizadores</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Dir Estrategia -->
-      <div class="role-card" onclick="toggleRole(this)">
-        <div class="role-header">
-          <div class="role-header-left">
-            <span class="role-num">5.2</span>
-            <div>
-              <div class="role-name">Dirección de Estrategia</div>
-              <div style="font-size:11px;color:var(--muted);">Nivel 1 — Creación de valor</div>
-            </div>
-          </div>
-          <div class="role-toggle">›</div>
-        </div>
-        <div class="role-body">
-          <div class="role-mandate">Traducir negocio a arquitectura estratégica defendible: foco, criterios, prioridades y roadmap.</div>
-          <div class="role-section-title">Entregables</div>
-          <ul class="role-list">
-            <li>Roadmap anual y trimestral</li>
-            <li>Marco estratégico (problema real, tensiones, KPIs)</li>
-            <li>Brief estratégico a creativo, growth y digital</li>
-            <li>Guías de decisión para campañas, funnels y activos</li>
-          </ul>
-          <div class="role-section-title">Decide</div>
-          <ul class="role-list">
-            <li>Problema prioritario · criterios BECD</li>
-            <li>Tipología de campaña</li>
-            <li>Aprobación de plataforma creativa</li>
-            <li>Priorización del enfoque growth digital</li>
-          </ul>
-          <div class="role-limit">✕ No administra ClickUp · no hace seguimiento operativo diario · no produce piezas</div>
-        </div>
-      </div>
-
-      <!-- Dir Operaciones -->
-      <div class="role-card" onclick="toggleRole(this)">
-        <div class="role-header">
-          <div class="role-header-left">
-            <span class="role-num">5.5</span>
-            <div>
-              <div class="role-name">Dirección de Operaciones Consultivas & Pipeline</div>
-              <div style="font-size:11px;color:var(--red);font-weight:600;">★ Nuevo rol · Nivel 2 — JC Guzmán</div>
-            </div>
-          </div>
-          <div class="role-toggle">›</div>
-        </div>
-        <div class="role-body">
-          <div class="role-mandate">Custodiar el modelo, sostener la relación estratégica en fee, gobernar pipeline, proteger alcance y evitar deriva táctica.</div>
-          <div class="role-section-title">Entregables</div>
-          <ul class="role-list">
-            <li>Pipeline único actualizado (semanal)</li>
-            <li>Actas consultivas (SLA 24h)</li>
-            <li>Gobernanza de licitaciones</li>
-            <li>Change Control formal ante desviaciones de alcance</li>
-            <li>Plan de renovación desde el mes 3</li>
-            <li>Alertas de sobreentrega y control de carga</li>
-          </ul>
-          <div class="role-section-title">Decide</div>
-          <ul class="role-list">
-            <li>GO/NO GO de prospectos (con CEO, Estrategia, Admin)</li>
-            <li>Priorización semanal de carga del equipo</li>
-            <li>Detener trabajo sin contrato o SOW vigente</li>
-            <li>Escalar riesgos a CEO cuando superan autoridad operativa</li>
-          </ul>
-          <div class="role-section-title">KPIs</div>
-          <ul class="role-list">
-            <li>% sobreentrega → objetivo: 0%</li>
-            <li>Tasa de renovación → objetivo: &gt;80%</li>
-            <li>Salud del pipeline · satisfacción del decisor</li>
-            <li>Cumplimiento de tiempos → objetivo: 100%</li>
-          </ul>
-          <div class="role-limit">✕ No redefine estrategia · no diseña creatividad · no se vuelve administrativa sin criterio</div>
-        </div>
-      </div>
-
-      <!-- Supervisora -->
-      <div class="role-card" onclick="toggleRole(this)">
-        <div class="role-header">
-          <div class="role-header-left">
-            <span class="role-num">5.6</span>
-            <div>
-              <div class="role-name">Supervisora de Cuentas</div>
-              <div style="font-size:11px;color:var(--muted);">Cuentas complejas + licitaciones</div>
-            </div>
-          </div>
-          <div class="role-toggle">›</div>
-        </div>
-        <div class="role-body">
-          <div class="role-mandate">Supervisar la operación y gobernanza de cuentas complejas. Apoyo en licitaciones.</div>
-          <ul class="role-list">
-            <li>Prioridades semanales de cuenta</li>
-            <li>Supervisión de agendas, minutas y riesgos</li>
-            <li>Control de cumplimiento del roadmap trimestral</li>
-            <li>Escalamiento temprano de bloqueos y cambios de alcance</li>
-          </ul>
-          <div class="role-limit">✕ No redefine estrategia · no negocia descuentos · no promete cambios sin validación</div>
-        </div>
-      </div>
-
-      <!-- Dir Creativa -->
-      <div class="role-card" onclick="toggleRole(this)">
-        <div class="role-header">
-          <div class="role-header-left">
-            <span class="role-num">5.9</span>
-            <div>
-              <div class="role-name">Dirección Creativa — Director Creativo</div>
-              <div style="font-size:11px;color:var(--muted);">Nivel 3 — Conversión estratégica</div>
-            </div>
-          </div>
-          <div class="role-toggle">›</div>
-        </div>
-        <div class="role-body">
-          <div class="role-mandate">Convertir estrategia en plataforma creativa y narrativa escalable defendible en comité.</div>
-          <ul class="role-list">
-            <li>Territorio creativo · plataforma creativa · concepto madre</li>
-            <li>Guía de mensajes · criterios de campaña por tipología</li>
-          </ul>
-          <div class="role-section-title">KPIs</div>
-          <ul class="role-list">
-            <li>Defendibilidad en comité</li>
-            <li>Reutilización del sistema · coherencia anual</li>
-          </ul>
-          <div class="role-limit">✕ No inventa estrategia · no acepta briefs sin marco · no baja a adaptación sin sistema</div>
-        </div>
-      </div>
-
-      <!-- Admin -->
-      <div class="role-card" onclick="toggleRole(this)">
-        <div class="role-header">
-          <div class="role-header-left">
-            <span class="role-num">5.15</span>
-            <div>
-              <div class="role-name">Jefe de Administración — Control Económico</div>
-              <div style="font-size:11px;color:var(--muted);">Sostenibilidad y margen</div>
-            </div>
-          </div>
-          <div class="role-toggle">›</div>
-        </div>
-        <div class="role-body">
-          <div class="role-mandate">Blindar margen y sostenibilidad: costear, validar y controlar rentabilidad por cuenta/proyecto.</div>
-          <ul class="role-list">
-            <li>Cotizadores por perfil y proyecto</li>
-            <li>Aprobación económica (con CEO)</li>
-            <li>Reporte de rentabilidad por cuenta</li>
-            <li>Alertas de desviación · modelo de costos actualizado</li>
-          </ul>
-        </div>
+      <div class="anchor-quote" style="margin-top:24px;">
+        <p>"No todo vale."</p>
+        <span>Cada rol tiene límites explícitos. Respetarlos es parte del sistema — no una limitación.</span>
       </div>
     </section>
+
 
     <!-- S6: MATRIZ DE AUTORIDAD -->
     <section class="section" id="s6">
@@ -845,15 +1864,26 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
         <h2>Matriz de autoridad — quién decide qué</h2>
       </div>
       <div class="section-divider"></div>
-      <p style="margin-bottom:14px;">Si una decisión no está en esta tabla, se escala a CEO + Operaciones.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+      <p style="margin-bottom:14px;">Si una decisión no está en esta tabla, se escala a CEO + Operaciones. <strong>La ambigüedad no es excusa para no escalar.</strong></p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;font-size:13px;">
         <span><span class="td-A">A</span> = Accountable (rinde cuentas)</span>
         <span><span class="td-R">R</span> = Responsible (ejecuta)</span>
         <span style="color:#7a5000;">C = Consulted</span>
         <span style="color:var(--muted);">I = Informed</span>
       </div>
-      <div class="table-wrap">
-        <table>
+      <div class="matriz-filter-bar">
+        <span class="matriz-filter-label">Ver decisiones relevantes para:</span>
+        <div class="matriz-filter-btns">
+          <button type="button" class="matriz-filter-btn active" data-role="all">Todos</button>
+          <button type="button" class="matriz-filter-btn" data-role="ceo">CEO</button>
+          <button type="button" class="matriz-filter-btn" data-role="operaciones">Operaciones</button>
+          <button type="button" class="matriz-filter-btn" data-role="estrategia">Estrategia</button>
+          <button type="button" class="matriz-filter-btn" data-role="admin">Admin</button>
+          <button type="button" class="matriz-filter-btn" data-role="creativo">Creativo / Arte</button>
+        </div>
+      </div>
+      <div class="table-wrap" id="matriz-table-wrap">
+        <table id="matriz-autoridad">
           <thead>
             <tr>
               <th>Decisión</th>
@@ -863,139 +1893,117 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
             </tr>
           </thead>
           <tbody>
-            <tr><td>GO/NO GO de prospecto</td><td class="td-A">Operaciones</td><td class="td-R">Operaciones</td><td class="td-C">CEO, Estrategia, Admin</td></tr>
-            <tr><td>Marco estratégico / Roadmap</td><td class="td-A">Dir. Estrategia</td><td class="td-R">Estrategia</td><td class="td-C">CEO, Operaciones</td></tr>
-            <tr><td>Cambios de alcance (Change Control)</td><td class="td-A">Operaciones</td><td class="td-R">Supervisora/Ejecutiva</td><td class="td-C">Estrategia, Admin</td></tr>
-            <tr><td>Aprobación económica de propuesta</td><td class="td-A">CEO + Admin</td><td class="td-R">Administración</td><td class="td-C">Operaciones, Estrategia</td></tr>
-            <tr><td>Descuentos / margen excepcional</td><td class="td-A">CEO</td><td class="td-R">Administración</td><td class="td-C">Operaciones</td></tr>
-            <tr><td>Selección tipología de campaña</td><td class="td-A">Estrategia</td><td class="td-R">Operaciones</td><td class="td-C">Creativo, Arte</td></tr>
-            <tr><td>Aprobación plataforma creativa</td><td class="td-A">Estrategia</td><td class="td-R">Dir. Creativa</td><td class="td-C">CEO (si crítica)</td></tr>
-            <tr><td>Aprobación sistema visual</td><td class="td-A">Dir. Creativa</td><td class="td-R">Dir. de Arte</td><td class="td-C">Estrategia</td></tr>
-            <tr><td>Prioridad semanal cuenta fee</td><td class="td-A">Operaciones</td><td class="td-R">Supervisora/Ejecutiva</td><td class="td-C">Estrategia</td></tr>
-            <tr><td>Apoyo Dir. Creativo a Estrategia</td><td class="td-A">Dir. Ops + CEO</td><td class="td-R">Dir. Creativo</td><td class="td-C">Dir. Estrategia</td></tr>
+            <tr data-row><td>GO/NO GO de prospecto</td><td class="td-A" data-roles="operaciones">Operaciones</td><td class="td-R" data-roles="operaciones">Operaciones</td><td class="td-C" data-roles="ceo estrategia admin">CEO, Estrategia, Admin</td></tr>
+            <tr data-row><td>Marco estratégico / Roadmap</td><td class="td-A" data-roles="estrategia">Dir. Estrategia</td><td class="td-R" data-roles="estrategia">Estrategia</td><td class="td-C" data-roles="ceo operaciones">CEO, Operaciones</td></tr>
+            <tr data-row><td>Cambios de alcance (Change Control)</td><td class="td-A" data-roles="operaciones">Operaciones</td><td class="td-R" data-roles="operaciones">Supervisorx/Ejecutivx</td><td class="td-C" data-roles="estrategia admin">Estrategia, Admin</td></tr>
+            <tr data-row><td>Aprobación económica de propuesta</td><td class="td-A" data-roles="ceo admin">CEO + Admin</td><td class="td-R" data-roles="admin">Administración</td><td class="td-C" data-roles="operaciones estrategia">Operaciones, Estrategia</td></tr>
+            <tr data-row><td>Descuentos / margen excepcional</td><td class="td-A" data-roles="ceo">CEO</td><td class="td-R" data-roles="admin">Administración</td><td class="td-C" data-roles="operaciones">Operaciones</td></tr>
+            <tr data-row><td>Selección tipología de campaña</td><td class="td-A" data-roles="estrategia">Estrategia</td><td class="td-R" data-roles="operaciones">Operaciones</td><td class="td-C" data-roles="creativo">Creativo, Arte</td></tr>
+            <tr data-row><td>Aprobación plataforma creativa</td><td class="td-A" data-roles="estrategia">Estrategia</td><td class="td-R" data-roles="creativo">Dir. Creativa</td><td class="td-C" data-roles="ceo">CEO (si crítica)</td></tr>
+            <tr data-row><td>Aprobación sistema visual</td><td class="td-A" data-roles="creativo">Dir. Creativa</td><td class="td-R" data-roles="creativo">Dir. de Arte</td><td class="td-C" data-roles="estrategia">Estrategia</td></tr>
+            <tr data-row><td>Prioridad semanal cuenta fee</td><td class="td-A" data-roles="operaciones">Operaciones</td><td class="td-R" data-roles="operaciones">Supervisorx/Ejecutivx</td><td class="td-C" data-roles="estrategia">Estrategia</td></tr>
+            <tr data-row><td>Detener trabajo sin SOW / contrato</td><td class="td-A" data-roles="operaciones">Operaciones</td><td class="td-R" data-roles="operaciones">Operaciones</td><td class="td-C" data-roles="ceo">CEO</td></tr>
           </tbody>
         </table>
       </div>
+      <div class="anchor-quote">
+        <p>"Esto no es opcional."</p>
+        <span>La matriz es el sistema de decisiones. No es sugerida — es operativa.</span>
+      </div>
     </section>
 
-    <!-- S7: ENTREGABLES -->
+    <!-- S7: PADRÓN DE ENTREGABLES -->
     <section class="section" id="s7">
       <div class="section-header">
         <div class="section-num">7</div>
-        <h2>Mapa de entregables con tiempos</h2>
+        <h2>Padrón de Entregables con Tiempos de Producción y Presentación</h2>
       </div>
       <div class="section-divider"></div>
 
-      <div class="card card--left" style="margin-bottom:16px;">
-        <p style="margin:0;font-size:13px;"><strong>Principio rector:</strong> La confianza estratégica se enfría si el cliente no percibe avance intelectual. El Director de Operaciones vigila tiempos y genera alertas antes de que un retraso se convierta en riesgo.</p>
+      <h3>6.1 Principio rector</h3>
+      <div class="card card--left anim-on-scroll">
+        <p style="margin:0;font-size:14px;line-height:1.6;">La confianza estratégica se enfría si el cliente no percibe avance intelectual. Cada entregable tiene definido: <strong>tiempo promedio de producción</strong>, <strong>tiempo máximo aceptable</strong>, momento ideal de entrega y riesgos asociados a retrasos.</p>
+        <p style="margin:12px 0 0;font-size:13px;color:var(--muted);">La calidad de los entregables y el cumplimiento de tiempos son vigilados por el Director de Operaciones Consultivas, anticipándose a los problemas y generando alertas oportunamente para decidir y minimizar riesgos.</p>
       </div>
 
-      <h3>Entregables estratégicos y creativos</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Entregable</th><th>Responsable</th><th>T. Promedio</th><th>T. Máximo</th></tr></thead>
+      <h3>6.2 Tabla de entregables con tiempos</h3>
+      <div class="table-filter-bar">
+        <span class="table-filter-label">Ver entregables relevantes para:</span>
+        <div class="table-filter-btns">
+          <button type="button" class="table-filter-btn active" data-table="entregables" data-role="all">Todos</button>
+          <button type="button" class="table-filter-btn" data-table="entregables" data-role="estrategia">Estrategia</button>
+          <button type="button" class="table-filter-btn" data-table="entregables" data-role="creativo">Creativo</button>
+          <button type="button" class="table-filter-btn" data-table="entregables" data-role="arte">Arte</button>
+        </div>
+      </div>
+      <div class="table-wrap anim-on-scroll anim-delay-1">
+        <table class="table-filterable" id="tabla-entregables">
+          <thead>
+            <tr>
+              <th>Entregable</th>
+              <th>Responsable</th>
+              <th>Objetivo</th>
+              <th>T. Promedio</th>
+              <th>T. Máximo</th>
+              <th>Riesgo si demora</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Acta estratégica post reunión</td><td>Dir. Estrategia</td><td><span class="badge-ok">24 h</span></td><td><span class="badge-warn">48 h</span></td></tr>
-            <tr><td>Doc estratégico de negocio</td><td>Dir. Estrategia</td><td><span class="badge-ok">3 días</span></td><td><span class="badge-warn">5 días</span></td></tr>
-            <tr><td>Doc estratégico marketing</td><td>Estrategia + Creativo</td><td><span class="badge-ok">3–4 días</span></td><td><span class="badge-warn">7 días</span></td></tr>
-            <tr><td>Roadmap estratégico anual</td><td>Dir. Estrategia</td><td><span class="badge-warn">10–15 días</span></td><td><span class="badge-max">20 días</span></td></tr>
-            <tr><td>Plataforma creativa</td><td>Dir. Creativo</td><td><span class="badge-warn">5–7 días</span></td><td><span class="badge-max">10 días</span></td></tr>
-            <tr><td>Sistema visual</td><td>Dir. de Arte</td><td><span class="badge-warn">5–7 días</span></td><td><span class="badge-max">10 días</span></td></tr>
-            <tr><td>Campaña lanzamiento</td><td>Creativo + Arte</td><td><span class="badge-warn">7–10 días</span></td><td><span class="badge-max">15 días</span></td></tr>
+            <tr data-row><td>Acta estratégica post reunión</td><td data-roles="estrategia">Dir. Estrategia</td><td>Demostrar comprensión</td><td><span class="badge-ok">24 h</span></td><td><span class="badge-warn">48 h</span></td><td>Prospecto pierde momentum</td></tr>
+            <tr data-row><td>Doc estratégico de negocio</td><td data-roles="estrategia">Dir. Estrategia</td><td>Abrir conversación con CEO</td><td><span class="badge-ok">3 días</span></td><td><span class="badge-warn">5 días</span></td><td>Ingenia vista como táctica</td></tr>
+            <tr data-row><td>Doc estratégico marketing</td><td data-roles="estrategia creativo">Estrategia + Creativo</td><td>Generar confianza con mktg</td><td><span class="badge-ok">3–4 días</span></td><td><span class="badge-warn">7 días</span></td><td>Marketing pierde interés</td></tr>
+            <tr data-row><td>Roadmap estratégico anual</td><td data-roles="estrategia">Dir. Estrategia</td><td>Ordenar decisiones del año</td><td><span class="badge-warn">10–15 días</span></td><td><span class="badge-max">20 días</span></td><td>Cliente sin dirección</td></tr>
+            <tr data-row><td>Ajustes trimestrales</td><td data-roles="estrategia">Dir. Estrategia</td><td>Actualizar roadmap</td><td><span class="badge-ok">3–5 días</span></td><td><span class="badge-warn">7 días</span></td><td>Estrategia se vuelve rígida</td></tr>
+            <tr data-row><td>Plataforma creativa</td><td data-roles="creativo">Dir. Creativo</td><td>Territorio narrativo</td><td><span class="badge-warn">5–7 días</span></td><td><span class="badge-max">10 días</span></td><td>Campañas sin coherencia</td></tr>
+            <tr data-row><td>Sistema visual</td><td data-roles="arte">Dir. de Arte</td><td>Gramática visual</td><td><span class="badge-warn">5–7 días</span></td><td><span class="badge-max">10 días</span></td><td>Piezas inconsistentes</td></tr>
+            <tr data-row><td>Campaña lanzamiento</td><td data-roles="creativo arte">Creativo + Arte</td><td>Materializar estrategia</td><td><span class="badge-warn">7–10 días</span></td><td><span class="badge-max">15 días</span></td><td>Percepción de lentitud</td></tr>
           </tbody>
         </table>
       </div>
-    </section>
 
-    <!-- S8: FLUJO -->
-    <section class="section" id="s8">
-      <div class="section-header">
-        <div class="section-num">8</div>
-        <h2>Flujo de revisión y aprobación</h2>
-      </div>
-      <div class="section-divider"></div>
-      <div class="card card--left" style="margin-bottom:14px;">
-        <strong>Todos los feedbacks se dan en máximo 24 horas.</strong>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Tipo de entregable</th><th>Genera</th><th>Revisión 1</th><th>Aprobación final</th></tr></thead>
-          <tbody>
-            <tr><td>Entregable estratégico</td><td>Dir. Estrategia</td><td>Checklist propio + CEO</td><td class="td-A">CEO</td></tr>
-            <tr><td>Plataforma creativa</td><td>Dir. Creativo</td><td>Dir. Estrategia</td><td class="td-A">CEO</td></tr>
-            <tr><td>Sistema visual</td><td>Dir. de Arte</td><td>Dir. Estrategia</td><td class="td-A">CEO</td></tr>
-            <tr><td>Campaña creativa/visual</td><td>Dir. Creativo + Arte</td><td>Dir. Estrategia</td><td class="td-A">CEO</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- S9: RITUALES -->
-    <section class="section" id="s9">
-      <div class="section-header">
-        <div class="section-num">9</div>
-        <h2>Rituales de gobernanza</h2>
-      </div>
-      <div class="section-divider"></div>
-
-      <h3>Rituales internos</h3>
-      <div class="card">
-        <div class="ritual-row">
-          <div class="ritual-freq"><span class="tag tag--red">Diario</span></div>
-          <div class="ritual-info">
-            <div class="ritual-name">Status operativo diario</div>
-            <div class="ritual-owner">Dueño: Dir. Operaciones · Participan: Supervisora, Ejecutivas, Líderes</div>
-            <div class="ritual-output">Salida: Bloqueos, riesgos, prioridades del día</div>
-          </div>
-        </div>
-        <div class="ritual-row">
-          <div class="ritual-freq"><span class="tag tag--orange">Semanal</span></div>
-          <div class="ritual-info">
-            <div class="ritual-name">Planificación semanal (lunes)</div>
-            <div class="ritual-owner">Dueño: Dir. Operaciones · Participan: Todos los líderes</div>
-            <div class="ritual-output">Salida: Prioridades, carga, alertas, recursos</div>
-          </div>
-        </div>
-        <div class="ritual-row">
-          <div class="ritual-freq"><span class="tag tag--orange">Semanal</span></div>
-          <div class="ritual-info">
-            <div class="ritual-name">Revisión pipeline</div>
-            <div class="ritual-owner">Dueño: Dir. Operaciones · Participan: CEO, Estrategia, Growth</div>
-            <div class="ritual-output">Salida: Hito por prospecto, GO/NO GO</div>
-          </div>
-        </div>
-        <div class="ritual-row">
-          <div class="ritual-freq"><span class="tag tag--orange">Semanal</span></div>
-          <div class="ritual-info">
-            <div class="ritual-name">Comité estratégico interno</div>
-            <div class="ritual-owner">Dueño: Dir. Estrategia · Participan: CEO, Operaciones, Growth, Creativo</div>
-            <div class="ritual-output">Salida: Alineamiento, roadmaps, trade-offs</div>
-          </div>
-        </div>
-        <div class="ritual-row">
-          <div class="ritual-freq"><span class="tag tag--orange">Semanal</span></div>
-          <div class="ritual-info">
-            <div class="ritual-name">Gobernanza económica</div>
-            <div class="ritual-owner">Dueño: Administración · Participan: CEO, Operaciones</div>
-            <div class="ritual-output">Salida: Margen, desvíos, cotizaciones</div>
-          </div>
-        </div>
-        <div class="ritual-row">
-          <div class="ritual-freq"><span class="tag tag--gray">Mensual</span></div>
-          <div class="ritual-info">
-            <div class="ritual-name">Retro de valor</div>
-            <div class="ritual-owner">Dueño: Planner Jr · Participan: Estrategia, Operaciones, Growth</div>
-            <div class="ritual-output">Salida: Aprendizajes, reenfoques, insights</div>
-          </div>
-        </div>
+      <h3>6.3 Entregables para Prospectos (Pipeline Consultivo)</h3>
+      <div class="card anim-on-scroll anim-delay-2">
+        <ul class="role-list">
+          <li>Ficha GO/NO GO (decisión de entrada)</li>
+          <li>Lectura previa: modelo de negocio, tensiones, hipótesis y mapa de decisores</li>
+          <li>Acta consultiva (SLA 24h)</li>
+          <li>Hipótesis de valor + delimitación preliminar de alcance</li>
+          <li>Documento ejecutivo para negocio o marketing según actor clave</li>
+          <li>Propuesta consultiva estructurada: fases, gobernanza, KPIs y supuestos</li>
+          <li>Handoff formal a operación si se cierra</li>
+        </ul>
       </div>
 
-      <h3 style="margin-top:24px;">Modelo 24–72–7 (ritmo consultivo)</h3>
-      <div class="model-247">
+      <h3>6.4 Entregables para Clientes Fee (Operación + Gobernanza)</h3>
+      <div class="card anim-on-scroll anim-delay-3">
+        <ul class="role-list">
+          <li>Kickoff estratégico con alineamiento de problema, alcance, roadmap y KPIs</li>
+          <li>Roadmap operativo trimestral derivado del roadmap anual</li>
+          <li>Comité mensual y comité trimestral con documento estratégico</li>
+          <li>Change Control formal ante desviaciones de alcance o prioridad</li>
+          <li>Reporte de control del valor: aprendizajes, riesgos, reenfoque</li>
+          <li>Narrativa de renovación desde el mes 3</li>
+        </ul>
+      </div>
+
+      <h3>6.5 Sistemas ejecutables, Growth y Sistemas</h3>
+      <div class="card anim-on-scroll anim-delay-4">
+        <ul class="role-list">
+          <li>Brief estructural: problema, usuario, impacto, KPI y criterio de crecimiento</li>
+          <li>Arquitectura UX + requerimientos funcionales</li>
+          <li>Backlog priorizado (MVP → iteraciones)</li>
+          <li>Plan de despliegue con hitos, responsables y riesgos</li>
+          <li>Trazabilidad en ClickUp, QA y criterios de aceptación</li>
+          <li>Documentación mínima de mantenimiento y aprendizaje</li>
+        </ul>
+      </div>
+
+      <h3>Modelo 24–72–7 (ritmo consultivo)</h3>
+      <div class="model-247 anim-on-scroll anim-delay-5">
         <div class="model-247-card">
           <div class="model-247-num">24</div>
           <div class="model-247-unit">horas</div>
-          <div class="model-247-desc">Acta estratégica post reunión</div>
+          <div class="model-247-desc">Señal estratégica (acta)</div>
         </div>
         <div class="model-247-card">
           <div class="model-247-num">72</div>
@@ -1003,12 +2011,276 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
           <div class="model-247-desc">Documento estratégico</div>
         </div>
         <div class="model-247-card">
-          <div class="model-247-num">7</div>
+          <div class="model-247-num">7–10</div>
           <div class="model-247-unit">días</div>
           <div class="model-247-desc">Propuesta estructural o avance creativo</div>
         </div>
       </div>
-      <p style="margin-top:10px;font-size:13px;font-style:italic;color:var(--muted);">Tres percepciones en el cliente: velocidad intelectual · profundidad estratégica · control del proceso.</p>
+      <p class="anim-on-scroll anim-delay-6" style="margin-top:10px;font-size:13px;font-style:italic;color:var(--muted);">Este modelo crea tres percepciones clave en el cliente: velocidad intelectual, profundidad estratégica y control del proceso.</p>
+    </section>
+
+    <!-- S8: FLUJO DE REVISIÓN -->
+    <section class="section" id="s8">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <h2>Flujo de Revisión, Feedback y Aprobación de Entregables</h2>
+      </div>
+      <div class="section-divider"></div>
+      <div class="card card--left anim-on-scroll">
+        <p style="margin:0;font-size:14px;line-height:1.6;">Las revisiones y feedback parten del que genera el entregable. Si es estratégico, el Director Creativo y luego el CEO pueden dar feedback. El guardián de que se genere el entregable repotenciado respondiendo los tiempos programados es el Director de Operaciones Consultivas.</p>
+        <p style="margin:10px 0 0;font-size:13px;font-weight:700;color:var(--red);">Todos los feedbacks se darán en un plazo máximo de 24 horas.</p>
+      </div>
+      <div class="table-filter-bar">
+        <span class="table-filter-label">Ver flujos relevantes para:</span>
+        <div class="table-filter-btns">
+          <button type="button" class="table-filter-btn active" data-table="flujo-revision" data-role="all">Todos</button>
+          <button type="button" class="table-filter-btn" data-table="flujo-revision" data-role="ceo">CEO</button>
+          <button type="button" class="table-filter-btn" data-table="flujo-revision" data-role="estrategia">Estrategia</button>
+          <button type="button" class="table-filter-btn" data-table="flujo-revision" data-role="operaciones">Operaciones</button>
+          <button type="button" class="table-filter-btn" data-table="flujo-revision" data-role="creativo">Creativo</button>
+          <button type="button" class="table-filter-btn" data-table="flujo-revision" data-role="arte">Arte</button>
+        </div>
+      </div>
+      <div class="table-wrap anim-on-scroll anim-delay-1">
+        <table class="table-filterable" id="tabla-flujo-revision">
+          <thead>
+            <tr>
+              <th>Tipo de Entregable</th>
+              <th>Genera</th>
+              <th>Revisión 1</th>
+              <th>Revisión 2</th>
+              <th>Aprobación Final</th>
+              <th>SLA Feedback</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-row><td>Entregable estratégico</td><td data-roles="estrategia">Dir. Estrategia</td><td>Checklist propio del Dir. Estrategia</td><td data-roles="ceo creativo">Dir. Creativo (si aplica) + CEO</td><td class="td-A" data-roles="ceo">CEO</td><td><span class="badge-ok">24 h</span></td></tr>
+            <tr data-row><td>Plataforma creativa</td><td data-roles="creativo">Dir. Creativo</td><td>Checklist Dir. Creativo</td><td data-roles="estrategia">Dir. Estrategia</td><td class="td-A" data-roles="ceo">CEO</td><td><span class="badge-ok">24 h</span></td></tr>
+            <tr data-row><td>Sistema visual</td><td data-roles="arte">Dir. de Arte</td><td>Checklist Dir. Arte</td><td data-roles="estrategia">Dir. Estrategia</td><td class="td-A" data-roles="ceo">CEO</td><td><span class="badge-ok">24 h</span></td></tr>
+            <tr data-row><td>Campaña creativa/visual</td><td data-roles="creativo arte">Dir. Creativo + Arte</td><td>Checklists respectivos</td><td data-roles="estrategia">Dir. Estrategia</td><td class="td-A" data-roles="ceo">CEO</td><td><span class="badge-ok">24 h</span></td></tr>
+            <tr data-row><td>Entregable repotenciado</td><td>Responsable original</td><td data-roles="operaciones">Dir. Operaciones valida tiempos</td><td>Revisor original</td><td>Según flujo</td><td><span class="badge-ok">24 h</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-group-label">Checklists operativos (Anexos 15)</div>
+        <div class="checklist-btns">
+          <button type="button" class="checklist-btn" data-checklist="a" data-roles="operaciones">
+            <span class="checklist-btn-icon">›</span> Anexo A — Candados
+          </button>
+          <button type="button" class="checklist-btn" data-checklist="b" data-roles="estrategia">
+            <span class="checklist-btn-icon">›</span> Anexo B — Acta Consultiva
+          </button>
+          <button type="button" class="checklist-btn" data-checklist="c" data-roles="estrategia">
+            <span class="checklist-btn-icon">›</span> Anexo C — Dir. Estrategia
+          </button>
+          <button type="button" class="checklist-btn" data-checklist="d" data-roles="creativo arte">
+            <span class="checklist-btn-icon">›</span> Anexo D — Dir. Creativa
+          </button>
+        </div>
+        <div class="checklist-panel" id="checklist-a">
+          <h4 style="margin:0 0 12px;font-size:14px;color:var(--red);">Anexo A — Checklist inicio de ejecución (candados)</h4>
+          <ul class="role-list" style="margin:0;">
+            <li>Contrato o aprobación formal equivalente recibida</li>
+            <li>SOW validado y entendido por ambas partes</li>
+            <li>Fee y condiciones de pago claras y firmadas</li>
+            <li>Alcance dentro/fuera documentado explícitamente</li>
+            <li>KPIs mínimos definidos con el cliente</li>
+            <li>Owner de cuenta y rituales calendarizados</li>
+          </ul>
+        </div>
+        <div class="checklist-panel" id="checklist-b">
+          <h4 style="margin:0 0 12px;font-size:14px;color:var(--red);">Anexo B — Checklist Acta Consultiva (24h)</h4>
+          <ul class="role-list" style="margin:0;">
+            <li>Contexto de negocio (solo lo relevante)</li>
+            <li>Tensión estratégica central identificada</li>
+            <li>Riesgo de no actuar</li>
+            <li>Oportunidad y dirección (no campaña)</li>
+            <li>Decisiones que el cliente debe considerar</li>
+            <li>Siguientes pasos: hito concreto y decisión con fecha</li>
+          </ul>
+        </div>
+        <div class="checklist-panel" id="checklist-c">
+          <h4 style="margin:0 0 12px;font-size:14px;color:var(--red);">Anexo C — Checklist Dir. Estrategia</h4>
+          <ul class="role-list" style="margin:0;">
+            <li>¿Responde al problema real del cliente, no solo al pedido?</li>
+            <li>¿Está alineado con el roadmap y prioridades del trimestre?</li>
+            <li>¿Incluye trade-offs explícitos — qué sí y qué no?</li>
+            <li>¿La narrativa es defendible en comité frente al decisor?</li>
+            <li>¿Tiene KPIs o criterios de éxito medibles?</li>
+            <li>¿El brief a creativo/digital es claro y accionable?</li>
+          </ul>
+        </div>
+        <div class="checklist-panel" id="checklist-d">
+          <h4 style="margin:0 0 12px;font-size:14px;color:var(--red);">Anexo D — Checklist Dir. Creativa</h4>
+          <ul class="role-list" style="margin:0;">
+            <li>¿La plataforma creativa responde a la estrategia aprobada?</li>
+            <li>¿Es coherente con el territorio definido?</li>
+            <li>¿El concepto es escalable y reutilizable en el año?</li>
+            <li>¿Pasa el test de consistencia multi-touchpoint?</li>
+            <li>¿La calidad cumple el estándar Ingenia?</li>
+            <li>¿Se puede defender en comité con el cliente?</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Reglas del flujo de feedback</h3>
+      <div class="card anim-on-scroll anim-delay-2">
+        <ul class="role-list">
+          <li>El que genera el entregable es responsable de pasar su propio checklist antes de enviarlo a revisión.</li>
+          <li>Cada feedback debe ser concreto, accionable y dentro del marco estratégico.</li>
+          <li>Si el feedback requiere cambio de alcance, se activa Change Control.</li>
+          <li>El Dir. de Operaciones Consultivas monitorea que los tiempos de feedback y repotenciación se cumplan.</li>
+          <li>Ningún entregable estratégico sale al cliente sin haber pasado por el flujo completo.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- S9: RITUALES -->
+    <section class="section" id="s9">
+      <div class="section-header">
+        <div class="section-num">9</div>
+        <h2>Rituales de Gobernanza</h2>
+      </div>
+      <div class="section-divider"></div>
+
+      <h3>8.1 Rituales internos</h3>
+      <div class="table-filter-bar">
+        <span class="table-filter-label">Ver rituales relevantes para:</span>
+        <div class="table-filter-btns">
+          <button type="button" class="table-filter-btn active" data-table="rituales" data-role="all">Todos</button>
+          <button type="button" class="table-filter-btn" data-table="rituales" data-role="ceo">CEO</button>
+          <button type="button" class="table-filter-btn" data-table="rituales" data-role="estrategia">Estrategia</button>
+          <button type="button" class="table-filter-btn" data-table="rituales" data-role="operaciones">Operaciones</button>
+          <button type="button" class="table-filter-btn" data-table="rituales" data-role="creativo">Creativo</button>
+          <button type="button" class="table-filter-btn" data-table="rituales" data-role="arte">Arte</button>
+          <button type="button" class="table-filter-btn" data-table="rituales" data-role="growth">Growth</button>
+          <button type="button" class="table-filter-btn" data-table="rituales" data-role="admin">Admin</button>
+        </div>
+      </div>
+      <div class="card anim-on-scroll" id="rituales-internos">
+        <div class="ritual-row" data-row data-roles="operaciones">
+          <div class="ritual-freq"><span class="tag tag--red">Diario</span></div>
+          <div class="ritual-info">
+            <div class="ritual-name">Status operativo diario</div>
+            <div class="ritual-owner">Dueño: Dir. Operaciones · Participan: Supervisorx, Ejecutivxs, Líderes</div>
+            <div class="ritual-output">Agenda / Salida: Bloqueos, riesgos, foco del día, prioridades inmediatas</div>
+          </div>
+        </div>
+        <div class="ritual-row" data-row data-roles="operaciones">
+          <div class="ritual-freq"><span class="tag tag--orange">Semanal (lunes)</span></div>
+          <div class="ritual-info">
+            <div class="ritual-name">Planificación semanal</div>
+            <div class="ritual-owner">Dueño: Dir. Operaciones · Participan: Todos los líderes</div>
+            <div class="ritual-output">Prioridades de la semana, carga por área, alertas, recursos</div>
+          </div>
+        </div>
+        <div class="ritual-row" data-row data-roles="operaciones ceo estrategia growth">
+          <div class="ritual-freq"><span class="tag tag--orange">Semanal</span></div>
+          <div class="ritual-info">
+            <div class="ritual-name">Revisión pipeline</div>
+            <div class="ritual-owner">Dueño: Dir. Operaciones · Participan: CEO, Estrategia, Growth</div>
+            <div class="ritual-output">Siguiente hito por prospecto, decisiones GO/NO GO, priorización</div>
+          </div>
+        </div>
+        <div class="ritual-row" data-row data-roles="estrategia ceo operaciones growth creativo">
+          <div class="ritual-freq"><span class="tag tag--orange">Semanal</span></div>
+          <div class="ritual-info">
+            <div class="ritual-name">Comité estratégico interno</div>
+            <div class="ritual-owner">Dueño: Dir. Estrategia · Participan: CEO, Operaciones, Growth, Creativo</div>
+            <div class="ritual-output">Alineamiento estratégico, roadmaps, decisiones de cuenta, trade-offs</div>
+          </div>
+        </div>
+        <div class="ritual-row" data-row data-roles="creativo estrategia arte">
+          <div class="ritual-freq"><span class="tag tag--orange">Semanal</span></div>
+          <div class="ritual-info">
+            <div class="ritual-name">Comité creativo</div>
+            <div class="ritual-owner">Dueño: Dir. Creativa · Participan: Estrategia, Arte, Copy, Diseño</div>
+            <div class="ritual-output">Plataformas, sistemas, campañas en curso, checklist de calidad</div>
+          </div>
+        </div>
+        <div class="ritual-row" data-row data-roles="growth estrategia operaciones">
+          <div class="ritual-freq"><span class="tag tag--orange">Semanal</span></div>
+          <div class="ritual-info">
+            <div class="ritual-name">Gobernanza digital &amp; growth</div>
+            <div class="ritual-owner">Dueño: Líder Digital &amp; Growth · Participan: Estrategia, Operaciones, PM Digital</div>
+            <div class="ritual-output">Funnels, KPIs, activos digitales, IA, optimizaciones</div>
+          </div>
+        </div>
+        <div class="ritual-row" data-row data-roles="admin ceo operaciones">
+          <div class="ritual-freq"><span class="tag tag--orange">Semanal</span></div>
+          <div class="ritual-info">
+            <div class="ritual-name">Gobernanza económica</div>
+            <div class="ritual-owner">Dueño: Administración · Participan: CEO, Operaciones</div>
+            <div class="ritual-output">Margen, desvíos, alertas, cotizaciones pendientes</div>
+          </div>
+        </div>
+        <div class="ritual-row" data-row data-roles="estrategia operaciones growth">
+          <div class="ritual-freq"><span class="tag tag--gray">Mensual</span></div>
+          <div class="ritual-info">
+            <div class="ritual-name">Retro de valor</div>
+            <div class="ritual-owner">Dueño: Planner Jr · Participan: Estrategia, Operaciones, Growth</div>
+            <div class="ritual-output">Aprendizajes, reenfoques, insights acumulados</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>8.2 Comités con cliente</h3>
+      <div class="table-filter-bar">
+        <span class="table-filter-label">Ver comités relevantes para:</span>
+        <div class="table-filter-btns">
+          <button type="button" class="table-filter-btn active" data-table="comites" data-role="all">Todos</button>
+          <button type="button" class="table-filter-btn" data-table="comites" data-role="ceo">CEO</button>
+          <button type="button" class="table-filter-btn" data-table="comites" data-role="estrategia">Estrategia</button>
+          <button type="button" class="table-filter-btn" data-table="comites" data-role="operaciones">Operaciones</button>
+          <button type="button" class="table-filter-btn" data-table="comites" data-role="creativo">Creativo</button>
+        </div>
+      </div>
+      <div class="table-wrap anim-on-scroll anim-delay-1">
+        <table class="table-filterable" id="tabla-comites">
+          <thead>
+            <tr>
+              <th>Comité con Cliente</th>
+              <th>Frecuencia</th>
+              <th>Lidera</th>
+              <th>Participan</th>
+              <th>Agenda / Qué llevar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-row><td>Comité estratégico mensual</td><td>Mensual</td><td data-roles="estrategia operaciones">Dir. Estrategia + Operaciones</td><td data-roles="ceo operaciones">CEO (si cuenta crítica), Supervisorx, Cliente decisor</td><td>Avance del roadmap, decisiones pendientes, trade-offs, señales de mercado, próximos hitos</td></tr>
+            <tr data-row><td>Comité trimestral</td><td>Trimestral</td><td data-roles="estrategia ceo">Dir. Estrategia + CEO</td><td data-roles="operaciones creativo">Operaciones, Creativo, Cliente C-level</td><td>Learning acumulado, reenfoque estratégico, protección de inversión, renovación narrativa</td></tr>
+            <tr data-row><td>Comité extraordinario</td><td>Cuando aplique</td><td data-roles="operaciones">Dir. Operaciones</td><td data-roles="operaciones">Según caso + Cliente</td><td>Desviación mayor, Change Control, riesgo reputacional, reenfoque urgente</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>8.3 Ritmo consultivo ideal</h3>
+      <div class="card card--accent anim-on-scroll anim-delay-2">
+        <h4 style="margin-top:0;">Con prospectos</h4>
+        <ul class="role-list">
+          <li><strong>Día 0:</strong> Primera reunión estratégica</li>
+          <li><strong>Día 1:</strong> Entrega del acta estratégica</li>
+          <li><strong>Día 3–5:</strong> Documento estratégico</li>
+          <li><strong>Día 7–10:</strong> Conversación estratégica o propuesta</li>
+        </ul>
+        <h4 style="margin-top:16px;">Con clientes activos</h4>
+        <ul class="role-list">
+          <li><strong>Mensual:</strong> Seguimiento y señales de avance</li>
+          <li><strong>Trimestral:</strong> Ajustes estratégicos</li>
+          <li><strong>Anual:</strong> Rediseño o actualización del roadmap</li>
+        </ul>
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,88,0,0.2);">
+          <strong>Modelo 24–72–7:</strong>
+          <ul class="role-list" style="margin-top:8px;">
+            <li><strong>24 horas:</strong> señal estratégica (acta)</li>
+            <li><strong>72 horas:</strong> documento estratégico</li>
+            <li><strong>7–10 días:</strong> propuesta estructural o avance creativo</li>
+          </ul>
+          <p style="margin:12px 0 0;font-size:13px;font-style:italic;color:var(--muted);">Este modelo crea tres percepciones clave en el cliente: velocidad intelectual, profundidad estratégica y control del proceso.</p>
+        </div>
+      </div>
     </section>
 
     <!-- S10: ECONÓMICO -->
@@ -1019,9 +2291,9 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
       </div>
       <div class="section-divider"></div>
       <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Operaciones</strong> define alcance preliminar (dentro/fuera) + supuestos</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Supervisora/Ejecutiva/Comercial</strong> arma solicitud de cotización: alcance, plazos, perfiles, riesgos</div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Administración</strong> arma cotizador: horas por perfil, costos directos/indirectos, margen objetivo</div></div>
+        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Operaciones</strong> define alcance preliminar (dentro/fuera del SOW) + supuestos</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Supervisorx/Ejecutivx/Comercial</strong> arma solicitud de cotización: alcance, plazos, perfiles, riesgos</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Administración</strong> construye cotizador: horas por perfil, costos directos/indirectos, margen objetivo</div></div>
         <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Operaciones</strong> valida capacidad instalada, riesgo de sobreentrega y secuencia</div></div>
         <div class="step"><div class="step-num">5</div><div class="step-body"><strong>CEO + Administración</strong> aprueban o piden ajuste</div></div>
         <div class="step"><div class="step-num">6</div><div class="step-body">Solo entonces se envía la propuesta económica al cliente</div></div>
@@ -1038,9 +2310,9 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
       <div class="section-divider"></div>
       <div class="card card--left">
         <ul class="role-list">
-          <li>La estrategia precede a la creatividad</li>
-          <li>La creatividad precede a la ejecución</li>
-          <li>Lo digital y growth traducen estrategia en conversión — no inventan dirección</li>
+          <li>La estrategia precede a la creatividad. Siempre.</li>
+          <li>La creatividad precede a la ejecución. Siempre.</li>
+          <li>Digital y growth traducen estrategia en conversión — no inventan dirección</li>
           <li>Operaciones protege el modelo y la trazabilidad</li>
           <li>Administración protege margen y sostenibilidad</li>
           <li><strong>ClickUp es el sistema único de trazabilidad.</strong> WhatsApp y correo no gobiernan el trabajo</li>
@@ -1054,14 +2326,13 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
           <li>Retrasar el primer documento estratégico</li>
           <li>Postergar decisiones creativas clave</li>
           <li>No actualizar la estrategia cuando el contexto cambia</li>
+          <li>Ejecutar fuera del SOW sin Change Control</li>
         </ul>
       </div>
 
-      <h3>Priorización en alta demanda</h3>
-      <div class="steps" style="margin-top:8px;">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Prospectos con momentum</strong> — no dejar enfriar la conversación</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Clientes estratégicos activos</strong> — proteger la relación</div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Producción creativa</strong> — ejecutar lo comprometido</div></div>
+      <div class="anchor-quote">
+        <p>"No reaccionamos. Decidimos."</p>
+        <span>La reacción es del equipo sin sistema. La decisión es del sistema con criterio.</span>
       </div>
     </section>
 
@@ -1077,14 +2348,12 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
         <h4 style="margin-top:0;">Por qué se refuerza la estructura en 2026</h4>
         <p>Ingenia Latam está en un momento de <strong>crecimiento del modelo</strong>: más clientes, cuentas de mayor complejidad, licitaciones y proyectos que requieren mayor trazabilidad y gobernanza.</p>
         <p>Sin gobernanza operativa, el crecimiento de carga genera: sobreentregas no detectadas · desgaste del equipo · pérdida de la promesa consultiva · pipeline desatendido.</p>
+        <p style="margin-bottom:0;"><strong>El problema central no es la carga. Es la coherencia.</strong> Con sistema, la misma carga produce mejor resultado.</p>
       </div>
 
       <h3>Tres movimientos estructurales en Marzo 2026</h3>
-      <p style="font-size:14px;color:var(--muted);margin-bottom:16px;">No es un rediseño del modelo — es completar el sistema con las personas que cada capa necesitaba.</p>
-
       <div class="new-role-cards">
-
-        <div class="new-role-card new-role-card--new">
+        <div class="new-role-card">
           <div class="new-role-badge new-role-badge--new">★ Nuevo ingreso</div>
           <div class="new-role-title">Director de Operaciones Consultivas &amp; Pipeline</div>
           <div class="new-role-person">JC Guzmán</div>
@@ -1102,83 +2371,169 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
 
         <div class="new-role-card new-role-card--internal">
           <div class="new-role-badge new-role-badge--internal">↑ Cambio interno</div>
-          <div class="new-role-title">Supervisora de Cuentas</div>
-          <div class="new-role-desc">Un movimiento interno que formaliza la supervisión de cuentas complejas y la coordinación de licitaciones. Esta capa libera a la Dirección de Operaciones para el trabajo estratégico de pipeline y gobernanza, mientras asegura que las ejecutivas tengan soporte y escalamiento de primer nivel.</div>
+          <div class="new-role-title">Supervisorx de Cuentas</div>
+          <div class="new-role-desc">Un movimiento interno que formaliza la supervisión de cuentas complejas y la coordinación de licitaciones. Libera a Operaciones para el trabajo estratégico de pipeline y gobernanza, mientras asegura que las ejecutivas tengan soporte y escalamiento de primer nivel.</div>
           <div class="new-role-impact">
-            <div class="new-role-impact-title">Reporta a</div>
+            <div class="new-role-impact-title">Reporta a / Supervisa</div>
             <ul class="role-list" style="margin-top:6px;">
-              <li>Dirección de Operaciones Consultivas &amp; Pipeline</li>
-              <li>Supervisa: Ejecutivas Senior y Ejecutivas de Cuenta</li>
+              <li>Reporta a: Dirección de Operaciones Consultivas &amp; Pipeline</li>
+              <li>Supervisa: Ejecutivxs Senior y Ejecutivxs de Cuenta</li>
             </ul>
           </div>
         </div>
 
-        <div class="new-role-card new-role-card--new">
+        <div class="new-role-card">
           <div class="new-role-badge new-role-badge--new">★ Nuevo perfil</div>
           <div class="new-role-title">Líder de Estrategia Digital y Growth</div>
-          <div class="new-role-desc">Mano derecha del Director de Estrategia. Traduce el pensamiento estratégico en ecosistemas digitales, funnels de conversión y crecimiento medible. No inventa dirección estratégica — la ejecuta con profundidad técnica, criterio de negocio e inteligencia artificial aplicada.</div>
+          <div class="new-role-desc">Mano derecha del Director de Estrategia. Traduce pensamiento estratégico en ecosistemas digitales, funnels de conversión y crecimiento medible. No inventa dirección estratégica — la ejecuta con profundidad técnica, criterio de negocio e inteligencia artificial aplicada.</div>
           <div class="new-role-impact">
-            <div class="new-role-impact-title">Reporta a</div>
+            <div class="new-role-impact-title">Reporta a / Lidera</div>
             <ul class="role-list" style="margin-top:6px;">
-              <li>Dirección de Estrategia</li>
+              <li>Reporta a: Dirección de Estrategia</li>
               <li>Lidera: Community Managers</li>
             </ul>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- S13: ANEXOS -->
+    <!-- S13: GUIÓN — 18 MARZO -->
     <section class="section" id="s13">
       <div class="section-header">
         <div class="section-num">13</div>
-        <h2>Anexos</h2>
+        <h2>Guión — Reunión 18 de Marzo</h2>
       </div>
       <div class="section-divider"></div>
 
+      <div class="card card--left" style="margin-bottom:20px;">
+        <p style="margin:0;font-size:13px;"><strong>Objetivo de la reunión:</strong> Que el equipo salga preguntándose "¿qué hago diferente mañana?" — No es una reunión informativa. Es un reposicionamiento interno.</p>
+      </div>
+
+      <div class="guion-block guion-block--red">
+        <div class="guion-time">Bloque 1 · 10 min</div>
+        <div class="guion-title">Apertura — JC</div>
+        <div class="guion-owner">JC Guzmán</div>
+        <div class="guion-body">
+          <div class="guion-quote">"Hasta ahora hemos hablado de estructura."<br><em>(Pausa)</em><br>"Pero el problema no es la estructura."<br><em>(Pausa corta)</em><br>"El problema es cómo trabajamos."</div>
+          <div class="guion-quote">"Porque puedes tener la mejor estructura del mundo…"<br><em>(Pausa)</em><br>"Y seguir trabajando mal."<br><em>(Silencio 2 segundos)</em></div>
+          <div class="guion-quote">"Ingenia no funciona como áreas.<br>Funciona como un sistema."</div>
+          <div class="guion-note">🎯 Muestra el ciclo de 6 nodos. Señala cada nodo. No sobre-expliques. Deja que el silencio trabaje.</div>
+        </div>
+      </div>
+
+      <div class="guion-block">
+        <div class="guion-time">Bloque 2 · 10 min</div>
+        <div class="guion-title">Contexto estratégico — Luis</div>
+        <div class="guion-owner">Luis Holder (CEO)</div>
+        <div class="guion-body">Por qué este es el momento. El crecimiento del modelo. El problema de coherencia. Por qué completar el sistema ahora.</div>
+      </div>
+
+      <div class="guion-block guion-block--red">
+        <div class="guion-time">Bloque 3 · 20 min</div>
+        <div class="guion-title">El sistema — cómo trabajamos — JC</div>
+        <div class="guion-owner">JC Guzmán</div>
+        <div class="guion-body">
+          <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">Recorre los 6 nodos con ejemplos concretos. Para en cada nodo y pregunta: "¿Cómo hacemos esto hoy?"</p>
+          <div class="guion-quote">"El sistema no elimina la fricción. La usa para elevar la calidad."</div>
+          <p style="font-size:13px;color:var(--muted);margin:10px 0;">Presenta la Matriz de Autoridad. Muestra 2–3 decisiones concretas que el equipo toma hoy sin claridad.</p>
+          <div class="guion-quote" style="border-color:var(--red);">"Hoy, siendo honestos…<br>¿Trabajamos así?"<br><br><em style="font-size:12px;">(Silencio incómodo. No lo llenes. Déjalo pasar.)</em></div>
+          <div class="guion-note">⚡ Este es el momento más importante de la reunión. El silencio es parte del mensaje.</div>
+        </div>
+      </div>
+
+      <div class="guion-block">
+        <div class="guion-time">Bloque 4 · 15 min</div>
+        <div class="guion-title">Los tres movimientos — Luis</div>
+        <div class="guion-owner">Luis Holder (CEO)</div>
+        <div class="guion-body">Presenta los 3 cambios estructurales (Operaciones, Supervisorx, Digital &amp; Growth). Contexto de cada rol. Por qué ahora.</div>
+      </div>
+
+      <div class="guion-block guion-block--green">
+        <div class="guion-time">Bloque 5 · 15 min</div>
+        <div class="guion-title">Q&amp;A + cierre</div>
+        <div class="guion-owner">JC facilita · Luis responde estratégico</div>
+        <div class="guion-body">
+          <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">JC facilita las preguntas. Luis responde las de carácter estratégico. JC las operativas.</p>
+          <div class="guion-quote">"La diferencia no está en trabajar más."<br><em>(Pausa)</em><br>"Está en trabajar en sistema."</div>
+          <div class="guion-quote">"Este modelo no es teoría. Es cómo vamos a trabajar."</div>
+          <div style="margin-top:12px;background:rgba(22,163,74,0.08);border-radius:6px;padding:12px 14px;font-size:13px;color:#166534;">
+            <strong>Tres cosas que cambian a partir de hoy:</strong><br>
+            1. No todo lo que entra se hace.<br>
+            2. Nada se ejecuta sin criterio.<br>
+            3. Todo se mide y se aprende.
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:20px;background:rgba(255,17,10,0.03);">
+        <h4 style="margin-top:0;color:var(--red);">Notas de dirección escénica</h4>
+        <ul class="role-list">
+          <li>No explicar demasiado. La sobre-explicación mata la autoridad.</li>
+          <li>No correr. El ritmo pausado es parte del mensaje.</li>
+          <li>Usar los silencios — son parte del método, no del nerviosismo.</li>
+          <li>Si se hace bien: no es una reunión de presentación → es un reposicionamiento.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- S15: ANEXOS -->
+    <section class="section" id="s15">
+      <div class="section-header">
+        <div class="section-num">15</div>
+        <h2>Anexos operativos</h2>
+      </div>
+      <div class="section-divider"></div>
+
+      <h3>Anexo A — Checklist inicio de ejecución (candados)</h3>
+      <div class="card">
+        <ul class="role-list">
+          <li>Contrato o aprobación formal equivalente recibida</li>
+          <li>SOW validado y entendido por ambas partes</li>
+          <li>Fee y condiciones de pago claras y firmadas</li>
+          <li>Alcance dentro/fuera documentado explícitamente</li>
+          <li>KPIs mínimos definidos con el cliente</li>
+          <li>Owner de cuenta y rituales calendarizados</li>
+        </ul>
+      </div>
+
       <h3>Anexo B — Checklist Acta Consultiva (24h)</h3>
-      <div class="card"><ul class="checklist">
-        <li>Contexto de negocio (solo lo relevante)</li>
-        <li>Tensión estratégica central</li>
-        <li>Riesgo de no actuar</li>
-        <li>Oportunidad y dirección (no campaña)</li>
-        <li>Decisiones que el cliente debe considerar</li>
-        <li>Siguientes pasos: hito y decisión concreta</li>
-      </ul></div>
+      <div class="card">
+        <ul class="role-list">
+          <li>Contexto de negocio (solo lo relevante)</li>
+          <li>Tensión estratégica central identificada</li>
+          <li>Riesgo de no actuar</li>
+          <li>Oportunidad y dirección (no campaña)</li>
+          <li>Decisiones que el cliente debe considerar</li>
+          <li>Siguientes pasos: hito concreto y decisión con fecha</li>
+        </ul>
+      </div>
 
-      <h3>Anexo C — Candados de inicio de ejecución</h3>
-      <div class="card"><ul class="checklist">
-        <li>Contrato o aprobación formal equivalente</li>
-        <li>SOW validado y entendido por ambas partes</li>
-        <li>Fee y condiciones de pago claras</li>
-        <li>Alcance dentro/fuera documentado</li>
-        <li>KPIs mínimos definidos</li>
-        <li>Owner de cuenta y rituales calendarizados</li>
-      </ul></div>
+      <h3>Anexo C — Checklist Dir. Estrategia</h3>
+      <div class="card">
+        <ul class="role-list">
+          <li>¿Responde al problema real del cliente, no solo al pedido?</li>
+          <li>¿Está alineado con el roadmap y prioridades del trimestre?</li>
+          <li>¿Incluye trade-offs explícitos — qué sí y qué no?</li>
+          <li>¿La narrativa es defendible en comité frente al decisor?</li>
+          <li>¿Tiene KPIs o criterios de éxito medibles?</li>
+          <li>¿El brief a creativo/digital es claro y accionable?</li>
+        </ul>
+      </div>
 
-      <h3>Anexo D — Checklist Dir. Estrategia</h3>
-      <div class="card"><ul class="checklist">
-        <li>¿Responde al problema real del cliente, no solo al pedido?</li>
-        <li>¿Está alineado con el roadmap y prioridades del trimestre?</li>
-        <li>¿Incluye trade-offs explícitos (qué sí y qué no)?</li>
-        <li>¿La narrativa es defendible en comité frente al decisor?</li>
-        <li>¿Tiene KPIs o criterios de éxito medibles?</li>
-        <li>¿El brief a creativo/digital es claro y accionable?</li>
-      </ul></div>
+      <h3>Anexo D — Checklist Dir. Creativa</h3>
+      <div class="card">
+        <ul class="role-list">
+          <li>¿La plataforma creativa responde a la estrategia aprobada?</li>
+          <li>¿Es coherente con el territorio definido?</li>
+          <li>¿El concepto es escalable y reutilizable en el año?</li>
+          <li>¿Pasa el test de consistencia multi-touchpoint?</li>
+          <li>¿La calidad cumple el estándar Ingenia?</li>
+          <li>¿Se puede defender en comité con el cliente?</li>
+        </ul>
+      </div>
 
-      <h3>Anexo E — Checklist Dir. Creativo / Dir. de Arte</h3>
-      <div class="card"><ul class="checklist">
-        <li>¿La plataforma creativa responde a la estrategia aprobada?</li>
-        <li>¿Es coherente con el territorio definido?</li>
-        <li>¿El concepto es escalable y reutilizable?</li>
-        <li>¿Pasa el test de consistencia multi-touchpoint?</li>
-        <li>¿La calidad cumple el estándar Ingenia?</li>
-        <li>¿Se puede defender en comité con el cliente?</li>
-      </ul></div>
-
-      <div style="margin-top:24px;font-size:12px;color:var(--muted);text-align:center;padding-top:16px;border-top:1px solid var(--light);">
-        Versión 6.0 — Marzo 2026 · Ingenia Latam · Documento maestro confidencial
+      <div style="margin-top:32px;font-size:12px;color:var(--muted);text-align:center;padding-top:16px;border-top:1px solid var(--light);">
+        Versión 6.1 — Marzo 2026 · Ingenia Latam · Documento maestro confidencial
       </div>
     </section>
 
@@ -1186,12 +2541,178 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
 </div>
 
 <script>
-function toggleRole(card) { card.classList.toggle('open'); }
+// Disclose (accordion) para Manual de funciones
+document.querySelectorAll('.disclose-head').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var item = this.closest('.disclose-item');
+    var isOpen = item.classList.toggle('open');
+    this.setAttribute('aria-expanded', isOpen);
+  });
+});
+
+// Tiers — animación cíclica con flecha
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var wrap = document.getElementById('tiers-wrap');
+  var arrow = document.getElementById('tier-arrow');
+  if (!wrap || !arrow) return;
+  var tiers = wrap.querySelectorAll('.tier[data-tier]');
+  var DURATION = 2800;
+  var RETURN_DURATION = 1200;
+  var currentIndex = 0;
+
+  function updatePositions() {
+    var wrapRect = wrap.getBoundingClientRect();
+    tiers.forEach(function(tier) {
+      var rect = tier.getBoundingClientRect();
+      tier._centerY = rect.top - wrapRect.top + rect.height / 2;
+    });
+  }
+
+  function goToTier(index, isReturn) {
+    currentIndex = index;
+    var tier = tiers[index];
+    if (!tier) return;
+    updatePositions();
+    var centerY = tier._centerY !== undefined ? tier._centerY : (tier.offsetTop + tier.offsetHeight / 2);
+    arrow.style.top = (centerY - 6) + 'px';
+    arrow.classList.toggle('tier-arrow--returning', isReturn);
+    tiers.forEach(function(t, i) { t.classList.toggle('tier-active', i === index); });
+  }
+
+  function next() {
+    if (currentIndex < 4) {
+      goToTier(currentIndex + 1, false);
+      setTimeout(next, DURATION);
+    } else {
+      setTimeout(function() {
+        arrow.classList.add('tier-arrow--returning');
+        goToTier(0, true);
+        setTimeout(function() {
+          arrow.classList.remove('tier-arrow--returning');
+          setTimeout(next, DURATION);
+        }, RETURN_DURATION);
+      }, DURATION);
+    }
+  }
+
+  updatePositions();
+  goToTier(0, false);
+  setTimeout(next, DURATION);
+})();
+
+// Matriz de autoridad — filtro por rol
+(function() {
+  var table = document.getElementById('matriz-autoridad');
+  if (!table) return;
+  var rows = table.querySelectorAll('tbody tr[data-row]');
+  var btns = document.querySelectorAll('.matriz-filter-btn');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var role = this.getAttribute('data-role');
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      rows.forEach(function(tr) {
+        var cells = tr.querySelectorAll('td[data-roles]');
+        var rowHasRole = false;
+        cells.forEach(function(td) {
+          var roles = (td.getAttribute('data-roles') || '').split(/\s+/);
+          var cellHasRole = role === 'all' || roles.indexOf(role) !== -1;
+          td.classList.toggle('matriz-highlight', cellHasRole && role !== 'all');
+          if (cellHasRole) rowHasRole = true;
+        });
+        tr.classList.toggle('matriz-dimmed', role !== 'all' && !rowHasRole);
+      });
+    });
+  });
+})();
+
+// Tablas entregables, flujo revisión, rituales, comités — filtro por responsable/rol
+(function() {
+  var TABLE_IDS = { entregables: 'tabla-entregables', 'flujo-revision': 'tabla-flujo-revision', comites: 'tabla-comites' };
+  function filterTable(tableId, role) {
+    var table = document.getElementById(tableId);
+    if (!table) return;
+    var rows = table.querySelectorAll('tbody tr[data-row]');
+    rows.forEach(function(tr) {
+      var cells = tr.querySelectorAll('td[data-roles]');
+      var rowHasRole = false;
+      cells.forEach(function(td) {
+        var roles = (td.getAttribute('data-roles') || '').split(/\s+/);
+        var cellHasRole = role === 'all' || roles.indexOf(role) !== -1;
+        td.classList.toggle('table-highlight', cellHasRole && role !== 'all');
+        if (cellHasRole) rowHasRole = true;
+      });
+      tr.classList.toggle('table-dimmed', role !== 'all' && !rowHasRole);
+    });
+  }
+  function filterRituales(role) {
+    var container = document.getElementById('rituales-internos');
+    if (!container) return;
+    var rows = container.querySelectorAll('.ritual-row[data-row]');
+    rows.forEach(function(row) {
+      var roles = (row.getAttribute('data-roles') || '').split(/\s+/);
+      var rowHasRole = role === 'all' || roles.indexOf(role) !== -1;
+      row.classList.toggle('ritual-dimmed', role !== 'all' && !rowHasRole);
+      row.classList.toggle('ritual-highlight', rowHasRole && role !== 'all');
+    });
+  }
+  document.querySelectorAll('.table-filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var tableKey = this.getAttribute('data-table');
+      var role = this.getAttribute('data-role');
+      var sameGroup = document.querySelectorAll('.table-filter-btn[data-table="' + tableKey + '"]');
+      sameGroup.forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      if (tableKey === 'rituales') {
+        filterRituales(role);
+      } else if (TABLE_IDS[tableKey]) {
+        filterTable(TABLE_IDS[tableKey], role);
+      }
+      if (tableKey === 'flujo-revision') {
+        document.querySelectorAll('.checklist-btn').forEach(function(cb) {
+          var roles = (cb.getAttribute('data-roles') || '').split(/\s+/);
+          cb.classList.toggle('relevant', role !== 'all' && roles.indexOf(role) !== -1);
+        });
+      }
+    });
+  });
+
+  // Checklist buttons — expand/collapse
+  document.querySelectorAll('.checklist-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var id = 'checklist-' + this.getAttribute('data-checklist');
+      var panel = document.getElementById(id);
+      var wasOpen = this.classList.contains('open');
+      document.querySelectorAll('.checklist-btn').forEach(function(b) { b.classList.remove('open'); });
+      document.querySelectorAll('.checklist-panel').forEach(function(p) { p.classList.remove('open'); });
+      if (!wasOpen) {
+        this.classList.add('open');
+        if (panel) panel.classList.add('open');
+      }
+    });
+  });
+})();
+
+// FAQ toggle
+function toggleFaq(item) {
+  item.classList.toggle('open');
+}
+
+// Animaciones al hacer scroll (presentación)
+var animEls = document.querySelectorAll('.anim-on-scroll');
+var animObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.classList.add('anim-visible');
+    }
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -50px 0px' });
+animEls.forEach(function(el) { animObs.observe(el); });
 
 // Active sidebar links on scroll
-var sections = document.querySelectorAll('.section[id]');
+var sections = document.querySelectorAll('.section[id], div[id="s-jc"]');
 var links = document.querySelectorAll('.sidebar-link');
-
 var obs = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {
     if (e.isIntersecting) {
@@ -1201,8 +2722,7 @@ var obs = new IntersectionObserver(function(entries) {
       });
     }
   });
-}, { rootMargin: '-40% 0px -55% 0px' });
-
+}, { threshold: 0.15, rootMargin: '-52px 0px -60% 0px' });
 sections.forEach(function(s) { obs.observe(s); });
 </script>
 </body>

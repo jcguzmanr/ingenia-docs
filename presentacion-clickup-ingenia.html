@@ -396,6 +396,37 @@ body {
   color: var(--color-accent);
   font-size: 12px;
   font-weight: bold;
+  animation: flowArrow 1.4s ease-in-out infinite;
+}
+.slide-2__arrow-flow .slide-2__arrow-sym:nth-of-type(1) { animation-delay: 0s; }
+.slide-2__arrow-flow .slide-2__arrow-sym:nth-of-type(2) { animation-delay: 0.18s; }
+.slide-2__arrow-flow .slide-2__arrow-sym:nth-of-type(3) { animation-delay: 0.36s; }
+.slide-2__arrow-flow .slide-2__arrow-sym:nth-of-type(4) { animation-delay: 0.54s; }
+.slide-2__arrow-flow .slide-2__arrow-sym:nth-of-type(5) { animation-delay: 0.72s; }
+.slide-2__arrow-flow .slide-2__arrow-sym:nth-of-type(6) { animation-delay: 0.9s; }
+.slide-2__arrow-flow .slide-2__arrow-sym:nth-of-type(7) { animation-delay: 1.08s; }
+.slide-2__arrow-flow .slide-2__arrow-sym:nth-of-type(8) { animation-delay: 1.26s; }
+@keyframes flowArrow {
+  0%, 100% { opacity: 0.45; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(3px); }
+}
+.slide-2__arrow-flow[style*="flex-direction:column"] .slide-2__arrow-sym {
+  transform: rotate(90deg);
+}
+.slide-2__arrow-flow[style*="flex-direction:column"] .slide-2__arrow-sym:nth-of-type(1) { animation-delay: 0s; }
+.slide-2__arrow-flow[style*="flex-direction:column"] .slide-2__arrow-sym:nth-of-type(2) { animation-delay: 0.2s; }
+.slide-2__arrow-flow[style*="flex-direction:column"] .slide-2__arrow-sym:nth-of-type(3) { animation-delay: 0.4s; }
+.slide-2__arrow-flow[style*="flex-direction:column"] .slide-2__arrow-sym:nth-of-type(4) { animation-delay: 0.6s; }
+.slide-2__arrow-flow[style*="flex-direction:column"] .slide-2__arrow-sym:nth-of-type(5) { animation-delay: 0.8s; }
+.slide-2__arrow-flow[style*="flex-direction:column"] .slide-2__arrow-sym:nth-of-type(6) { animation-delay: 1s; }
+.slide-2__arrow-flow[style*="flex-direction:column"] .slide-2__arrow-sym:nth-of-type(7) { animation-delay: 1.2s; }
+.slide-2__arrow-flow[style*="flex-direction:column"] .slide-2__arrow-sym:nth-of-type(8) { animation-delay: 1.4s; }
+@keyframes flowArrowVertical {
+  0%, 100% { opacity: 0.45; transform: rotate(90deg) translateY(0); }
+  50% { opacity: 1; transform: rotate(90deg) translateY(3px); }
+}
+.slide-2__arrow-flow[style*="flex-direction:column"] .slide-2__arrow-sym {
+  animation-name: flowArrowVertical;
 }
 
 .slide-2__quote {
@@ -454,6 +485,8 @@ body {
 
 .slide-3__panel--jc .slide-3__panel-head { color: var(--color-primary); }
 .slide-3__panel--luis .slide-3__panel-head { color: var(--color-secondary); }
+.slide-3__panel--priority { border: 2px solid rgba(255,88,0,0.35); box-shadow: 0 4px 24px rgba(255,88,0,0.12); }
+.slide-3__priority-badge { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; background: var(--color-secondary); color: #fff; padding: 2px 8px; border-radius: 4px; margin-left: 8px; white-space: nowrap; }
 
 .slide-3__row {
   display: flex; align-items: flex-start; gap: 8px;
@@ -523,6 +556,23 @@ body {
 .slide-4__flow-arrow {
   color: var(--color-accent);
   font-size: 11px;
+  animation: flowArrow 1.4s ease-in-out infinite;
+}
+.slide-4__flow .slide-4__flow-arrow:nth-of-type(1) { animation-delay: 0s; }
+.slide-4__flow .slide-4__flow-arrow:nth-of-type(2) { animation-delay: 0.2s; }
+.slide-4__flow .slide-4__flow-arrow:nth-of-type(3) { animation-delay: 0.4s; }
+.slide-4__flow .slide-4__flow-arrow:nth-of-type(4) { animation-delay: 0.6s; }
+.slide-4__flow .slide-4__flow-step {
+  animation: flowStepPulse 2.2s ease-in-out infinite;
+}
+.slide-4__flow .slide-4__flow-step:nth-of-type(1) { animation-delay: 0s; }
+.slide-4__flow .slide-4__flow-step:nth-of-type(3) { animation-delay: 0.35s; }
+.slide-4__flow .slide-4__flow-step:nth-of-type(5) { animation-delay: 0.7s; }
+.slide-4__flow .slide-4__flow-step:nth-of-type(7) { animation-delay: 1.05s; }
+.slide-4__flow .slide-4__flow-step:nth-of-type(9) { animation-delay: 1.4s; }
+@keyframes flowStepPulse {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
 }
 
 .slide-4__grid {
@@ -1285,6 +1335,30 @@ body {
     <p class="slide__subheading reveal">Visiones complementarias, no competitivas</p>
 
     <div class="slide-3__grid">
+      <div class="slide-3__panel slide-3__panel--luis reveal slide-3__panel--priority">
+        <div class="slide-3__panel-head">🎯 Luis — OS Consultivo <span class="slide-3__priority-badge">Referencia prioritaria</span></div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Eje:</strong> Modelo consultivo + 7 procesos del sistema operativo</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Capas:</strong> 4 niveles ClickUp — WS → Space → Folder → List</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Pipeline:</strong> Flujo de valor + licitaciones formales</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Clientes:</strong> Gobierno de cuentas con métricas</span>
+        </div>
+        <div class="slide-3__row">
+          <span class="slide-3__row-icon">→</span>
+          <span><strong>Comités:</strong> Disciplina semanal formal · 7 dashboards estratégicos</span>
+        </div>
+      </div>
+
       <div class="slide-3__panel slide-3__panel--jc reveal">
         <div class="slide-3__panel-head">🟠 JC — Ingenia OS</div>
         <div class="slide-3__row">
@@ -1306,30 +1380,6 @@ body {
         <div class="slide-3__row">
           <span class="slide-3__row-icon">→</span>
           <span><strong>Comités:</strong> Metodología CLAUDE + preparación estructurada</span>
-        </div>
-      </div>
-
-      <div class="slide-3__panel slide-3__panel--luis reveal">
-        <div class="slide-3__panel-head">🎯 Luis — OS Consultivo</div>
-        <div class="slide-3__row">
-          <span class="slide-3__row-icon">→</span>
-          <span><strong>Eje:</strong> Modelo consultivo + 7 procesos del sistema operativo</span>
-        </div>
-        <div class="slide-3__row">
-          <span class="slide-3__row-icon">→</span>
-          <span><strong>Capas:</strong> 4 niveles ClickUp — WS → Space → Folder → List</span>
-        </div>
-        <div class="slide-3__row">
-          <span class="slide-3__row-icon">→</span>
-          <span><strong>Pipeline:</strong> Flujo de valor + licitaciones formales</span>
-        </div>
-        <div class="slide-3__row">
-          <span class="slide-3__row-icon">→</span>
-          <span><strong>Clientes:</strong> Gobierno de cuentas con métricas</span>
-        </div>
-        <div class="slide-3__row">
-          <span class="slide-3__row-icon">→</span>
-          <span><strong>Comités:</strong> Disciplina semanal formal · 7 dashboards estratégicos</span>
         </div>
       </div>
     </div>

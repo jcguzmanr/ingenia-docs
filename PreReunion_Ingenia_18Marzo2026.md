@@ -108,7 +108,7 @@ La organización funciona como un **sistema circular de valor**, no como una jer
 │  → Protege que el sistema funcione                      │
 ├─────────────────────────────────────────────────────────┤
 │  OPTIMIZACIÓN                                           │
-│  Dirección Creativa · Proyectos Digitales               │
+│  Dirección Creativa · Sistemas ejecutables               │
 │  → Estrategia → sistemas → activos → ejecución          │
 ├─────────────────────────────────────────────────────────┤
 │  SOSTENIBILIDAD                                         │
