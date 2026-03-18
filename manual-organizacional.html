@@ -37,7 +37,8 @@ body { font-family: var(--fb); background: var(--bg); color: var(--text); min-he
   display: flex; align-items: center; padding: 0 24px; gap: 16px;
   z-index: 200;
 }
-.topnav-logo { font-family: var(--fh); font-weight: 700; font-size: 15px; color: var(--red); }
+.topnav-logo { display: flex; align-items: center; text-decoration: none; }
+.topnav-logo img { height: 20px; width: auto; object-fit: contain; display: block; }
 .topnav-title { font-size: 13px; color: var(--muted); flex: 1; }
 .topnav-badge { font-size: 11px; font-weight: 600; background: rgba(255,17,10,0.1); color: var(--red); border-radius: 4px; padding: 2px 8px; }
 .topnav-back { font-size: 12px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: color 0.15s; }
@@ -514,7 +515,7 @@ tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
 <body>
 
 <nav class="topnav">
-  <span class="topnav-logo">🟠 Ingenia</span>
+  <a href="index.html" class="topnav-logo" aria-label="Ingenia"><img src="logo.png" alt="Ingenia" /></a>
   <span class="topnav-title">Manual Organizacional Consultivo</span>
   <a href="index.html" class="topnav-back">← Volver al hub</a>
   <span class="topnav-badge">V6.1</span>
