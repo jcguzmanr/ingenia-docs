@@ -147,7 +147,7 @@
 
     /* ── MAIN ── */
     .main {
-      margin-left: var(--sidebar);
+      margin-left: 0;
       flex: 1;
       min-width: 0;
       padding: 34px clamp(24px, 4vw, 64px) 80px;
@@ -252,8 +252,7 @@
     }
 
     @media (max-width: 880px) {
-      .sidebar { display: none; }
-      .main { margin-left: 0; max-width: 100%; }
+      .main { max-width: 100%; }
     }
   </style>
 </head>
@@ -269,27 +268,18 @@
   </nav>
 
   <div class="layout">
-    <aside class="sidebar">
-      <div class="sidebar-section">Navegación</div>
-      <a class="sidebar-link" href="#cronograma">
-        <span class="num">01</span> Vista interactiva (Gantt + Sprints)
-      </a>
-      <a class="sidebar-link" href="#como-usarlo">
-        <span class="num">02</span> Cómo usar la vista
-      </a>
-    </aside>
-
     <main class="main">
       <div class="hero">
         <div class="hero-tag">Plan 90 días · Operación ClickUp</div>
         <h1>Plan 90 Días</h1>
         <p>
-          La vista interactiva se mantiene igual que el cronograma base: expande sprints, y observa el gantt con marcador “HOY”.
+          Plan de implantación: Sprint 1 y 2 presentados en Gabrielitor (incluidos en el timeline).
+          Formación de PMs empieza a lo largo del plan y Finanzas semanales se ejecutan como procesos organizativos.
         </p>
       </div>
 
       <div class="section" id="cronograma">
-        <h2>Vista interactiva</h2>
+        <h2>Plan de Implantación · 90 días</h2>
         <div class="frame-wrap">
           <iframe
             id="cronogramaFrame"
@@ -300,25 +290,6 @@
             loading="lazy"
           ></iframe>
         </div>
-      </div>
-
-      <div class="section" id="como-usarlo">
-        <h2>Cómo usar la vista</h2>
-        <div class="card">
-          <p>
-            <strong>1)</strong> En el timeline: haz clic en cada sprint para expandir su tabla de iniciativas.
-          </p>
-          <p>
-            <strong>2)</strong> En el gantt: pasa el mouse por las barras para ver detalle visual; el marcador rojo muestra el “HOY”.
-          </p>
-          <p>
-            <strong>3)</strong> Usa la barra de secciones del sidebar para volver rápido a esta vista.
-          </p>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top: 16px;">
-        <p><strong>Tip:</strong> esta página conserva la interactividad del cronograma incrustado.</p>
       </div>
     </main>
   </div>
