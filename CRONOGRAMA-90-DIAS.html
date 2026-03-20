@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ingenia Latam — Plan de Implantación 90 Días</title>
+<style>
+  :root {
+    --orange: #F97316;
+    --orange-light: #FEF3E2;
+    --orange-mid: #FDBA74;
+    --dark: #1C1C1E;
+    --gray: #6B7280;
+    --gray-light: #F3F4F6;
+    --white: #FFFFFF;
+    --border: #E5E7EB;
+    --green: #22C55E;
+    --green-light: #F0FDF4;
+    --blue: #3B82F6;
+    --blue-light: #EFF6FF;
+    --purple: #8B5CF6;
+    --purple-light: #F5F3FF;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: var(--gray-light);
+    color: var(--dark);
+    line-height: 1.5;
+  }
+
+  .header {
+    background: var(--orange);
+    color: var(--white);
+    padding: 24px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(249,115,22,0.3);
+  }
+
+  .header h1 { font-size: 1.4rem; font-weight: 700; }
+  .header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px 16px; }
+
+  /* ── Meta cards ── */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .meta-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 14px 16px;
+    border-left: 4px solid var(--orange);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .meta-card .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); font-weight: 600; }
+  .meta-card .value { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-top: 2px; }
+
+  /* ── Gantt progress ── */
+  .gantt-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .gantt-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .gantt-header h3 { font-size: 0.9rem; color: var(--dark); }
+  .gantt-header span { font-size: 0.8rem; color: var(--orange); font-weight: 700; }
+
+  .gantt-grid {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* Month columns bg */
+  .gantt-months {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin-bottom: 4px;
+    padding-left: 110px;
+  }
+  .gantt-month {
+    flex: 1;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray);
+    text-align: center;
+  }
+
+  .gantt-row {
+    display: flex;
+    align-items: center;
+    height: 32px;
+  }
+  .gantt-label {
+    width: 110px;
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--dark);
+    padding-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .gantt-track {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    background: var(--gray-light);
+    border-radius: 4px;
+    overflow: visible;
+  }
+  .gantt-bar {
+    position: absolute;
+    top: 3px;
+    height: calc(100% - 6px);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--white);
+    transition: opacity 0.2s;
+    cursor: default;
+    min-width: 20px;
+  }
+  .gantt-bar:hover { opacity: 0.85; }
+  .gantt-bar .bar-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 6px; }
+
+  .gantt-today {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--red);
+    z-index: 5;
+    pointer-events: none;
+  }
+  .gantt-today::after {
+    content: 'HOY';
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--red);
+    white-space: nowrap;
+  }
+
+  .gantt-week-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .gantt-week-line {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--border);
+    opacity: 0.5;
+  }
+
+  @media (max-width: 600px) {
+    .gantt-label { width: 80px; font-size: 0.68rem; }
+    .gantt-bar .bar-text { font-size: 0.58rem; }
+    .gantt-months { padding-left: 80px; }
+  }
+
+  /* ── Timeline ── */
+  .timeline { position: relative; }
+
+  .sprint-block {
+    background: var(--white);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s;
+  }
+  .sprint-block:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .sprint-block.active { border-color: var(--orange); }
+
+  .sprint-header {
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .sprint-header:hover { background: var(--gray-light); }
+
+  .sprint-left { flex: 1; min-width: 0; }
+  .sprint-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 8px;
+    color: var(--white);
+  }
+  .sprint-title { font-size: 1rem; font-weight: 700; color: var(--dark); margin-top: 4px; }
+  .sprint-dates { font-size: 0.78rem; color: var(--gray); margin-top: 2px; }
+
+  .sprint-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .sprint-status {
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .status-active { background: var(--green-light); color: var(--green); }
+  .status-upcoming { background: var(--gray-light); color: var(--gray); }
+
+  .chevron {
+    width: 20px; height: 20px;
+    transition: transform 0.3s;
+    color: var(--gray);
+  }
+  .sprint-block.open .chevron { transform: rotate(180deg); }
+
+  .sprint-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .sprint-block.open .sprint-body { max-height: 2000px; }
+
+  .sprint-content { padding: 0 18px 18px; }
+
+  /* ── Version badge ── */
+  .version-callout {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .version-callout .icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+  .version-callout .text { font-size: 0.82rem; }
+  .version-callout .text strong { font-size: 0.85rem; }
+
+  /* ── Task list ── */
+  .task-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .task-table th {
+    text-align: left;
+    padding: 8px 10px;
+    background: var(--gray-light);
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray);
+    border-bottom: 2px solid var(--border);
+  }
+  .task-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .task-table tr:last-child td { border-bottom: none; }
+  .task-table tr:hover { background: var(--gray-light); }
+
+  .owner-tag {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--orange-light);
+    color: var(--orange);
+    white-space: nowrap;
+  }
+
+  /* ── Rituals ── */
+  .rituals-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .rituals-section h3 { font-size: 0.95rem; color: var(--orange); margin-bottom: 12px; font-weight: 700; }
+  .ritual-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+  .ritual-card {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--gray-light);
+  }
+  .ritual-card .r-title { font-weight: 700; font-size: 0.82rem; color: var(--dark); margin-bottom: 4px; }
+  .ritual-card .r-desc { font-size: 0.76rem; color: var(--gray); }
+
+  /* ── Indicators ── */
+  .indicators-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .indicators-section h3 { font-size: 0.95rem; color: var(--orange); margin-bottom: 12px; font-weight: 700; }
+  .indicator-row {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .indicator-row:last-child { border-bottom: none; }
+  .ind-name { font-weight: 700; font-size: 0.82rem; min-width: 140px; flex-shrink: 0; }
+  .ind-today, .ind-goal { font-size: 0.78rem; flex: 1; }
+  .ind-today { color: var(--gray); }
+  .ind-goal { color: var(--dark); font-weight: 600; }
+
+  /* ── Risk ── */
+  .risk-banner {
+    background: var(--orange-light);
+    border: 2px solid var(--orange);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .risk-banner h4 { color: var(--orange); font-size: 0.88rem; margin-bottom: 6px; }
+  .risk-banner p { font-size: 0.82rem; color: var(--dark); }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.75rem;
+    color: var(--gray);
+  }
+
+  /* ── Quick wins toggle ── */
+  .qw-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .qw-section h3 { font-size: 0.95rem; color: var(--orange); margin-bottom: 12px; font-weight: 700; }
+  .qw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .qw-col h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); margin-bottom: 8px; font-weight: 700; }
+  .qw-item {
+    font-size: 0.8rem;
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+    color: var(--dark);
+  }
+  .qw-item::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--orange);
+    font-weight: 700;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .header h1 { font-size: 1.15rem; }
+    .meta-grid { grid-template-columns: repeat(2, 1fr); }
+    .ritual-grid { grid-template-columns: 1fr; }
+    .qw-grid { grid-template-columns: 1fr; }
+    .indicator-row { flex-direction: column; gap: 4px; }
+    .task-table { font-size: 0.76rem; }
+    .task-table th, .task-table td { padding: 6px 8px; }
+    .sprint-title { font-size: 0.9rem; }
+  }
+
+  @media (max-width: 480px) {
+    .header { padding: 16px 14px; }
+    .container { padding: 12px 10px; }
+    .meta-grid { grid-template-columns: 1fr; }
+    .sprint-header { padding: 12px 14px; }
+    .sprint-content { padding: 0 14px 14px; }
+    .sprint-right { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Plan de Implantación — Ingenia Latam</h1>
+  <p>Horizonte 90 días | Expectativa: completar en menos tiempo | 20 Mar – 18 Jun 2026</p>
+</div>
+
+<div class="container">
+
+  <!-- Meta -->
+  <div class="meta-grid">
+    <div class="meta-card">
+      <div class="label">Responsable</div>
+      <div class="value">JC Guzmán</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Sponsor</div>
+      <div class="value">Luis Holder (CEO)</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Objetivo</div>
+      <div class="value">ClickUp = SO Ingenia</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Status</div>
+      <div class="value" style="color: var(--orange);">En ejecución</div>
+    </div>
+  </div>
+
+  <!-- Gantt Chart -->
+  <div class="gantt-section">
+    <div class="gantt-header">
+      <h3>Cronograma de Sprints</h3>
+      <span id="ganttDay">Día 1 de 90</span>
+    </div>
+    <div class="gantt-months" id="ganttMonths"></div>
+    <div class="gantt-grid" id="ganttGrid"></div>
+  </div>
+
+  <!-- Rituales transversales -->
+  <div class="rituals-section">
+    <h3>Rituales Transversales (todos los sprints)</h3>
+    <div class="ritual-grid">
+      <div class="ritual-card">
+        <div class="r-title">Viernes — Plan Adelantado</div>
+        <div class="r-desc">Cada líder publica en ClickUp su plan estratégico de la próxima semana por prospecto y cliente.</div>
+      </div>
+      <div class="ritual-card">
+        <div class="r-title">Diario — Log de Actividad</div>
+        <div class="r-desc">Cada director registra al cierre: qué hizo hoy + qué tiene mañana. Tarea recurrente en ClickUp.</div>
+      </div>
+      <div class="ritual-card">
+        <div class="r-title">Videos Inducción</div>
+        <div class="r-desc">Diario o interdiario en canal general. Tutoriales cortos de carga, navegación y uso de ClickUp.</div>
+      </div>
+      <div class="ritual-card">
+        <div class="r-title">Finanzas Semanal</div>
+        <div class="r-desc">Avance semanal con Karen. Proceso continuo de construcción financiera integrada a ClickUp.</div>
+      </div>
+      <div class="ritual-card">
+        <div class="r-title">Inmersión en Cuentas</div>
+        <div class="r-desc">Cada sprint profundizar en clientes: SOWs, roadmaps, entregables, riesgos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+
+    <!-- SPRINT 1 -->
+    <div class="sprint-block active open" data-sprint="1">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-left">
+          <span class="sprint-badge" style="background: var(--green);">S1</span>
+          <span class="sprint-badge" style="background: var(--orange);">v1.0 MVP</span>
+          <div class="sprint-title">MVP + Cimientos</div>
+          <div class="sprint-dates">Mar 20 – 28 (9 días)</div>
+        </div>
+        <div class="sprint-right">
+          <span class="sprint-status status-active">En curso</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-content">
+          <div class="version-callout" style="background: var(--green-light); border-left: 4px solid var(--green);">
+            <div class="icon">🎯</div>
+            <div class="text"><strong>Criterio de éxito:</strong> Luis valida en comité. Dashboard refleja la realidad del pipeline y clientes.</div>
+          </div>
+          <table class="task-table">
+            <thead><tr><th>Iniciativa</th><th>Entregable / Evidencia</th><th>Dueño</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ClickUp v1.0</strong></td><td>Pipeline + 3 clientes + dashboard + 1er comité</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Videos inducción</td><td>Tutorial carga info — publicar en canal equipo</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Propuesta comités</td><td>Documento: integrantes, agendas, cadencia</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>WhatsApp cleanup</td><td>Cierre 8 de 10 grupos</td><td><span class="owner-tag">Luis</span></td></tr>
+              <tr><td>Pipeline + finanzas</td><td>1er avance semanal con Karen</td><td><span class="owner-tag">JC + Karen</span></td></tr>
+              <tr><td>Cuentas</td><td>Profundizar Nicovita/Vitapro: roadmaps, SOWs</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Perfil ejecutiva Ecuador</td><td>Publicación activa</td><td><span class="owner-tag">JC</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPRINT 2 -->
+    <div class="sprint-block" data-sprint="2">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-left">
+          <span class="sprint-badge" style="background: var(--blue);">S2</span>
+          <span class="sprint-badge" style="background: var(--orange);">v2.0 Gobernanza</span>
+          <div class="sprint-title">Gobernanza + Rituales</div>
+          <div class="sprint-dates">Mar 31 – Abr 11 (2 semanas)</div>
+        </div>
+        <div class="sprint-right">
+          <span class="sprint-status status-upcoming">Próximo</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-content">
+          <div class="version-callout" style="background: var(--blue-light); border-left: 4px solid var(--blue);">
+            <div class="icon">🏛️</div>
+            <div class="text"><strong>Criterio de éxito:</strong> 1er ciclo semanal completo ejecutado. Los 3 comités operando con agenda en ClickUp.</div>
+          </div>
+          <table class="task-table">
+            <thead><tr><th>Iniciativa</th><th>Entregable / Evidencia</th><th>Dueño</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ClickUp v2.0</strong></td><td>Comités con agenda + log diario + plan viernes operando</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Comité Dir + Manos</td><td>Reunión inaugural bestial. Cascada modelo consultivo</td><td><span class="owner-tag">JC + Luis</span></td></tr>
+              <tr><td>1-a-1 ejecutivas</td><td>Contexto nuevo rol. Construcción confianza</td><td><span class="owner-tag">JC + Luis</span></td></tr>
+              <tr><td>Formación PMs S2</td><td>Tema: diferencia agencia vs consultora + KPIs cuenta</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Prospectos calientes</td><td>Cheegrisa, OCA, Power Pay con siguiente paso claro</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Finanzas</td><td>2do avance semanal: estructura y pedidos</td><td><span class="owner-tag">JC + Karen</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPRINT 3 -->
+    <div class="sprint-block" data-sprint="3">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-left">
+          <span class="sprint-badge" style="background: var(--purple);">S3</span>
+          <span class="sprint-badge" style="background: var(--orange);">v3.0 Método</span>
+          <div class="sprint-title">Método Consultivo Integrado</div>
+          <div class="sprint-dates">Abr 14 – May 2 (3 semanas)</div>
+        </div>
+        <div class="sprint-right">
+          <span class="sprint-status status-upcoming">Próximo</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-content">
+          <div class="version-callout" style="background: var(--purple-light); border-left: 4px solid var(--purple);">
+            <div class="icon">📐</div>
+            <div class="text"><strong>Criterio de éxito:</strong> Equipo consulta en ClickUp, no WhatsApp. Fases 1→4 visibles por cliente.</div>
+          </div>
+          <table class="task-table">
+            <thead><tr><th>Iniciativa</th><th>Entregable / Evidencia</th><th>Dueño</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ClickUp v3.0</strong></td><td>Fases 1→4 por cliente. SOWs + roadmaps vinculados</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Migración WhatsApp</td><td>Todo contenido operativo trasladado (1 día intensivo)</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Formación PMs S3</td><td>Tema: generación de valor estratégico + propuestas valor</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Comité cuentas</td><td>Revisión semanal clientes con KPIs visibles</td><td><span class="owner-tag">JC + Ejec.</span></td></tr>
+              <tr><td>Admin + finanzas</td><td>Proceso semanal consolidado. Pedidos integrados</td><td><span class="owner-tag">JC + Karen</span></td></tr>
+              <tr><td>Inmersión cuentas</td><td>Brother, Travel, nuevas cuentas: roadmaps + riesgos</td><td><span class="owner-tag">JC</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPRINT 4 -->
+    <div class="sprint-block" data-sprint="4">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-left">
+          <span class="sprint-badge" style="background: var(--red);">S4</span>
+          <span class="sprint-badge" style="background: var(--orange);">v4.0 Sist. Operativo</span>
+          <div class="sprint-title">Sistema Operativo Completo</div>
+          <div class="sprint-dates">May 5 – May 23 (3 semanas)</div>
+        </div>
+        <div class="sprint-right">
+          <span class="sprint-status status-upcoming">Próximo</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-content">
+          <div class="version-callout" style="background: var(--red-light); border-left: 4px solid var(--red);">
+            <div class="icon">🚀</div>
+            <div class="text"><strong>Criterio de éxito:</strong> Luis opera 100% desde ClickUp sin preguntar por WhatsApp.</div>
+          </div>
+          <table class="task-table">
+            <thead><tr><th>Iniciativa</th><th>Entregable / Evidencia</th><th>Dueño</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ClickUp v4.0</strong></td><td>Dashboard ejecutivo: clientes + pipeline + riesgos + alertas</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Comité mensual cliente</td><td>1er comité mensual con cliente piloto</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Adopción total</td><td>Líderes + ejecutivas operando 100% en ClickUp</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Travel integrado</td><td>Entregables críticos + riesgos visibles</td><td><span class="owner-tag">Crhistiam</span></td></tr>
+              <tr><td>Formación PMs S4</td><td>Tema: anticipación + blindaje de cuentas</td><td><span class="owner-tag">JC</span></td></tr>
+              <tr><td>Evaluación + Plan</td><td>Reporte avance + roadmap meses restantes</td><td><span class="owner-tag">JC</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUFFER -->
+    <div class="sprint-block" data-sprint="buffer">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-left">
+          <span class="sprint-badge" style="background: var(--gray);">BUF</span>
+          <div class="sprint-title">Consolidación + Buffer</div>
+          <div class="sprint-dates">May 26 – Jun 18 (4 semanas)</div>
+        </div>
+        <div class="sprint-right">
+          <span class="sprint-status status-upcoming">Buffer</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+      <div class="sprint-body">
+        <div class="sprint-content">
+          <div class="version-callout" style="background: var(--gray-light); border-left: 4px solid var(--gray);">
+            <div class="icon">🛡️</div>
+            <div class="text"><strong>Si los 4 sprints se ejecutan a ritmo, el sistema estará operando antes del día 90.</strong> Este bloque es para ajustes, adopción rezagada, optimización de dashboards y preparación de la siguiente fase de escalamiento.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Indicadores -->
+  <div class="indicators-section">
+    <h3>Indicadores de Éxito</h3>
+    <div class="indicator-row" style="border-bottom: 2px solid var(--border); padding-bottom: 6px; margin-bottom: 4px;">
+      <div class="ind-name" style="color: var(--gray); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Indicador</div>
+      <div class="ind-today" style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Estado Hoy</div>
+      <div class="ind-goal" style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange);">Meta Final del Plan</div>
+    </div>
+    <div class="indicator-row">
+      <div class="ind-name">Modelo Consultivo</div>
+      <div class="ind-today">80% dominio. Oportunidad: pensamiento estructurado para nuevos</div>
+      <div class="ind-goal">100%. Materiales rotatorios activos. Equipos capacitados</div>
+    </div>
+    <div class="indicator-row">
+      <div class="ind-name">Pipeline estructural</div>
+      <div class="ind-today">Migrado a ClickUp con cronogramas por prospecto</div>
+      <div class="ind-goal">Predicción workload + proyección financiera integrada</div>
+    </div>
+    <div class="indicator-row">
+      <div class="ind-name">Sobreentrega / margen</div>
+      <div class="ind-today">In progress. Estructuras + automatizaciones ayudan</div>
+      <div class="ind-goal">Alertas visibles en dashboard + protocolo escalamiento</div>
+    </div>
+    <div class="indicator-row">
+      <div class="ind-name">ClickUp como SO</div>
+      <div class="ind-today">Miro + carpetas espejo completados. Migrando</div>
+      <div class="ind-goal">Fuente única de verdad. Método consultivo integrado</div>
+    </div>
+    <div class="indicator-row">
+      <div class="ind-name">Quick wins</div>
+      <div class="ind-today">Organigrama, SOWs, lineamientos, share folder, migración</div>
+      <div class="ind-goal">Consolidados + nuevos en adopción, admin y formación</div>
+    </div>
+  </div>
+
+  <!-- Quick Wins -->
+  <div class="qw-section">
+    <h3>Quick Wins</h3>
+    <div class="qw-grid">
+      <div class="qw-col">
+        <h4>Ya ejecutados</h4>
+        <div class="qw-item">Merge organigrama + manual organizacional</div>
+        <div class="qw-item">Lineamientos: cámaras, agendas, comunicación</div>
+        <div class="qw-item">Migración progresiva + share folder</div>
+        <div class="qw-item">Análisis SOWs y roadmaps por cliente</div>
+        <div class="qw-item">Materiales método en rotación</div>
+        <div class="qw-item">Pipeline migrado de Excel a ClickUp</div>
+        <div class="qw-item">Diagnóstico procesos + gap analysis</div>
+      </div>
+      <div class="qw-col">
+        <h4>Sprint 1–2</h4>
+        <div class="qw-item">Videos inducción ClickUp (diario/interdiario)</div>
+        <div class="qw-item">Cierre grupos WhatsApp (Luis)</div>
+        <div class="qw-item">Documento propuesta comités</div>
+        <div class="qw-item">Template log diario directores</div>
+        <div class="qw-item">Agenda estándar cada comité</div>
+        <div class="qw-item">Presentación Gabrielito (look Ingenia)</div>
+        <div class="qw-item">Proceso finanzas semanal con Karen</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Risk -->
+  <div class="risk-banner">
+    <h4>Riesgo y Mitigación</h4>
+    <p><strong>Riesgo:</strong> MVP no operando al 28/Mar retrasa toda la cadena. Adopción lenta = retorno a WhatsApp.</p>
+    <p style="margin-top: 6px;"><strong>Mitigación:</strong> JC con autoridad total. Luis 20% diario. Comités generan presión positiva de adopción. Videos diarios aceleran curva. Sin alternativa: si no estás en ClickUp, no estás en Ingenia.</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  Ingenia Latam — 20 de marzo de 2026 — Uso interno / Confidencial
+</div>
+
+<script>
+function toggleSprint(header) {
+  const block = header.closest('.sprint-block');
+  block.classList.toggle('open');
+}
+
+// ── Gantt Chart ──
+(function() {
+  const planStart = new Date('2026-03-20');
+  const planEnd   = new Date('2026-06-18');
+  const totalDays = (planEnd - planStart) / 864e5;
+  const now = new Date();
+  const elapsed = Math.max(0, Math.min(totalDays, (now - planStart) / 864e5));
+  const day = Math.max(1, Math.round(elapsed));
+
+  document.getElementById('ganttDay').textContent = `Día ${day} de 90 — ${Math.round((elapsed/totalDays)*100)}%`;
+
+  const sprints = [
+    { name: 'S1: MVP',        start: '2026-03-20', end: '2026-03-28', color: '#22C55E' },
+    { name: 'S2: Gobernanza', start: '2026-03-31', end: '2026-04-11', color: '#3B82F6' },
+    { name: 'S3: Método',     start: '2026-04-14', end: '2026-05-02', color: '#8B5CF6' },
+    { name: 'S4: Sist. Op.',  start: '2026-05-05', end: '2026-05-23', color: '#EF4444' },
+    { name: 'Buffer',         start: '2026-05-26', end: '2026-06-18', color: '#9CA3AF' },
+  ];
+
+  const rituals = [
+    { name: 'Videos inducción',  start: '2026-03-20', end: '2026-05-23', color: '#F97316' },
+    { name: 'Finanzas semanal',  start: '2026-03-20', end: '2026-06-18', color: '#FDBA74' },
+    { name: 'Formación PMs',     start: '2026-03-31', end: '2026-05-23', color: '#FB923C' },
+  ];
+
+  function dayOffset(dateStr) {
+    return (new Date(dateStr) - planStart) / 864e5;
+  }
+  function pct(d) { return (d / totalDays) * 100; }
+
+  // Months header
+  const months = [
+    { name: 'Marzo', start: '2026-03-20', end: '2026-03-31' },
+    { name: 'Abril', start: '2026-04-01', end: '2026-04-30' },
+    { name: 'Mayo',  start: '2026-05-01', end: '2026-05-31' },
+    { name: 'Junio', start: '2026-06-01', end: '2026-06-18' },
+  ];
+  const mCont = document.getElementById('ganttMonths');
+  months.forEach(m => {
+    const ms = Math.max(0, dayOffset(m.start));
+    const me = Math.min(totalDays, dayOffset(m.end));
+    const div = document.createElement('div');
+    div.className = 'gantt-month';
+    div.style.flex = (me - ms).toString();
+    div.textContent = m.name;
+    mCont.appendChild(div);
+  });
+
+  const grid = document.getElementById('ganttGrid');
+
+  function addRow(item, isRitual) {
+    const row = document.createElement('div');
+    row.className = 'gantt-row';
+
+    const label = document.createElement('div');
+    label.className = 'gantt-label';
+    label.textContent = item.name;
+    if (isRitual) label.style.color = '#6B7280';
+    row.appendChild(label);
+
+    const track = document.createElement('div');
+    track.className = 'gantt-track';
+    if (isRitual) track.style.background = 'transparent';
+
+    const bar = document.createElement('div');
+    bar.className = 'gantt-bar';
+    const left = pct(dayOffset(item.start));
+    const width = pct(dayOffset(item.end) - dayOffset(item.start));
+    bar.style.left = left + '%';
+    bar.style.width = width + '%';
+    bar.style.background = item.color;
+    if (isRitual) { bar.style.opacity = '0.5'; bar.style.height = 'calc(100% - 10px)'; bar.style.top = '5px'; }
+
+    const ds = new Date(item.start);
+    const de = new Date(item.end);
+    const fmt = d => `${d.getDate()}/${d.getMonth()+1}`;
+    const days = Math.round((de - ds) / 864e5);
+    const text = document.createElement('span');
+    text.className = 'bar-text';
+    text.textContent = isRitual ? '' : `${fmt(ds)} – ${fmt(de)} (${days}d)`;
+    bar.appendChild(text);
+    bar.title = `${item.name}: ${fmt(ds)} – ${fmt(de)} (${days} días)`;
+
+    track.appendChild(bar);
+    row.appendChild(track);
+    grid.appendChild(row);
+  }
+
+  // Separator label
+  function addSeparator(text) {
+    const sep = document.createElement('div');
+    sep.style.cssText = 'font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#9CA3AF;margin-top:6px;margin-bottom:2px;padding-left:2px;';
+    sep.textContent = text;
+    grid.appendChild(sep);
+  }
+
+  addSeparator('Sprints');
+  sprints.forEach(s => addRow(s, false));
+  addSeparator('Rituales transversales');
+  rituals.forEach(r => addRow(r, true));
+
+  // Today marker on each track
+  if (elapsed > 0 && elapsed < totalDays) {
+    const tracks = grid.querySelectorAll('.gantt-track');
+    const todayPctVal = pct(elapsed);
+    tracks.forEach((t, i) => {
+      if (i === 0) {
+        const marker = document.createElement('div');
+        marker.className = 'gantt-today';
+        marker.style.left = todayPctVal + '%';
+        t.appendChild(marker);
+      } else {
+        const line = document.createElement('div');
+        line.style.cssText = `position:absolute;top:0;width:2px;height:100%;background:#EF4444;z-index:5;pointer-events:none;left:${todayPctVal}%;opacity:0.5;`;
+        t.appendChild(line);
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
